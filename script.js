@@ -433,42 +433,44 @@ function nextQuestion() {
 
 
 function showResults() {
-  finished = true;
+  const totalQuestions = questions.length;
+  const accuracy = totalQuestions > 0
+    ? correctCount / totalQuestions
+    : 0;
 
-  if (timerInterval !== null) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
+  // Čas testu v minutách
+  const timeMinutes = Math.max(elapsedSeconds / 60, 0.1);
 
-  const elapsed = getElapsedSeconds();
-  const playerName = playerNameInput.value.trim();
+  // Skóre za správnost
+  const accuracyScore = Math.pow(accuracy, 1.2);
 
-  quizScreen.hidden = true;
-  resultScreen.hidden = false;
+  // Skóre za rychlost
+  // Kratší čas znamená vyšší hodnotu.
+  const speedScore = Math.exp(-timeMinutes / 25);
 
-  resultHeading.textContent = playerName
-    ? `CerebrIQ přehled — ${playerName}`
-    : "CerebrIQ přehled";
+  // Kombinace přesnosti a rychlosti
+  const combinedScore =
+    0.8 * accuracyScore +
+    0.2 * speedScore;
 
-  // Zatím nezobrazujeme vymyšlenou hodnotu IQ.
-  // Skutečný převod vyžaduje ověřenou normovací tabulku.
-  resultScore.textContent = "Nehodnoceno";
+  // Převod na škálu 40–250 CIQ
+  const ciq = Math.round(
+    40 + 210 * combinedScore
+  );
 
-  document.querySelector("#result-correct").textContent =
-    `${score} / ${questions.length}`;
-
-  resultTime.textContent = formatTime(elapsed);
+  // Zobrazení výsledků
+  resultScore.textContent = `${ciq} CIQ`;
+  resultCorrect.textContent =
+    `${correctCount} / ${totalQuestions}`;
+  resultTime.textContent = formatTime(elapsedSeconds);
 
   resultMessage.textContent =
-    "Tvůj výsledek shrnuje počet správně vyřešených úloh. " +
-    "Odhad IQ bude možné doplnit, až bude k dispozici ověřená " +
-    "metodika převodu skóre na IQ.";
+    "Tvé CerebrIQ skóre kombinuje správnost odpovědí a rychlost řešení. " +
+    "Bodovací systém je experimentální a bude se upravovat podle výsledků testování.";
 
-  progressFill.style.width = "100%";
-  progressTrack.setAttribute(
-    "aria-valuenow",
-    String(questions.length)
-  );
+  // Přepnutí obrazovek
+  quizScreen.hidden = true;
+  resultScreen.hidden = false;
 }
 
 
