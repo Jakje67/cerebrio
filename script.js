@@ -3,6 +3,25 @@ const startButton = document.querySelector("#start-button");
 const testSection = document.querySelector("#test");
 const yearElement = document.querySelector("#year");
 
+
+// Zobrazení ukázkového testu po kliknutí na odkaz.
+document.querySelectorAll('a[href="#test"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const test = document.querySelector("#test");
+
+    if (test) {
+      test.hidden = false;
+      test.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      history.replaceState(null, "", "#test");
+    }
+  });
+});
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
