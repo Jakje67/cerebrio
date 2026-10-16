@@ -432,41 +432,53 @@ function nextQuestion() {
 }
 
 
-function showResults() {
-  const totalQuestions = questions.length;
-  const accuracy = totalQuestions > 0
-    ? correctCount / totalQuestions
-    : 0;
 
-  // Čas testu v minutách
-  const timeMinutes = Math.max(elapsedSeconds / 60, 0.1);
+function showResults() {
+  if (finished) return;
+
+  finished = true;
+
+  // Zastavení časomíry a zaznamenání výsledného času
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  const totalQuestions = questions.length;
+  const elapsedSeconds = getElapsedSeconds();
+  const accuracy = totalQuestions > 0
+    ? score / totalQuestions
+    : 0;
 
   // Skóre za správnost
   const accuracyScore = Math.pow(accuracy, 1.2);
 
   // Skóre za rychlost
-  // Kratší čas znamená vyšší hodnotu.
+  const timeMinutes = Math.max(elapsedSeconds / 60, 0.1);
   const speedScore = Math.exp(-timeMinutes / 25);
 
-  // Kombinace přesnosti a rychlosti
+  // Kombinace správnosti a rychlosti
   const combinedScore =
     0.8 * accuracyScore +
     0.2 * speedScore;
 
-  // Převod na škálu 40–250 CIQ
-  const ciq = Math.round(
-    40 + 210 * combinedScore
+  // Výsledné skóre v rozsahu 40–250 CIQ
+  const ciq = Math.min(
+    250,
+    Math.max(40, Math.round(40 + 210 * combinedScore))
   );
 
   // Zobrazení výsledků
   resultScore.textContent = `${ciq} CIQ`;
-  resultCorrect.textContent =
-    `${correctCount} / ${totalQuestions}`;
+
+  document.querySelector("#result-correct").textContent =
+    `${score} / ${totalQuestions}`;
+
   resultTime.textContent = formatTime(elapsedSeconds);
 
   resultMessage.textContent =
     "Tvé CerebrIQ skóre kombinuje správnost odpovědí a rychlost řešení. " +
-    "Bodovací systém je experimentální a bude se upravovat podle výsledků testování.";
+    "Bodovací systém je experimentální a výsledek není skutečně změřené IQ.";
 
   // Přepnutí obrazovek
   quizScreen.hidden = true;
