@@ -1154,3 +1154,233 @@ a.catalog-link:hover {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* =========================================
+   CEREBRIO — SVĚTLÝ KRÉMOVÝ DESIGN
+   ========================================= */
+
+:root {
+  --cream: #f8f5ee;
+  --cream-dark: #eee7d9;
+  --card: #fffdf8;
+  --ink: #302f29;
+  --muted: #777468;
+  --sage: #71836b;
+  --sage-dark: #52664e;
+  --sage-light: #e5ebdf;
+  --border: #e4ddcf;
+  --correct-bg: #e4efe1;
+  --correct-text: #315c35;
+  --incorrect-bg: #f5e4df;
+  --incorrect-text: #963f32;
+  --shadow-soft: 0 12px 36px rgba(69, 58, 38, 0.07);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+}
+
+.site-header,
+.site-footer {
+  background: rgba(248, 245, 238, 0.96) !important;
+  color: var(--ink) !important;
+  border-color: var(--border) !important;
+}
+
+.brand,
+.brand-name,
+.header-nav a,
+.header-link {
+  color: var(--ink) !important;
+}
+
+.hero,
+.hero-section,
+.features-section,
+.facts-section,
+.catalog-section,
+.sample-section,
+.test-section {
+  color: var(--ink);
+}
+
+.hero h1,
+.hero h2,
+section h2,
+.test-card h2,
+.test-card h3 {
+  color: var(--ink) !important;
+}
+
+.hero p,
+section p,
+.card-description,
+.fine-print,
+.sequence {
+  color: var(--muted);
+}
+
+.test-card,
+.catalog-card,
+.feature-card,
+.fact-card,
+.stat-card,
+.profile-card,
+.result-card {
+  background: var(--card) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-soft);
+  border-radius: 20px;
+}
+
+.section-kicker,
+.test-tag {
+  color: var(--sage-dark) !important;
+}
+
+.primary-button {
+  background: var(--sage-dark) !important;
+  color: #fffdf8 !important;
+  border: 1px solid var(--sage-dark) !important;
+  border-radius: 12px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #40543d !important;
+  transform: translateY(-1px);
+}
+
+.header-link:hover,
+.header-nav a:hover {
+  color: var(--sage-dark) !important;
+}
+
+.answer {
+  background: var(--card) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.answer:hover:not(:disabled) {
+  background: var(--sage-light) !important;
+  border-color: var(--sage) !important;
+}
+
+.answer.correct {
+  background: var(--correct-bg) !important;
+  color: var(--correct-text) !important;
+  border-color: #9eb99a !important;
+}
+
+.answer.incorrect {
+  background: var(--incorrect-bg) !important;
+  color: var(--incorrect-text) !important;
+  border-color: #d6a49b !important;
+}
+
+.answer:disabled {
+  opacity: 1;
+}
+
+.test-progress {
+  background: var(--cream-dark) !important;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.test-progress-fill {
+  background: var(--sage) !important;
+  border-radius: 999px;
+}
+
+.test-timer {
+  color: var(--sage-dark) !important;
+  background: var(--sage-light);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.feedback {
+  color: var(--ink);
+}
+
+.result-metric,
+.category-result {
+  background: var(--cream) !important;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.metric-value,
+.result-score,
+.result-percentage {
+  color: var(--sage-dark) !important;
+}
+
+.profile-card form {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.profile-card label {
+  color: var(--ink);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.profile-card input,
+.profile-card select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fffdf8;
+  color: var(--ink);
+  font: inherit;
+}
+
+.profile-card input:focus,
+.profile-card select:focus {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+}
+
+.profile-card .primary-button {
+  margin-top: 12px;
+}
+
+::selection {
+  background: #dce5d5;
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .test-card,
+  .catalog-card,
+  .feature-card,
+  .fact-card,
+  .stat-card {
+    border-radius: 16px;
+  }
+
+  .profile-card input,
+  .profile-card select {
+    font-size: 16px;
+  }
+}
