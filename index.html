@@ -106,15 +106,44 @@
           </button>
         </div>
 
-        <div id="result-screen" hidden aria-live="polite">
-          <p class="eyebrow">VÝSLEDEK</p>
-          <h3 id="result-heading">Test dokončen</h3>
-          <p class="result-score" id="result-score"></p>
-          <p id="result-message"></p>
-          <p class="result-time" id="result-time"></p>
-          <button class="button button-primary" id="restart-button" type="button">
-            Zkusit znovu
-          </button>
+        
+<div id="result-screen" hidden aria-live="polite">
+  <p class="eyebrow">CEREBRIQ · OVERVIEW</p>
+  <h3 id="result-heading">Výsledky testu</h3>
+
+  <div class="iq-result">
+    <p class="iq-label">Tvůj odhad IQ</p>
+    <p class="result-score" id="result-score">—</p>
+    <p class="iq-status">Předběžný odhad</p>
+  </div>
+
+  <div class="overview-grid">
+    <div class="overview-item">
+      <span class="overview-label">Správné odpovědi</span>
+      <strong id="result-correct">— / 30</strong>
+    </div>
+    <div class="overview-item">
+      <span class="overview-label">Dokončení testu</span>
+      <strong id="result-time">—</strong>
+    </div>
+  </div>
+
+  <p id="result-message"></p>
+
+  <div class="iq-warning" role="note">
+    <strong>Upozornění</strong>
+    <p>
+      Hodnota IQ je zatím pouze orientační odhad vytvořený z výsledku
+      tohoto testu. Test není standardizovaný ani odborně normovaný
+      a výsledek nelze považovat za skutečně změřené IQ.
+    </p>
+  </div>
+
+  <button class="button button-primary" id="restart-button" type="button">
+    Zopakovat test
+  </button>
+</div>
+
         </div>
       </div>
     </section>
