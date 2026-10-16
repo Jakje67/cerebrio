@@ -315,6 +315,92 @@ let endTime = 0;
 let questionResults = [];
 let timerInterval = null;
 
+
+const CEREBRIO_HISTORY_KEY = "cerebrio-test-history-v1";
+const CEREBRIO_MAX_HISTORY = 20;
+
+// Načte historii uloženou v tomto prohlížeči.
+function getTestHistory() {
+  try {
+    const saved = localStorage.getItem(CEREBRIO_HISTORY_KEY);
+    const history = saved ? JSON.parse(saved) : [];
+
+    if (!Array.isArray(history)) {
+      return [];
+    }
+
+    return history
+      .filter((item) =>
+        item &&
+        Number.isFinite(item.score) &&
+        Number.isFinite(item.totalQuestions) &&
+        Number.isFinite(item.percentage) &&
+        Number.isFinite(item.totalTimeMs) &&
+        typeof item.completedAt === "string"
+      )
+      .slice(0, CEREBRIO_MAX_HISTORY);
+  } catch (error) {
+    // Web může mít ukládání vypnuté; test musí fungovat dál.
+    return [];
+  }
+}
+
+// Uloží dokončený pokus a ponechá posledních 20 výsledků.
+function saveTestResult(result) {
+  const entry = {
+    score: result.score,
+    totalQuestions: result.totalQuestions,
+    percentage: result.percentage,
+    totalTimeMs: result.totalTimeMs,
+    completedAt: result.completedAt
+  };
+
+  const previousHistory = getTestHistory();
+  const history = [entry, ...previousHistory]
+    .slice(0, CEREBRIO_MAX_HISTORY);
+
+  try {
+    localStorage.setItem(
+      CEREBRIO_HISTORY_KEY,
+      JSON.stringify(history)
+    );
+
+    return {
+      history,
+      saved: true
+    };
+  } catch (error) {
+    // Při problému s úložištěm lze výsledek stále zobrazit.
+    return {
+      history,
+      saved: false
+    };
+  }
+}
+
+// Nejvyšší dosažené skóre v tomto prohlížeči.
+function getPersonalBest(history = getTestHistory()) {
+  if (history.length === 0) {
+    return null;
+  }
+
+  return history.reduce((best, item) => {
+    if (item.percentage > best.percentage) {
+      return item;
+    }
+
+    if (
+      item.percentage === best.percentage &&
+      item.score > best.score
+    ) {
+      return item;
+    }
+
+    return best;
+  });
+}
+
+
 function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
   const minutes = Math.floor(totalSeconds / 60);
