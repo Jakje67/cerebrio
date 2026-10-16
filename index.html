@@ -4,63 +4,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101827">
-  <meta name="description" content="Cerebrio — objev své logické myšlení a vyzkoušej si ukázkový test.">
-  <title>Cerebrio — Poznej svou mysl</title>
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Cerebrio — objev své schopnosti prostřednictvím matematických a logických testů.">
+  <title>Cerebrio — Objev svou mysl</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#">
-      <span class="brand-mark">C</span>
+    <a class="brand" href="#" aria-label="Cerebrio – úvodní stránka">
+      <span class="brand-mark">✳</span>
       <span>Cerebrio</span>
     </a>
-    <a class="header-link" href="#jak-to-funguje">Jak to funguje</a>
+
+    <nav class="header-nav" aria-label="Hlavní navigace">
+      <a class="header-link" href="#testy">Testy</a>
+      <a class="header-link" href="#zajimavosti">Zajímavosti</a>
+      <a class="header-link" href="#jak-to-funguje">O projektu</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        TRÉNUJ MYSL. OBJEVUJ MOŽNOSTI.
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          POZNEJ SVOU MYSL. ROZVÍJEJ SVÉ MOŽNOSTI.
+        </div>
+
+        <h1>Každá mysl je jiná.<br><span>Objev tu svou.</span></h1>
+
+        <p class="hero-copy">
+          Vyzkoušej zajímavé úlohy, hledej skryté vzory
+          a zjisti, jak si poradíš s různými výzvami.
+          Začni svou cestu s Cerebrio.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-button" href="#testy">
+            Prozkoumat testy <span aria-hidden="true">→</span>
+          </a>
+          <a class="secondary-button" href="#jak-to-funguje">
+            Jak to funguje
+          </a>
+        </div>
+
+        <p class="fine-print">
+          Testy slouží k procvičení a zábavě. Výsledky samy o sobě
+          nepředstavují standardizované měření IQ.
+        </p>
       </div>
-
-      <h1>Poznej, jak<br><span>přemýšlíš.</span></h1>
-
-      <p class="hero-copy">
-        Vyzkoušej si logické úlohy, prověř své uvažování
-        a objev svět přemýšlení s Cerebrio.
-      </p>
-
-      <button class="primary-button" id="start-button">
-        Vyzkoušet ukázkový test <span>→</span>
-      </button>
-
-      <p class="fine-print">
-        Ukázková úloha není standardizovaný IQ test a neměří
-        klinicky validované IQ.
-      </p>
 
       <div class="hero-decoration" aria-hidden="true">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
-        <div class="orbit-core">C</div>
+        <div class="orbit-core">✳</div>
         <span class="spark spark-one">✳</span>
         <span class="spark spark-two">✦</span>
       </div>
     </section>
 
-    <section class="test-section" id="test" hidden>
-      <div class="section-kicker">UKÁZKOVÁ ÚLOHA</div>
+    <section class="test-section catalog-section" id="testy">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">VYBER SI SVOU VÝZVU</div>
+          <h2>Objev testy Cerebrio</h2>
+          <p class="section-description">
+            Každá kategorie prověří trochu jiný způsob přemýšlení.
+          </p>
+        </div>
+        <span class="catalog-count">01 / 05</span>
+      </div>
+
+      <div class="test-catalog">
+        <article class="catalog-card catalog-card-featured">
+          <div class="catalog-card-top">
+            <span class="catalog-icon" aria-hidden="true">∑</span>
+            <span class="catalog-status status-available">DOSTUPNÉ</span>
+          </div>
+          <div class="catalog-card-body">
+            <p class="catalog-category">ČÍSLA A VZORY</p>
+            <h3>Matematické myšlení</h3>
+            <p>
+              Hledej číselné řady, odhaluj pravidla a řeš
+              matematické hádanky.
+            </p>
+          </div>
+          <a class="catalog-link" href="#ukazkovy-test">
+            Vyzkoušet ukázku <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="catalog-card">
+          <div class="catalog-card-top">
+            <span class="catalog-icon" aria-hidden="true">⌘</span>
+            <span class="catalog-status">PŘIPRAVUJEME</span>
+          </div>
+          <div class="catalog-card-body">
+            <p class="catalog-category">VZTAHY A PRAVIDLA</p>
+            <h3>Logické myšlení</h3>
+            <p>
+              Propojuj informace, hledej souvislosti a řeš
+              logické problémy.
+            </p>
+          </div>
+          <span class="catalog-link catalog-link-muted">Již brzy</span>
+        </article>
+
+        <article class="catalog-card">
+          <div class="catalog-card-top">
+            <span class="catalog-icon" aria-hidden="true">◇</span>
+            <span class="catalog-status">PŘIPRAVUJEME</span>
+          </div>
+          <div class="catalog-card-body">
+            <p class="catalog-category">TVARY A PROSTOR</p>
+            <h3>Prostorová představivost</h3>
+            <p>
+              Představuj si tvary, otáčej objekty v mysli
+              a objevuj prostorové vztahy.
+            </p>
+          </div>
+          <span class="catalog-link catalog-link-muted">Již brzy</span>
+        </article>
+
+        <article class="catalog-card">
+          <div class="catalog-card-top">
+            <span class="catalog-icon" aria-hidden="true">◷</span>
+            <span class="catalog-status">PŘIPRAVUJEME</span>
+          </div>
+          <div class="catalog-card-body">
+            <p class="catalog-category">SOUSTŘEDĚNÍ</p>
+            <h3>Paměť a pozornost</h3>
+            <p>
+              Trénuj soustředění, zapamatování informací
+              a všímavost k detailům.
+            </p>
+          </div>
+          <span class="catalog-link catalog-link-muted">Již brzy</span>
+        </article>
+
+        <article class="catalog-card">
+          <div class="catalog-card-top">
+            <span class="catalog-icon" aria-hidden="true">✳</span>
+            <span class="catalog-status">PŘIPRAVUJEME</span>
+          </div>
+          <div class="catalog-card-body">
+            <p class="catalog-category">KOMBINOVANÉ VÝZVY</p>
+            <h3>Mix schopností</h3>
+            <p>
+              Kombinuj různé typy úloh v jedné rozmanité
+              mentální výzvě.
+            </p>
+          </div>
+          <span class="catalog-link catalog-link-muted">Již brzy</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="test-section sample-section" id="ukazkovy-test">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">ZAČNI HNED</div>
+          <h2>Malá výzva pro tvou mysl</h2>
+          <p class="section-description">
+            Vyzkoušej si ukázkovou úlohu bez registrace.
+          </p>
+        </div>
+      </div>
 
       <div class="test-card">
         <div class="test-topline">
           <span>Otázka 1 z 1</span>
-          <span class="test-tag">Logika</span>
+          <span class="test-tag">Číselná řada</span>
         </div>
 
-        <h2>Jaké číslo následuje?</h2>
+        <h3>Jaké číslo následuje?</h3>
         <p class="sequence">2 · 4 · 8 · 16 · ?</p>
 
         <div class="answers">
@@ -77,36 +195,133 @@
 
     <section class="how-section" id="jak-to-funguje">
       <div class="section-kicker">JEDNODUŠE A SROZUMITELNĚ</div>
-      <h2>Každá otázka je nový způsob, jak přemýšlet.</h2>
+      <h2>Rozvíjej způsob, jakým přemýšlíš.</h2>
 
       <div class="feature-grid">
         <article class="feature-card">
           <div class="feature-icon">⌁</div>
-          <h3>Logické úlohy</h3>
-          <p>Hledej vzory, vztahy a řešení v zajímavých úlohách.</p>
+          <h3>Různé typy úloh</h3>
+          <p>
+            Od číselných řad až po logické hádanky.
+            Postupně přidáme další kategorie.
+          </p>
         </article>
 
         <article class="feature-card">
           <div class="feature-icon">◷</div>
-          <h3>Jasný výsledek</h3>
-          <p>Zjisti, jak se ti podařilo vyřešit jednotlivé otázky.</p>
+          <h3>Okamžitá zpětná vazba</h3>
+          <p>
+            Po odpovědi zjistíš, zda byla správná,
+            a seznámíš se s řešením.
+          </p>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">◇</div>
-          <h3>Digitální certifikáty</h3>
-          <p>Do budoucna nabídneme certifikáty s možností ověření.</p>
+          <div class="feature-icon">✳</div>
+          <h3>Tvá cesta poznání</h3>
+          <p>
+            Cerebrio postupně rozšíříme o další testy,
+            výsledky a nové možnosti.
+          </p>
         </article>
+      </div>
+    </section>
+
+    <section class="facts-section" id="zajimavosti">
+      <div class="section-kicker">VĚDĚL JSI, ŽE…</div>
+      <h2>Lidská mysl je fascinující.</h2>
+      <p class="section-description">
+        Několik zajímavostí o přemýšlení, učení a lidských schopnostech.
+      </p>
+
+      <div class="facts-grid">
+        <article class="fact-card">
+          <img
+            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80"
+            alt="Zápis matematických výpočtů na tabuli"
+            loading="lazy"
+          >
+          <div class="fact-content">
+            <span class="fact-number">01 / UČENÍ</span>
+            <h3>Cvičení pomáhá rozvíjet dovednosti</h3>
+            <p>
+              Pravidelné procvičování a vhodná zpětná vazba
+              pomáhají člověku zlepšovat se v konkrétních úlohách.
+            </p>
+          </div>
+        </article>
+
+        <article class="fact-card">
+          <img
+            src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=900&q=80"
+            alt="Knihy a materiály ke studiu"
+            loading="lazy"
+          >
+          <div class="fact-content">
+            <span class="fact-number">02 / MYŠLENÍ</span>
+            <h3>Schopnosti nejsou jen jedno číslo</h3>
+            <p>
+              Výkon ovlivňuje mnoho faktorů, například zkušenosti,
+              znalosti, únava i typ řešeného problému.
+            </p>
+          </div>
+        </article>
+
+        <article class="fact-card">
+          <img
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+            alt="Člověk pracující na počítači"
+            loading="lazy"
+          >
+          <div class="fact-content">
+            <span class="fact-number">03 / SOUSTŘEDĚNÍ</span>
+            <h3>Na prostředí záleží</h3>
+            <p>
+              Dostatek odpočinku a prostředí s menším množstvím
+              rušivých vlivů mohou usnadnit soustředěnou práci.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <p class="facts-note">
+        Jde o obecné poznatky, nikoliv o diagnostiku nebo měření IQ.
+      </p>
+    </section>
+
+    <section class="stats-section" aria-labelledby="stats-title">
+      <div class="section-kicker">CEREBRIO V ČÍSLECH</div>
+      <h2 id="stats-title">Budujeme prostor pro zvídavé mysli.</h2>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value">—</span>
+          <span class="stat-label">Otestovaní uživatelé</span>
+          <span class="stat-note">Statistika se připravuje</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-value">—</span>
+          <span class="stat-label">Vydané certifikáty</span>
+          <span class="stat-note">Statistika se připravuje</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-value">4/5</span>
+          <span class="stat-label">Plánované hodnocení</span>
+          <span class="stat-note">Zatím nejde o uživatelské recenze</span>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <a class="brand footer-brand" href="#">
-      <span class="brand-mark">C</span>
+      <span class="brand-mark">✳</span>
       <span>Cerebrio</span>
     </a>
     <span>© <span id="year"></span> Cerebrio</span>
+    <a class="footer-top-link" href="#">Zpět nahoru ↑</a>
   </footer>
 </body>
 </html>
