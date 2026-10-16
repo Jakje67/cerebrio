@@ -1,5 +1,807 @@
 
 /* =========================================
+   CEREBRIO — KRÉMOVÝ PODZIM
+   Kompletní vzhled webu
+   ========================================= */
+
+/* 1. Barevná paleta */
+
+:root {
+  color-scheme: light;
+
+  --cream: #FAF6EE;
+  --cream-deep: #F1E7D8;
+  --paper: #FFFDF8;
+  --beige: #E9D8C3;
+
+  --brown: #593B2B;
+  --brown-light: #80583E;
+  --caramel: #BD8757;
+  --caramel-light: #E8D0B5;
+
+  --ink: #382B23;
+  --muted: #78695D;
+  --border: #E6D9C8;
+
+  --green-soft: #E7EDE0;
+  --green-ink: #35563A;
+  --red-soft: #F5E3DA;
+  --red-ink: #8B392B;
+
+  --shadow:
+    0 8px 28px rgba(89, 59, 43, 0.07);
+
+  --shadow-hover:
+    0 14px 34px rgba(89, 59, 43, 0.12);
+
+  --radius: 18px;
+  --radius-small: 11px;
+  --content-width: 1120px;
+}
+
+/* 2. Základní nastavení */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  background: var(--cream);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family:
+    Inter,
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family:
+    Inter,
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--brown-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--caramel);
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--caramel);
+  outline-offset: 4px;
+}
+
+::selection {
+  color: var(--brown);
+  background: var(--caramel-light);
+}
+
+/* 3. Hlavička a navigace */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 15px max(24px, calc((100% - var(--content-width)) / 2));
+  background: rgba(250, 246, 238, 0.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--brown);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.brand-name {
+  color: var(--brown);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.header-nav a,
+.header-link {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.header-nav a:hover,
+.header-link:hover {
+  color: var(--brown);
+}
+
+/* 4. Společné rozložení sekcí */
+
+section {
+  width: 100%;
+  padding: 76px 24px;
+  scroll-margin-top: 85px;
+}
+
+section > * {
+  max-width: var(--content-width);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero,
+.hero-section,
+.features-section,
+.facts-section,
+.catalog-section,
+.sample-section,
+.test-section {
+  color: var(--ink);
+}
+
+section h2,
+.hero h1,
+.hero h2 {
+  color: var(--brown);
+  letter-spacing: -0.045em;
+  line-height: 1.18;
+}
+
+section h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+}
+
+section p {
+  color: var(--muted);
+}
+
+.section-kicker,
+.test-tag {
+  margin-bottom: 12px;
+  color: var(--brown-light);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 5. Úvodní hero sekce */
+
+.hero,
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(76px, 10vw, 128px);
+  padding-bottom: clamp(76px, 10vw, 128px);
+  background:
+    radial-gradient(
+      ellipse at 85% 20%,
+      rgba(232, 208, 181, 0.38),
+      transparent 42%
+    ),
+    var(--cream);
+}
+
+.hero h1 {
+  max-width: 850px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: clamp(2.6rem, 7vw, 5.1rem);
+  font-weight: 800;
+  line-height: 1.06;
+}
+
+.hero h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.hero p {
+  max-width: 680px;
+  margin-top: 0;
+  margin-bottom: 28px;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.85;
+}
+
+.hero .primary-button,
+.hero .secondary-button {
+  margin-top: 12px;
+  margin-right: 10px;
+}
+
+/* 6. Tlačítka */
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primary-button {
+  background: var(--brown);
+  color: var(--paper);
+  border-color: var(--brown);
+  box-shadow: 0 5px 12px rgba(89, 59, 43, 0.12);
+}
+
+.primary-button:hover {
+  background: var(--brown-light);
+  color: #FFFFFF;
+  border-color: var(--brown-light);
+  box-shadow: 0 8px 18px rgba(89, 59, 43, 0.16);
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--brown);
+  border-color: var(--border);
+}
+
+.secondary-button:hover {
+  background: var(--paper);
+  border-color: var(--caramel);
+  color: var(--brown);
+}
+
+/* 7. Katalog, funkce a informační karty */
+
+.catalog-section,
+.features-section,
+.facts-section {
+  background: var(--cream);
+}
+
+.catalog-section {
+  border-top: 1px solid rgba(230, 217, 200, 0.65);
+}
+
+.catalog-grid,
+.features-grid,
+.facts-grid,
+.stats-grid,
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 32px;
+}
+
+.catalog-card,
+.feature-card,
+.fact-card,
+.stat-card {
+  min-width: 0;
+  padding: 27px;
+  overflow-wrap: anywhere;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.catalog-card:hover,
+.feature-card:hover,
+.fact-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--caramel-light);
+  box-shadow: var(--shadow-hover);
+}
+
+.catalog-card h3,
+.feature-card h3,
+.fact-card h3,
+.stat-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--brown);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.catalog-card p,
+.feature-card p,
+.fact-card p,
+.stat-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.catalog-card a:not(.primary-button),
+.feature-card a:not(.primary-button) {
+  color: var(--brown-light);
+  font-weight: 700;
+}
+
+.catalog-card a:hover,
+.feature-card a:hover {
+  color: var(--caramel);
+}
+
+/* 8. Testovací sekce */
+
+.test-section,
+.sample-section {
+  background:
+    linear-gradient(
+      180deg,
+      var(--cream) 0%,
+      #F7F0E5 100%
+    );
+}
+
+.test-card,
+.profile-card,
+.result-card {
+  width: 100%;
+  max-width: 820px;
+  margin: 28px auto;
+  padding: clamp(22px, 5vw, 42px);
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.test-card h2,
+.test-card h3,
+.profile-card h2,
+.result-card h2 {
+  color: var(--brown);
+}
+
+.test-card h2,
+.profile-card h2,
+.result-card h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.25;
+}
+
+.test-card p,
+.profile-card p,
+.result-card p {
+  color: var(--muted);
+}
+
+/* 9. Otázky a odpovědi */
+
+.question-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: var(--brown);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.answers,
+.answer-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.answer {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 18px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.answer:hover:not(:disabled) {
+  background: #F5EBDD;
+  border-color: var(--caramel);
+  transform: translateY(-1px);
+}
+
+.answer:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.answer.correct {
+  background: var(--green-soft);
+  color: var(--green-ink);
+  border-color: #A7B99B;
+}
+
+.answer.incorrect {
+  background: var(--red-soft);
+  color: var(--red-ink);
+  border-color: #D8AA99;
+}
+
+/* 10. Průběh a čas testu */
+
+.test-progress {
+  width: 100%;
+  height: 9px;
+  margin: 18px 0;
+  overflow: hidden;
+  background: var(--cream-deep);
+  border-radius: 999px;
+}
+
+.test-progress-fill {
+  width: 0;
+  height: 100%;
+  background: var(--caramel);
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+.test-timer {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 13px;
+  background: #F2E4D3;
+  color: var(--brown);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.feedback {
+  margin-top: 18px;
+  color: var(--ink);
+}
+
+/* 11. Formulář před testem */
+
+.profile-card form {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.profile-card label {
+  margin-top: 8px;
+  color: var(--brown);
+  font-weight: 700;
+}
+
+.profile-card input,
+.profile-card select,
+.profile-card textarea {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: #FFFEFA;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  line-height: 1.5;
+  box-shadow: none;
+}
+
+.profile-card input::placeholder,
+.profile-card textarea::placeholder {
+  color: #A09183;
+}
+
+.profile-card input:focus,
+.profile-card select:focus,
+.profile-card textarea:focus {
+  border-color: var(--caramel);
+  outline: 2px solid rgba(189, 135, 87, 0.2);
+  outline-offset: 1px;
+}
+
+.profile-card .primary-button {
+  margin-top: 14px;
+}
+
+.fine-print {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+/* 12. Výsledky testu */
+
+.result-metric,
+.category-result {
+  padding: 16px;
+  background: #FAF5EC;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+.metric-value,
+.result-score,
+.result-percentage {
+  color: var(--brown-light);
+  font-weight: 800;
+}
+
+.result-score,
+.result-percentage {
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.2;
+}
+
+.category-result {
+  margin-top: 12px;
+}
+
+.result-card .primary-button {
+  margin-top: 20px;
+}
+
+/* 13. Patička */
+
+.site-footer {
+  padding: 32px 24px;
+  background: var(--cream-deep);
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  color: var(--brown-light);
+}
+
+.site-footer a:hover {
+  color: var(--brown);
+}
+
+/* 14. Pomocné prvky */
+
+[hidden] {
+  display: none !important;
+}
+
+hr {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+}
+
+small {
+  color: var(--muted);
+}
+
+:disabled {
+  cursor: not-allowed;
+}
+
+/* 15. Tablet */
+
+@media (max-width: 900px) {
+  .site-header {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .catalog-grid,
+  .features-grid,
+  .facts-grid,
+  .stats-grid,
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  section {
+    padding: 62px 22px;
+  }
+
+  .hero,
+  .hero-section {
+    padding-top: 82px;
+    padding-bottom: 82px;
+  }
+}
+
+/* 16. Mobil */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  .site-header {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+  }
+
+  .header-nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px 18px;
+  }
+
+  .header-nav a,
+  .header-link {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 48px 18px;
+    scroll-margin-top: 20px;
+  }
+
+  .hero,
+  .hero-section {
+    padding-top: 66px;
+    padding-bottom: 66px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
+  }
+
+  .catalog-grid,
+  .features-grid,
+  .facts-grid,
+  .stats-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .catalog-card,
+  .feature-card,
+  .fact-card,
+  .stat-card {
+    padding: 22px;
+    border-radius: 15px;
+  }
+
+  .test-card,
+  .profile-card,
+  .result-card {
+    padding: 23px 18px;
+    border-radius: 17px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 48px;
+    padding: 12px 17px;
+  }
+
+  .answer {
+    min-height: 52px;
+    padding: 13px 14px;
+    font-size: 0.96rem;
+  }
+
+  .profile-card input,
+  .profile-card select,
+  .profile-card textarea {
+    font-size: 16px;
+  }
+}
+
+/* 17. Omezení animací podle nastavení zařízení */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =========================================
    CEREBRIO — VÍCE TEPLA A CHARAKTERU
    ========================================= */
 
