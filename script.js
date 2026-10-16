@@ -431,6 +431,7 @@ function nextQuestion() {
   }
 }
 
+
 function showResults() {
   finished = true;
 
@@ -440,34 +441,28 @@ function showResults() {
   }
 
   const elapsed = getElapsedSeconds();
-  const percentage = Math.round((score / questions.length) * 100);
   const playerName = playerNameInput.value.trim();
 
   quizScreen.hidden = true;
   resultScreen.hidden = false;
 
   resultHeading.textContent = playerName
-    ? `Test dokončen, ${playerName}.`
-    : "Test dokončen.";
+    ? `CerebrIQ přehled — ${playerName}`
+    : "CerebrIQ přehled";
 
-  resultScore.textContent =
-    `${score} / ${questions.length} bodů (${percentage} %)`;
+  // Zatím nezobrazujeme vymyšlenou hodnotu IQ.
+  // Skutečný převod vyžaduje ověřenou normovací tabulku.
+  resultScore.textContent = "Nehodnoceno";
 
-  if (percentage >= 90) {
-    resultMessage.textContent =
-      "Velmi vysoká úspěšnost v tomto souboru úloh. Výsledek popisuje výkon v tomto testu, nikoli standardizované IQ.";
-  } else if (percentage >= 75) {
-    resultMessage.textContent =
-      "Vysoká úspěšnost. Většinu úloh se podařilo vyřešit správně.";
-  } else if (percentage >= 50) {
-    resultMessage.textContent =
-      "Střední úspěšnost. Projdi si vysvětlení a zaměř se na obtížnější úlohy.";
-  } else {
-    resultMessage.textContent =
-      "Nižší úspěšnost v tomto pokusu. Projdi si vysvětlení a můžeš test zopakovat.";
-  }
+  document.querySelector("#result-correct").textContent =
+    `${score} / ${questions.length}`;
 
-  resultTime.textContent = `Čas: ${formatTime(elapsed)}`;
+  resultTime.textContent = formatTime(elapsed);
+
+  resultMessage.textContent =
+    "Tvůj výsledek shrnuje počet správně vyřešených úloh. " +
+    "Odhad IQ bude možné doplnit, až bude k dispozici ověřená " +
+    "metodika převodu skóre na IQ.";
 
   progressFill.style.width = "100%";
   progressTrack.setAttribute(
@@ -475,6 +470,7 @@ function showResults() {
     String(questions.length)
   );
 }
+
 
 startButton.addEventListener("click", startTest);
 nextButton.addEventListener("click", nextQuestion);
