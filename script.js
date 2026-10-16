@@ -464,41 +464,120 @@ function nextQuestion() {
   }
 }
 
+
 function showResults() {
   endTime = Date.now();
   stopTimer();
 
-  const totalTime = endTime - startTime;
-  const percentage = Math.round((score / questions.length) * 100);
+  const totalTime = Math.max(0, endTime - startTime);
+  const totalQuestions = questions.length;
+  const percentage = totalQuestions
+    ? Math.round((score / totalQuestions) * 100)
+    : 0;
 
-  const categories = [...new Set(questions.map((question) => question.category))];
+  const averageTime = totalQuestions
+    ? Math.round(totalTime / totalQuestions / 1000)
+    : 0;
+
+  const categories = [...new Set(
+    questions.map((question) => question.category)
+  )];
 
   const categorySummary = categories.map((category) => {
     const categoryQuestions = questionResults.filter(
       (result) => result.category === category
     );
+
     const categoryCorrect = categoryQuestions.filter(
       (result) => result.correct
     ).length;
 
+    const categoryTotal = categoryQuestions.length;
+
     return {
       name: category,
       correct: categoryCorrect,
-      total: categoryQuestions.length
+      total: categoryTotal,
+      percentage: categoryTotal
+        ? Math.round((categoryCorrect / categoryTotal) * 100)
+        : 0
     };
   });
 
   let message;
 
-  if (score >= 27) {
-    message = "Výborný výsledek! V tomto testu jsi vyřešil/a většinu úloh správně.";
-  } else if (score >= 21) {
-    message = "Velmi dobrý výsledek. Prokázal/a jsi silnou úspěšnost v tomto souboru úloh.";
-  } else if (score >= 15) {
-    message = "Solidní základ. Výsledky ukazují, ve kterých typech úloh můžeš pokračovat v tréninku.";
+  if (percentage >= 90) {
+    message = "Skvělý výsledek! V tomto testu se ti dařilo velmi dobře.";
+  } else if (percentage >= 70) {
+    message = "Velmi dobrá práce. Většinu úloh se ti podařilo vyřešit správně.";
+  } else if (percentage >= 50) {
+    message = "Solidní základ. Výsledky ti ukážou, na které oblasti se zaměřit.";
   } else {
-    message = "Ber to jako výchozí bod. Projdi si vysvětlení a zkus test znovu.";
+    message = "Každý test je příležitost k učení. Zkus další pokus a sleduj svůj pokrok.";
   }
+
+  // Profil je nepovinný. Pokud proměnná existuje,
+  // zahrneme bezpečně dostupné údaje do výsledku.
+  const profile =
+    typeof participantProfile !== "undefined" && participantProfile
+      ? participantProfile
+      : {};
+
+  const profileLabels = [];
+
+  if (profile.age) {
+    const ageLabels = {
+      under18: "Méně než 18 let",
+      "18–24": "18–24 let",
+      "25–34": "25–34 let",
+      "35–44": "35–44 let",
+      "45–54": "45–54 let",
+      "55–64": "55–64 let",
+      "65+": "65 a více let"
+    };
+
+    profileLabels.push({
+      label: "Věková skupina",
+      value: ageLabels[profile.age] || profile.age
+    });
+  }
+
+  if (profile.language) {
+    profileLabels.push({
+      label: "Jazyk testu",
+      value: profile.language
+    });
+  }
+
+  if (profile.gender) {
+    profileLabels.push({
+      label: "Pohlaví",
+      value: profile.gender
+    });
+  }
+
+  if (profile.nationality) {
+    profileLabels.push({
+      label: "Národnost",
+      value: profile.nationality
+    });
+  }
+
+  // Strukturovaný výsledek pro budoucí statistiky.
+  // Zatím zůstává pouze v paměti stránky.
+  const testResult = {
+    score,
+    totalQuestions,
+    percentage,
+    totalTimeMs: totalTime,
+    averageTimePerQuestionSeconds: averageTime,
+    categories: categorySummary,
+    profile: { ...profile },
+    completedAt: new Date().toISOString()
+  };
+
+  // Dostupné pro další funkce během běhu stránky.
+  window.cerebrioLastResult = testResult;
 
   testSection.innerHTML = `
     <div class="section-kicker">TEST DOKONČEN</div>
@@ -507,40 +586,85 @@ function showResults() {
       <div class="result-symbol" aria-hidden="true">✳</div>
       <h2>Tvůj výsledek</h2>
 
-      <p class="result-score">${score}<span> / ${questions.length}</span></p>
-      <p class="result-percentage">${percentage} % úspěšnost</p>
+      <p class="result-score">
+        ${score}<span> / ${totalQuestions}</span>
+      </p>
+
+      <p class="result-percentage">
+        ${percentage} % úspěšnost
+      </p>
 
       <div class="result-metrics">
         <div class="result-metric">
           <span class="metric-value">${formatTime(totalTime)}</span>
           <span class="metric-label">Celkový čas</span>
         </div>
+
         <div class="result-metric">
-          <span class="metric-value">${(totalTime / 60000).toFixed(1)} min</span>
-          <span class="metric-label">Doba testu</span>
+          <span class="metric-value">${averageTime} s</span>
+          <span class="metric-label">Průměr na otázku</span>
         </div>
       </div>
 
-      <div class="test-progress">
-        <div class="test-progress-fill" style="width: ${percentage}%"></div>
+      <div
+        class="test-progress"
+        role="progressbar"
+        aria-label="Úspěšnost testu"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="${percentage}"
+      >
+        <div
+          class="test-progress-fill"
+          style="width: ${percentage}%"
+        ></div>
       </div>
 
       <p class="feedback">${message}</p>
 
       <h3>Výsledky podle oblastí</h3>
+
       <div class="category-results">
         ${categorySummary.map((item) => `
           <div class="category-result">
-            <span>${item.name}</span>
-            <strong>${item.correct} / ${item.total}</strong>
+            <div>
+              <span>${item.name}</span>
+              <div class="test-progress">
+                <div
+                  class="test-progress-fill"
+                  style="width: ${item.percentage}%"
+                ></div>
+              </div>
+            </div>
+
+            <strong>
+              ${item.correct} / ${item.total}
+              <span class="fine-print">(${item.percentage} %)</span>
+            </strong>
           </div>
         `).join("")}
       </div>
 
+      ${
+        profileLabels.length
+          ? `
+            <h3>Profil účastníka</h3>
+            <div class="category-results">
+              ${profileLabels.map((item) => `
+                <div class="category-result">
+                  <span>${escapeHtml(item.label)}</span>
+                  <strong>${escapeHtml(item.value)}</strong>
+                </div>
+              `).join("")}
+            </div>
+          `
+          : ""
+      }
+
       <p class="fine-print">
-        Tento výsledek vyjadřuje pouze úspěšnost v našem procvičovacím testu.
-        Není to standardizované IQ skóre ani klinické či psychologické posouzení.
-        Čas závisí také na čtení, soustředění a podmínkách vyplňování.
+        Výsledek vyjadřuje úspěšnost v tomto procvičovacím testu,
+        nikoli standardizované IQ skóre. Osobní profil se v této
+        verzi ukládá pouze do paměti stránky a není odesílán na server.
       </p>
 
       <button type="button" class="primary-button" id="restart-test">
@@ -549,8 +673,25 @@ function showResults() {
     </div>
   `;
 
-  testSection.querySelector("#restart-test").addEventListener("click", startTest);
+  testSection.querySelector("#restart-test")
+    .addEventListener("click", startTest);
 }
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+
+    return entities[character];
+  });
+}
+
+
 
 
 function startTest() {
