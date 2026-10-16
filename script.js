@@ -348,6 +348,13 @@ function startTimer() {
   timerInterval = setInterval(updateTimer, 250);
 }
 
+let participantProfile = {
+  age: "",
+  language: "Čeština",
+  gender: "",
+  nationality: ""
+};
+
 function renderQuestion() {
   const question = questions[currentQuestion];
 
@@ -545,14 +552,102 @@ function showResults() {
   testSection.querySelector("#restart-test").addEventListener("click", startTest);
 }
 
+
 function startTest() {
   stopTimer();
+
+  testSection.hidden = false;
+  testSection.innerHTML = `
+    <div class="section-kicker">CEREBRIO · PŘED TESTEM</div>
+
+    <div class="test-card profile-card">
+      <h2>Než začneš</h2>
+      <p>Vyplň několik nepovinných údajů, které nám pomohou lépe popsat výsledky testování.</p>
+
+      <form id="profile-form">
+        <label for="profile-age">Věková skupina</label>
+        <select id="profile-age" name="age">
+          <option value="">Nechci uvádět</option>
+          <option value="under18">Méně než 18 let</option>
+          <option value="18–24">18–24 let</option>
+          <option value="25–34">25–34 let</option>
+          <option value="35–44">35–44 let</option>
+          <option value="45–54">45–54 let</option>
+          <option value="55–64">55–64 let</option>
+          <option value="65+">65 a více let</option>
+        </select>
+
+        <label for="profile-language">Jazyk testu</label>
+        <select id="profile-language" name="language">
+          <option value="Čeština">Čeština</option>
+          <option value="Slovenština">Slovenština</option>
+          <option value="Angličtina">Angličtina</option>
+          <option value="Jiný">Jiný</option>
+        </select>
+
+        <label for="profile-gender">Pohlaví (nepovinné)</label>
+        <select id="profile-gender" name="gender">
+          <option value="">Nechci uvádět</option>
+          <option value="Muž">Muž</option>
+          <option value="Žena">Žena</option>
+          <option value="Jiné">Jiné</option>
+        </select>
+
+        <label for="profile-nationality">Národnost (nepovinné)</label>
+        <input
+          id="profile-nationality"
+          name="nationality"
+          type="text"
+          maxlength="60"
+          placeholder="Např. česká"
+          autocomplete="off"
+        />
+
+        <p class="fine-print">
+          Údaje se zatím ukládají pouze do paměti této stránky.
+          Neodesílají se na server a po obnovení stránky se ztratí.
+          Neovlivňují skóre ani neurčují IQ.
+        </p>
+
+        <button type="submit" class="primary-button">
+          Začít test →
+        </button>
+      </form>
+    </div>
+  `;
+
+  testSection.querySelector("#profile-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+
+    participantProfile = {
+      age: form.elements.age.value,
+      language: form.elements.language.value,
+      gender: form.elements.gender.value,
+      nationality: form.elements.nationality.value.trim()
+    };
+
+    beginTest();
+  });
+
+  testSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function beginTest() {
+  stopTimer();
+
   currentQuestion = 0;
   score = 0;
   answered = false;
   questionResults = [];
 
   renderQuestion();
+
+  // Čas začíná běžet až po potvrzení profilu a spuštění testu.
   startTimer();
   updateTimer();
 
@@ -561,6 +656,7 @@ function startTest() {
     block: "start"
   });
 }
+
 
 if (startButton) {
   startButton.addEventListener("click", (event) => {
