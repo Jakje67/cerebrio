@@ -1093,3 +1093,59 @@ hr {
     box-shadow: 0 6px 18px rgba(89, 59, 43, 0.06);
   }
 }
+
+/* Vyhodnocení odpovědí */
+.answer.answer-correct {
+  border-color: #218653;
+  background-color: #e8f7ee;
+  color: #155c37;
+}
+
+.answer.answer-incorrect {
+  border-color: #c83d48;
+  background-color: #fff0f0;
+  color: #922b35;
+}
+
+.answer.answer-correct .answer-letter {
+  background-color: #218653;
+  color: #ffffff;
+}
+
+.answer.answer-incorrect .answer-letter {
+  background-color: #c83d48;
+  color: #ffffff;
+}
+
+.answer:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* Zpětná vazba */
+.feedback.feedback-correct {
+  color: #218653;
+  font-weight: 600;
+}
+
+.feedback.feedback-incorrect {
+  color: #c83d48;
+  font-weight: 600;
+}
+
+/* Vysvětlení odpovědi */
+.answer-explanation {
+  margin-top: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #d8e2eb;
+  border-left: 4px solid #6484a3;
+  border-radius: 10px;
+  background: #f5f8fb;
+  color: #243447;
+  line-height: 1.65;
+}
+
+.answer-explanation[hidden] {
+  display: none;
+}
