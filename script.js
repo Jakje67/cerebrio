@@ -346,13 +346,20 @@ function getTestHistory() {
 }
 
 // Uloží dokončený pokus a ponechá posledních 20 výsledků.
+// Uloží dokončený pokus a ponechá posledních 20 výsledků.
 function saveTestResult(result) {
   const entry = {
     score: result.score,
     totalQuestions: result.totalQuestions,
     percentage: result.percentage,
     totalTimeMs: result.totalTimeMs,
-    completedAt: result.completedAt
+    completedAt: result.completedAt,
+    cerebrioScore: result.cerebrioScore,
+    scoreType: result.scoreType,
+    calibrationVersion: result.calibrationVersion,
+    profile: result.profile,
+    participant: result.participant,
+    categories: result.categories
   };
 
   const previousHistory = getTestHistory();
@@ -370,14 +377,12 @@ function saveTestResult(result) {
       saved: true
     };
   } catch (error) {
-    // Při problému s úložištěm lze výsledek stále zobrazit.
     return {
       history,
       saved: false
     };
   }
 }
-
 // Nejvyšší dosažené skóre v tomto prohlížeči.
 function getPersonalBest(history = getTestHistory()) {
   if (history.length === 0) {
@@ -673,9 +678,7 @@ testResult.calibrationVersion = estimate.calibrationVersion;
 testResult.calibrationSampleSize = estimate.calibrationSampleSize;
 
 testResult.participant = {
-  age: participantProfile?.age
-    ? Number(participantProfile.age)
-    : null,
+  age: participantProfile?.age || null,
 
   language: participantProfile?.language || "Čeština",
 
@@ -714,6 +717,15 @@ saveTestResult(testResult);
           <span class="metric-label">Průměr na otázku</span>
         </div>
       </div>
+      <div class="result-metric">
+  <span class="metric-label">Experimentální Cerebrio skóre</span>
+  <strong class="metric-value">${testResult.cerebrioScore}</strong>
+</div>
+
+<p class="fine-print">
+  Experimentální index odvozený z malého pilotního vzorku.
+  Nejde o standardizované IQ měření.
+</p>
 
       <div
         class="test-progress"
@@ -827,6 +839,16 @@ function startTest() {
           <option value="65+">65 a více let</option>
         </select>
 
+        <label for="education">Nejvyšší dokončené vzdělání (nepovinné)</label>
+<select id="education" name="education">
+<option value="">Nechci uvádět</option>
+  <option value="zakladni">Základní</option>
+  <option value="stredni_bez_maturity">Střední bez maturity</option>
+  <option value="stredni_s_maturitou">Střední s maturitou</option>
+  <option value="vyssi_odb">Vyšší odborné</option>
+  <option value="vysokoskolske">Vysokoškolské</option>
+</select>
+
         <label for="profile-language">Jazyk testu</label>
         <select id="profile-language" name="language">
           <option value="Čeština">Čeština</option>
@@ -854,10 +876,10 @@ function startTest() {
         />
 
         <p class="fine-print">
-          Údaje se zatím ukládají pouze do paměti této stránky.
-          Neodesílají se na server a po obnovení stránky se ztratí.
-          Neovlivňují skóre ani neurčují IQ.
-        </p>
+  Výsledek a profilové údaje se ukládají lokálně v tomto
+  prohlížeči. Na server se v této verzi neodesílají.
+  Zatím neovlivňují skóre.
+</p>
 
         <button type="submit" class="primary-button">
           Začít test →
@@ -871,12 +893,13 @@ function startTest() {
 
     const form = event.currentTarget;
 
-    participantProfile = {
-      age: form.elements.age.value,
-      language: form.elements.language.value,
-      gender: form.elements.gender.value,
-      nationality: form.elements.nationality.value.trim()
-    };
+   participantProfile = {
+  age: form.elements.age.value,
+  language: form.elements.language.value,
+  gender: form.elements.gender.value,
+  nationality: form.elements.nationality.value.trim(),
+  education: form.elements.education.value
+};
 
     beginTest();
   });
