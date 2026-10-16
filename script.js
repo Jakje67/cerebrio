@@ -662,6 +662,29 @@ function showResults() {
     completedAt: new Date().toISOString()
   };
 
+  const estimate = calculateCerebrioScore(
+  testResult.score,
+  testResult.totalQuestions
+);
+
+testResult.cerebrioScore = estimate.score;
+testResult.scoreType = estimate.type;
+testResult.calibrationVersion = estimate.calibrationVersion;
+testResult.calibrationSampleSize = estimate.calibrationSampleSize;
+
+testResult.participant = {
+  age: participantProfile?.age
+    ? Number(participantProfile.age)
+    : null,
+
+  language: participantProfile?.language || "Čeština",
+
+  education: participantProfile?.education || null
+};
+
+// Historii už projekt podporuje, ale je nutné ji skutečně zavolat.
+saveTestResult(testResult);
+
   // Dostupné pro další funkce během běhu stránky.
   window.cerebrioLastResult = testResult;
 
@@ -902,3 +925,49 @@ document.querySelectorAll('a[href="#test"]').forEach((link) => {
     startTest();
   });
 });
+
+const CEREBRIO_CALIBRATION = {
+  version: "pilot-10-friends-v1",
+  sampleSize: 10,
+  meanScore: 22.1,
+  standardDeviation: 4.23,
+  targetMean: 100,
+  targetSD: 15,
+  minScore: 55,
+  maxScore: 145
+};
+
+function calculateCerebrioScore(score, totalQuestions) {
+  if (
+    !Number.isFinite(score) ||
+    !Number.isFinite(totalQuestions) ||
+    totalQuestions <= 0
+  ) {
+    throw new Error("Neplatný výsledek testu.");
+  }
+
+  // Přepočet na test o 30 otázkách.
+  const normalizedScore = (score / totalQuestions) * 30;
+
+  const z =
+    (normalizedScore - CEREBRIO_CALIBRATION.meanScore) /
+    CEREBRIO_CALIBRATION.standardDeviation;
+
+  const rawScore =
+    CEREBRIO_CALIBRATION.targetMean +
+    CEREBRIO_CALIBRATION.targetSD * z;
+
+  const cerebrioScore = Math.round(
+    Math.max(
+      CEREBRIO_CALIBRATION.minScore,
+      Math.min(CEREBRIO_CALIBRATION.maxScore, rawScore)
+    )
+  );
+
+  return {
+    score: cerebrioScore,
+    type: "experimental",
+    calibrationVersion: CEREBRIO_CALIBRATION.version,
+    calibrationSampleSize: CEREBRIO_CALIBRATION.sampleSize
+  };
+}
