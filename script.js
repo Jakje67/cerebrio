@@ -156,13 +156,13 @@ const questions = [
     explanation: "Průměr tří po sobě jdoucích čísel je prostřední číslo. 72 ÷ 3 = 24."
   },
   {
-    category: "Analogie",
-    level: 2,
-    question: "Semínko je k rostlině jako vejce k…",
-    detail: "Uvažuj běžný biologický vztah.",
-    answers: ["Hnízdu", "Ptákovi", "Mláděti", "Peří"],
-    correct: 2,
-    explanation: "Ze semínka může vyrůst rostlina, z vejce se může vylíhnout mládě."
+  category: "Analogie",
+  level: 2,
+  question: "Kniha je k autorovi jako obraz k…",
+  detail: "Najdi stejný vztah.",
+  answers: ["Galerii", "Malíři", "Rámu", "Divákovi"],
+  correct: 1,
+  explanation: "Kniha je dílem autora a obraz je dílem malíře."
   },
   {
     category: "Matematika",
@@ -417,8 +417,8 @@ function checkAnswer(selectedIndex) {
 
   const question = questions[currentQuestion];
   const answerButtons = testSection.querySelectorAll(".answer");
-  const feedbackElement = testSection.querySelector("#feedback");
   const nextButton = testSection.querySelector("#next-question");
+
   const isCorrect = selectedIndex === question.correct;
 
   if (isCorrect) {
@@ -435,15 +435,13 @@ function checkAnswer(selectedIndex) {
     button.disabled = true;
   });
 
-  answerButtons[question.correct].classList.add("correct");
+  // Během testu neprozrazujeme správnou odpověď.
+  // Ani neukazujeme vysvětlení.
+  const feedbackElement = testSection.querySelector("#feedback");
 
-  if (!isCorrect) {
-    answerButtons[selectedIndex].classList.add("incorrect");
+  if (feedbackElement) {
+    feedbackElement.textContent = "Odpověď zaznamenána.";
   }
-
-  feedbackElement.textContent = isCorrect
-    ? `Správně! ${question.explanation}`
-    : `Nesprávně. ${question.explanation}`;
 
   nextButton.hidden = false;
   updateTimer();
