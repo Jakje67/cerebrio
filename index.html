@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Cerebrio — objev své logické myšlení a vyzkoušej si ukázkový test.">
+  <title>Cerebrio — Poznej svou mysl</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#">
+      <span class="brand-mark">C</span>
+      <span>Cerebrio</span>
+    </a>
+    <a class="header-link" href="#jak-to-funguje">Jak to funguje</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        TRÉNUJ MYSL. OBJEVUJ MOŽNOSTI.
+      </div>
+
+      <h1>Poznej, jak<br><span>přemýšlíš.</span></h1>
+
+      <p class="hero-copy">
+        Vyzkoušej si logické úlohy, prověř své uvažování
+        a objev svět přemýšlení s Cerebrio.
+      </p>
+
+      <button class="primary-button" id="start-button">
+        Vyzkoušet ukázkový test <span>→</span>
+      </button>
+
+      <p class="fine-print">
+        Ukázková úloha není standardizovaný IQ test a neměří
+        klinicky validované IQ.
+      </p>
+
+      <div class="hero-decoration" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit-core">C</div>
+        <span class="spark spark-one">✳</span>
+        <span class="spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <section class="test-section" id="test" hidden>
+      <div class="section-kicker">UKÁZKOVÁ ÚLOHA</div>
+
+      <div class="test-card">
+        <div class="test-topline">
+          <span>Otázka 1 z 1</span>
+          <span class="test-tag">Logika</span>
+        </div>
+
+        <h2>Jaké číslo následuje?</h2>
+        <p class="sequence">2 · 4 · 8 · 16 · ?</p>
+
+        <div class="answers">
+          <button class="answer" data-answer="24">24</button>
+          <button class="answer" data-answer="30">30</button>
+          <button class="answer" data-answer="32">32</button>
+          <button class="answer" data-answer="34">34</button>
+        </div>
+
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+        <button class="text-button" id="reset-button">Zkusit znovu</button>
+      </div>
+    </section>
+
+    <section class="how-section" id="jak-to-funguje">
+      <div class="section-kicker">JEDNODUŠE A SROZUMITELNĚ</div>
+      <h2>Každá otázka je nový způsob, jak přemýšlet.</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">⌁</div>
+          <h3>Logické úlohy</h3>
+          <p>Hledej vzory, vztahy a řešení v zajímavých úlohách.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">◷</div>
+          <h3>Jasný výsledek</h3>
+          <p>Zjisti, jak se ti podařilo vyřešit jednotlivé otázky.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">◇</div>
+          <h3>Digitální certifikáty</h3>
+          <p>Do budoucna nabídneme certifikáty s možností ověření.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#">
+      <span class="brand-mark">C</span>
+      <span>Cerebrio</span>
+    </a>
+    <span>© <span id="year"></span> Cerebrio</span>
+  </footer>
+</body>
+</html>
