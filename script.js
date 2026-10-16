@@ -338,6 +338,11 @@ let endTime = 0;
 let questionResults = [];
 let timerInterval = null;
 
+// Měření pouze aktivního času řešení.
+let accumulatedTimeMs = 0;
+let questionStartTime = 0;
+let questionTimerRunning = false;
+
 
 const CEREBRIO_HISTORY_KEY = "cerebrio-test-history-v1";
 const CEREBRIO_MAX_HISTORY = 20;
@@ -438,7 +443,11 @@ function formatTime(milliseconds) {
 }
 
 function elapsedTime() {
-  return Date.now() - startTime;
+  const currentQuestionTime = questionTimerRunning
+    ? Date.now() - questionStartTime
+    : 0;
+
+  return accumulatedTimeMs + currentQuestionTime;
 }
 
 function stopTimer() {
@@ -458,8 +467,22 @@ function updateTimer() {
 
 function startTimer() {
   stopTimer();
-  startTime = Date.now();
+
+  questionStartTime = Date.now();
+  questionTimerRunning = true;
+
+  updateTimer();
   timerInterval = setInterval(updateTimer, 250);
+}
+
+function pauseTimer() {
+  if (questionTimerRunning) {
+    accumulatedTimeMs += Date.now() - questionStartTime;
+    questionTimerRunning = false;
+  }
+
+  stopTimer();
+  updateTimer();
 }
 
 let participantProfile = {
@@ -507,16 +530,23 @@ function renderQuestion() {
         `).join("")}
       </div>
 
-      <p id="feedback" class="feedback" aria-live="polite"></p>
+<p id="feedback" class="feedback" aria-live="polite"></p>
 
+<div
+  id="explanation"
+  class="answer-explanation"
+  aria-live="polite"
+  hidden
+></div>
       <button type="button" class="primary-button" id="next-question" hidden>
         ${currentQuestion === questions.length - 1
           ? "Zobrazit výsledek"
           : "Další otázka"} <span aria-hidden="true">→</span>
       </button>
 
-      <p class="fine-print">Čas běží od spuštění testu do jeho dokončení.</p>
-    </div>
+<p class="fine-print">
+  Čas se počítá pouze během řešení otázky.
+</p>    </div>
   `;
 
   answered = false;
@@ -536,9 +566,14 @@ function checkAnswer(selectedIndex) {
 
   answered = true;
 
+  // Čas se zastaví okamžitě po potvrzení odpovědi.
+  pauseTimer();
+
   const question = questions[currentQuestion];
   const answerButtons = testSection.querySelectorAll(".answer");
   const nextButton = testSection.querySelector("#next-question");
+  const feedbackElement = testSection.querySelector("#feedback");
+  const explanationElement = testSection.querySelector("#explanation");
 
   const isCorrect = selectedIndex === question.correct;
 
@@ -552,16 +587,34 @@ function checkAnswer(selectedIndex) {
     correct: isCorrect
   });
 
-  answerButtons.forEach((button) => {
+  answerButtons.forEach((button, index) => {
     button.disabled = true;
+
+    // Správná odpověď se vždy zvýrazní zeleně.
+    if (index === question.correct) {
+      button.classList.add("answer-correct");
+    }
+
+    // Pokud uživatel odpověděl špatně, jeho volba bude červená.
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("answer-incorrect");
+    }
   });
 
-  // Během testu neprozrazujeme správnou odpověď.
-  // Ani neukazujeme vysvětlení.
-  const feedbackElement = testSection.querySelector("#feedback");
-
   if (feedbackElement) {
-    feedbackElement.textContent = "Odpověď zaznamenána.";
+    feedbackElement.textContent = isCorrect
+      ? "Správně! Tuto otázku máš za bod."
+      : "Nesprávně. Správná odpověď je zvýrazněna zeleně.";
+
+    feedbackElement.classList.toggle("feedback-correct", isCorrect);
+    feedbackElement.classList.toggle("feedback-incorrect", !isCorrect);
+  }
+
+  if (explanationElement) {
+    explanationElement.textContent =
+      question.explanation || "Vysvětlení k této otázce není k dispozici.";
+
+    explanationElement.hidden = false;
   }
 
   nextButton.hidden = false;
@@ -573,6 +626,9 @@ function nextQuestion() {
 
   if (currentQuestion < questions.length) {
     renderQuestion();
+
+    // Čas další otázky začne až po přechodu na ni.
+    startTimer();
   } else {
     showResults();
   }
@@ -580,10 +636,10 @@ function nextQuestion() {
 
 
 function showResults() {
-  endTime = Date.now();
   stopTimer();
+questionTimerRunning = false;
 
-  const totalTime = Math.max(0, endTime - startTime);
+const totalTime = Math.max(0, elapsedTime());
   const totalQuestions = questions.length;
   const percentage = totalQuestions
     ? Math.round((score / totalQuestions) * 100)
@@ -941,11 +997,14 @@ function beginTest() {
   answered = false;
   questionResults = [];
 
+  accumulatedTimeMs = 0;
+  questionStartTime = 0;
+  questionTimerRunning = false;
+
   renderQuestion();
 
-  // Čas začíná běžet až po potvrzení profilu a spuštění testu.
+  // Čas začne běžet až po spuštění testu.
   startTimer();
-  updateTimer();
 
   testSection.scrollIntoView({
     behavior: "smooth",
@@ -953,24 +1012,6 @@ function beginTest() {
   });
 }
 
-
-if (startButton) {
-  startButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    startTest();
-  });
-}
-
-// Odkazy z katalogu mohou ukazovat na #test.
-// Zachováme i spuštění kliknutím na takový odkaz.
-document.querySelectorAll('a[href="#test"]').forEach((link) => {
-  if (link.id === "start-button") return;
-
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    startTest();
-  });
-});
 
 const CEREBRIO_CALIBRATION = {
   version: "pilot-v1",
@@ -982,8 +1023,6 @@ const CEREBRIO_CALIBRATION = {
   minScore: 55,
   maxScore: 145
 };
-
-
 function calculateCerebrioScore(score, totalQuestions = 30) {
   if (
     !Number.isFinite(score) ||
