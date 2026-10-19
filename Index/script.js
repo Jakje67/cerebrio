@@ -827,3 +827,24 @@ async function saveCerebriqResult({
     status.style.color = "var(--red)";
   }
 }
+
+
+const userMenuToggle = document.getElementById("user-label");
+const userMenuLinks = document.getElementById("user-menu-links");
+
+if (userMenuToggle && userMenuLinks) {
+  userMenuToggle.addEventListener("click", () => {
+    const isOpen =
+      userMenuToggle.getAttribute("aria-expanded") === "true";
+
+    userMenuToggle.setAttribute("aria-expanded", String(!isOpen));
+    userMenuLinks.hidden = isOpen;
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest("#user-menu")) {
+      userMenuLinks.hidden = true;
+      userMenuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
