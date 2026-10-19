@@ -552,3 +552,43 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+.auth-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.auth-panel .button {
+  margin: 0;
+  min-height: 42px;
+  padding: 9px 14px;
+  font-size: 0.88rem;
+}
+
+#user-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#user-label {
+  color: var(--brown);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#auth-message {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 700px) {
+  .auth-panel {
+    width: 100%;
+  }
+}
