@@ -29,13 +29,35 @@
     Přihlásit se
   </button>
 
-  <div id="user-panel" hidden>
-    <span id="user-label"></span>
+  
+<div id="user-panel" hidden>
+  <div class="user-menu" id="user-menu">
     <button
-      class="button button-secondary"
-      id="logout-button"
       type="button"
+      id="user-label"
+      class="user-menu-toggle"
+      aria-expanded="false"
+      aria-controls="user-menu-links"
     >
+      Můj účet ▾
+    </button>
+
+    <div class="user-menu-links" id="user-menu-links" hidden>
+      <a href="Klient-karta/klient.html">
+        Matematika náhled
+      </a>
+    </div>
+  </div>
+
+  <button
+    class="button button-secondary"
+    id="logout-button"
+    type="button"
+  >
+    Odhlásit se
+  </button>
+</div>
+
       Odhlásit se
     </button>
   </div>
