@@ -489,3 +489,117 @@ function showResults() {
 startButton.addEventListener("click", startTest);
 nextButton.addEventListener("click", nextQuestion);
 restartButton.addEventListener("click", startTest);
+// Supabase – veřejné údaje projektu
+const SUPABASE_URL = "https://wecdhuqrfotybypnszxi.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "SEM_VLOZ_SVŮJ_PUBLISHABLE_KEY";
+
+const loginButton = document.querySelector("#login-button");
+const logoutButton = document.querySelector("#logout-button");
+const userPanel = document.querySelector("#user-panel");
+const userLabel = document.querySelector("#user-label");
+const authMessage = document.querySelector("#auth-message");
+
+let supabaseClient = null;
+
+function showAuthMessage(message) {
+  authMessage.textContent = message;
+}
+
+function updateAuthUI(user) {
+  loginButton.hidden = Boolean(user);
+  userPanel.hidden = !user;
+
+  if (user) {
+    const displayName =
+      user.user_metadata?.user_name ||
+      user.user_metadata?.preferred_username ||
+      user.user_metadata?.full_name ||
+      user.email ||
+      "Přihlášený uživatel";
+
+    userLabel.textContent = displayName;
+    showAuthMessage("Jsi přihlášen/a.");
+  } else {
+    userLabel.textContent = "";
+    showAuthMessage("");
+  }
+}
+
+async function initializeAuth() {
+  if (!window.supabase) {
+    showAuthMessage("Nepodařilo se načíst přihlašovací službu.");
+    loginButton.disabled = true;
+    return;
+  }
+
+  if (
+    !SUPABASE_PUBLISHABLE_KEY ||
+    SUPABASE_PUBLISHABLE_KEY === "SEM_VLOZ_SVŮJ_PUBLISHABLE_KEY"
+  ) {
+    showAuthMessage("Nejprve nastav Supabase Publishable key.");
+    return;
+  }
+
+  supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    showAuthMessage("Nepodařilo se načíst stav přihlášení.");
+    return;
+  }
+
+  updateAuthUI(data.session?.user ?? null);
+
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    updateAuthUI(session?.user ?? null);
+  });
+}
+
+loginButton.addEventListener("click", async () => {
+  if (!supabaseClient) {
+    showAuthMessage("Přihlášení není nakonfigurované.");
+    return;
+  }
+
+  loginButton.disabled = true;
+  showAuthMessage("Přesměrovávám na GitHub…");
+
+  try {
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: window.location.origin
+      }
+    });
+
+    if (error) {
+      showAuthMessage("Přihlášení se nezdařilo. Zkus to znovu.");
+      loginButton.disabled = false;
+    }
+  } catch {
+    showAuthMessage("Nastala chyba při přihlašování.");
+    loginButton.disabled = false;
+  }
+});
+
+logoutButton.addEventListener("click", async () => {
+  if (!supabaseClient) return;
+
+  logoutButton.disabled = true;
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  logoutButton.disabled = false;
+
+  if (error) {
+    showAuthMessage("Odhlášení se nezdařilo.");
+  } else {
+    updateAuthUI(null);
+  }
+});
+
+initializeAuth();
