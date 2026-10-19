@@ -790,3 +790,48 @@ h2 {
     padding: 29px 20px 22px;
   }
 }
+
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.user-menu-toggle {
+  padding: 8px 12px;
+  color: var(--brown);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.user-menu-links {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+  min-width: 190px;
+  padding: 6px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.user-menu-links a {
+  display: block;
+  padding: 10px 12px;
+  color: var(--ink);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.user-menu-links a:hover {
+  background: var(--beige);
+}
+
+.user-menu-links[hidden] {
+  display: none;
+}
