@@ -1,1 +1,53 @@
 
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Osobní profil Cerebrio a historie výsledků CerebrIQ.">
+  <title>Můj profil | Cerebrio</title>
+  <link rel="stylesheet" href="client.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="client.js" defer></script>
+</head>
+<body>
+  <header class="client-header">
+    <a href="../" class="brand">Cerebrio</a>
+    <a href="../" class="back-link">Zpět na hlavní stránku</a>
+  </header>
+
+  <main class="profile-card">
+    <p class="profile-eyebrow">OSOBNÍ PROFIL</p>
+    <h1 id="profile-name">Můj profil</h1>
+    <p class="profile-description">
+      Přehled tvých výsledků CerebrIQ.
+    </p>
+
+    <section class="score-panel">
+      <p>Poslední výsledek</p>
+      <strong id="profile-score">— CIQ</strong>
+      <span id="profile-date">Načítám datum…</span>
+    </section>
+
+    <section class="stats">
+      <div>
+        <span>Správné odpovědi</span>
+        <strong id="profile-correct">—</strong>
+      </div>
+      <div>
+        <span>Čas řešení</span>
+        <strong id="profile-time">—</strong>
+      </div>
+    </section>
+
+    <p id="profile-status" role="status" aria-live="polite">
+      Načítám profil…
+    </p>
+
+    <section>
+      <h2>Historie testů</h2>
+      <ul id="profile-history"></ul>
+    </section>
+  </main>
+</body>
+</html>
