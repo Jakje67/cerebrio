@@ -489,20 +489,87 @@ function showResults() {
 startButton.addEventListener("click", startTest);
 nextButton.addEventListener("click", nextQuestion);
 restartButton.addEventListener("click", startTest);
-// Supabase – veřejné údaje projektu
+// ===== Cerebrio: přihlášení přes Supabase =====
+
 const SUPABASE_URL = "https://wecdhuqrfotybypnszxi.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1AF0NrMIx7oUMT3jy4lJbQ_LqrMD1nC";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_1AF0NrMIx7oUMT3jy4lJbQ_LqrMD1nC";
 
 const loginButton = document.querySelector("#login-button");
 const logoutButton = document.querySelector("#logout-button");
 const userPanel = document.querySelector("#user-panel");
 const userLabel = document.querySelector("#user-label");
+
+const authModal = document.querySelector("#auth-modal");
+const authClose = document.querySelector("#auth-close");
 const authMessage = document.querySelector("#auth-message");
 
-let supabaseClient = null;
+const githubButton = document.querySelector("#github-login");
+const googleButton = document.querySelector("#google-login");
 
-function showAuthMessage(message) {
+const emailForm = document.querySelector("#email-auth-form");
+const emailInput = document.querySelector("#auth-email");
+const passwordInput = document.querySelector("#auth-password");
+const emailSubmit = document.querySelector("#email-submit");
+
+const authTitle = document.querySelector("#auth-title");
+const authSubtitle = document.querySelector("#auth-subtitle");
+const authSwitchLabel = document.querySelector("#auth-switch-label");
+const authSwitchButton = document.querySelector("#auth-switch-button");
+
+let supabaseClient = null;
+let authMode = "login";
+
+function showAuthMessage(message, isError = true) {
   authMessage.textContent = message;
+  authMessage.style.color = isError ? "var(--red)" : "var(--green)";
+}
+
+function openAuthModal() {
+  if (!supabaseClient) {
+    return;
+  }
+
+  authModal.hidden = false;
+  showAuthMessage("");
+  authClose.focus();
+}
+
+function closeAuthModal() {
+  authModal.hidden = true;
+  showAuthMessage("");
+  loginButton.focus();
+}
+
+function setAuthMode(mode) {
+  authMode = mode;
+  const isSignup = mode === "signup";
+
+  authTitle.textContent = isSignup
+    ? "Vytvoření účtu"
+    : "Přihlášení do Cerebrio";
+
+  authSubtitle.textContent = isSignup
+    ? "Založ si účet pro přístup ke svým uloženým výsledkům."
+    : "Přihlas se ke svému účtu.";
+
+  emailSubmit.textContent = isSignup
+    ? "Zaregistrovat se"
+    : "Přihlásit se";
+
+  authSwitchLabel.textContent = isSignup
+    ? "Už máš účet?"
+    : "Nemáš účet?";
+
+  authSwitchButton.textContent = isSignup
+    ? "Přihlásit se"
+    : "Zaregistrovat se";
+
+  passwordInput.autocomplete = isSignup
+    ? "new-password"
+    : "current-password";
+
+  showAuthMessage("");
 }
 
 function updateAuthUI(user) {
@@ -510,33 +577,157 @@ function updateAuthUI(user) {
   userPanel.hidden = !user;
 
   if (user) {
-    const displayName =
+    userLabel.textContent =
       user.user_metadata?.user_name ||
       user.user_metadata?.preferred_username ||
       user.user_metadata?.full_name ||
       user.email ||
       "Přihlášený uživatel";
 
-    userLabel.textContent = displayName;
-    showAuthMessage("Jsi přihlášen/a.");
+    authModal.hidden = true;
   } else {
     userLabel.textContent = "";
-    showAuthMessage("");
   }
 }
 
+async function signInWithProvider(provider) {
+  if (!supabaseClient) return;
+
+  githubButton.disabled = true;
+  googleButton.disabled = true;
+  showAuthMessage("Přesměrovávám na přihlášení…", false);
+
+  try {
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: window.location.origin
+      }
+    });
+
+    if (error) {
+      showAuthMessage("Přihlášení se nezdařilo. Zkontroluj nastavení.");
+    }
+  } catch {
+    showAuthMessage("Nastala chyba při přihlašování.");
+  } finally {
+    githubButton.disabled = false;
+    googleButton.disabled = false;
+  }
+}
+
+loginButton.addEventListener("click", openAuthModal);
+authClose.addEventListener("click", closeAuthModal);
+
+authModal.addEventListener("click", (event) => {
+  if (event.target === authModal) {
+    closeAuthModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !authModal.hidden) {
+    closeAuthModal();
+  }
+});
+
+githubButton.addEventListener("click", () => {
+  signInWithProvider("github");
+});
+
+googleButton.addEventListener("click", () => {
+  signInWithProvider("google");
+});
+
+authSwitchButton.addEventListener("click", () => {
+  setAuthMode(authMode === "login" ? "signup" : "login");
+});
+
+emailForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!supabaseClient) return;
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  emailSubmit.disabled = true;
+  showAuthMessage(
+    authMode === "signup"
+      ? "Vytvářím účet…"
+      : "Přihlašuji tě…",
+    false
+  );
+
+  try {
+    if (authMode === "signup") {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: window.location.origin
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        showAuthMessage("Účet byl vytvořen a jsi přihlášen/a.", false);
+        updateAuthUI(data.user);
+      } else {
+        showAuthMessage(
+          "Registrace proběhla. Pokud je vyžadováno potvrzení e-mailu, otevři zprávu ve své schránce.",
+          false
+        );
+      }
+    } else {
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      if (error) throw error;
+
+      updateAuthUI(data.user);
+      showAuthMessage("Přihlášení proběhlo úspěšně.", false);
+    }
+  } catch (error) {
+    if (error.message?.includes("Invalid login credentials")) {
+      showAuthMessage("Nesprávný e-mail nebo heslo.");
+    } else if (error.message?.includes("already registered")) {
+      showAuthMessage("Tento e-mail už má účet. Zkus se přihlásit.");
+    } else {
+      showAuthMessage(
+        error.message || "Operace se nezdařila. Zkus to znovu."
+      );
+    }
+  } finally {
+    emailSubmit.disabled = false;
+  }
+});
+
+logoutButton.addEventListener("click", async () => {
+  if (!supabaseClient) return;
+
+  logoutButton.disabled = true;
+
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) throw error;
+
+    updateAuthUI(null);
+  } catch {
+    alert("Odhlášení se nezdařilo. Zkus to znovu.");
+  } finally {
+    logoutButton.disabled = false;
+  }
+});
+
 async function initializeAuth() {
   if (!window.supabase) {
-    showAuthMessage("Nepodařilo se načíst přihlašovací službu.");
     loginButton.disabled = true;
-    return;
-  }
-
-  if (
-    !SUPABASE_PUBLISHABLE_KEY ||
-    SUPABASE_PUBLISHABLE_KEY === "SEM_VLOZ_SVŮJ_PUBLISHABLE_KEY"
-  ) {
-    showAuthMessage("Nejprve nastav Supabase Publishable key.");
     return;
   }
 
@@ -558,48 +749,5 @@ async function initializeAuth() {
     updateAuthUI(session?.user ?? null);
   });
 }
-
-loginButton.addEventListener("click", async () => {
-  if (!supabaseClient) {
-    showAuthMessage("Přihlášení není nakonfigurované.");
-    return;
-  }
-
-  loginButton.disabled = true;
-  showAuthMessage("Přesměrovávám na GitHub…");
-
-  try {
-    const { error } = await supabaseClient.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: window.location.origin
-      }
-    });
-
-    if (error) {
-      showAuthMessage("Přihlášení se nezdařilo. Zkus to znovu.");
-      loginButton.disabled = false;
-    }
-  } catch {
-    showAuthMessage("Nastala chyba při přihlašování.");
-    loginButton.disabled = false;
-  }
-});
-
-logoutButton.addEventListener("click", async () => {
-  if (!supabaseClient) return;
-
-  logoutButton.disabled = true;
-
-  const { error } = await supabaseClient.auth.signOut();
-
-  logoutButton.disabled = false;
-
-  if (error) {
-    showAuthMessage("Odhlášení se nezdařilo.");
-  } else {
-    updateAuthUI(null);
-  }
-});
 
 initializeAuth();
