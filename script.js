@@ -491,7 +491,7 @@ nextButton.addEventListener("click", nextQuestion);
 restartButton.addEventListener("click", startTest);
 // Supabase – veřejné údaje projektu
 const SUPABASE_URL = "https://wecdhuqrfotybypnszxi.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "SEM_VLOZ_SVŮJ_PUBLISHABLE_KEY";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1AF0NrMIx7oUMT3jy4lJbQ_LqrMD1nC";
 
 const loginButton = document.querySelector("#login-button");
 const logoutButton = document.querySelector("#logout-button");
