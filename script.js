@@ -483,6 +483,13 @@ function showResults() {
   // Přepnutí obrazovek
   quizScreen.hidden = true;
   resultScreen.hidden = false;
+
+  saveCerebriqResult({
+  ciq,
+  correctAnswers: score,
+  totalQuestions,
+  elapsedSeconds
+});
 }
 
 
@@ -750,4 +757,73 @@ async function initializeAuth() {
   });
 }
 
-initializeAuth();
+
+const authReady = initializeAuth();
+
+async function saveCerebriqResult({
+  ciq,
+  correctAnswers,
+  totalQuestions,
+  elapsedSeconds
+}) {
+  const statusId = "result-save-status";
+  let status = document.getElementById(statusId);
+
+  if (!status) {
+    status = document.createElement("p");
+    status.id = statusId;
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    status.style.marginTop = "12px";
+
+    resultMessage.insertAdjacentElement("afterend", status);
+  }
+
+  try {
+    await authReady;
+
+    if (!supabaseClient) {
+      status.textContent =
+        "Výsledek se zobrazuje, ale databáze není dostupná.";
+      return;
+    }
+
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError) throw userError;
+
+    if (!user) {
+      status.textContent =
+        "Výsledek není uložen. Přihlas se, pokud ho chceš mít ve svém účtu.";
+      return;
+    }
+
+    status.textContent = "Ukládám výsledek…";
+
+    const { error } = await supabaseClient
+      .from("cerebriq_results")
+      .insert({
+        user_id: user.id,
+        score: ciq,
+        total_questions: totalQuestions,
+        answers: {
+          correct_answers: correctAnswers,
+          elapsed_seconds: elapsedSeconds
+        }
+      });
+
+    if (error) throw error;
+
+    status.textContent = "Výsledek byl uložen do tvého účtu.";
+    status.style.color = "var(--green)";
+  } catch (error) {
+    console.error("Uložení výsledku selhalo:", error);
+
+    status.textContent =
+      "Výsledek se zobrazil, ale nepodařilo se ho uložit. Zkus to znovu později.";
+    status.style.color = "var(--red)";
+  }
+}
