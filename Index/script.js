@@ -494,3 +494,34 @@ if (userMenuToggle && userMenuLinks) {
     }
   });
 }
+// ==========================================
+// KONTROLA PŘIHLÁŠENÍ PŘED SPUŠTĚNÍM TESTU
+// ==========================================
+const startMatLink = document.querySelector("#start-mat-link");
+
+if (startMatLink) {
+  startMatLink.addEventListener("click", async (event) => {
+    // Pokud Supabase client neexistuje, pustíme ho dál (anonymní režim)
+    if (!supabaseClient) return;
+
+    try {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+
+      // Pokud uživatel NENÍ přihlášen, zastavíme přesměrování a otevřeme modál
+      if (!user) {
+        event.preventDefault();
+        
+        // Otevřeme existující přihlašovací modál
+        openAuthModal();
+
+        // Můžeme uživateli ukázat přátelskou zprávu v modálním okně
+        showAuthMessage("Pro uložení výsledků do tvého účtu se před spuštěním testu přihlas.");
+        
+        // Případně si můžeme uložit kam chtěl jít, nebo ho nechat po přihlášení pokračovat
+      }
+    } catch (error) {
+      console.error("Chyba při ověřování přihlášení:", error);
+      // Při chybě sítě ho raději pustíme do testu normálně
+    }
+  });
+}
