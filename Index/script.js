@@ -501,27 +501,41 @@ const startMatLink = document.querySelector("#start-mat-link");
 
 if (startMatLink) {
   startMatLink.addEventListener("click", async (event) => {
-    // Pokud Supabase client neexistuje, pustíme ho dál (anonymní režim)
-    if (!supabaseClient) return;
+    // 1. Okamžitě zastavíme výchozí přechod na stránku testu
+    event.preventDefault();
+
+    const targetUrl = startMatLink.getAttribute("href");
+
+    // Pokud Supabase ještě není načtený, pustíme ho rovnou dál
+    if (!supabaseClient) {
+      window.location.href = targetUrl;
+      return;
+    }
 
     try {
-      const { data: { user } } = await supabaseClient.auth.getUser();
+      const { data: { user }, error } = await supabaseClient.auth.getUser();
 
-      // Pokud uživatel NENÍ přihlášen, zastavíme přesměrování a otevřeme modál
-      if (!user) {
-        event.preventDefault();
-        
-        // Otevřeme existující přihlašovací modál
+      if (error) throw error;
+
+      if (user) {
+        // 2. Pokud JE přihlášen, pošleme ho do testu
+        window.location.href = targetUrl;
+      } else {
+        // 3. Pokud NENÍ přihlášen, otevřeme modál
         openAuthModal();
 
-        // Můžeme uživateli ukázat přátelskou zprávu v modálním okně
-        showAuthMessage("Pro uložení výsledků do tvého účtu se před spuštěním testu přihlas.");
+        const authTitle = document.querySelector("#auth-title");
+        const authSubtitle = document.querySelector("#auth-subtitle");
         
-        // Případně si můžeme uložit kam chtěl jít, nebo ho nechat po přihlášení pokračovat
+        if (authTitle) authTitle.textContent = "Uložení výsledků testu";
+        if (authSubtitle) authSubtitle.textContent = "Přihlas se, aby se ti výsledek automaticky uložil do profilu.";
+
+        showAuthMessage("Můžeš se přihlásit, nebo okno křížkem zavřít.", false);
       }
     } catch (error) {
       console.error("Chyba při ověřování přihlášení:", error);
-      // Při chybě sítě ho raději pustíme do testu normálně
+      // Při chybě sítě uživatele raději pustíme dál do testu
+      window.location.href = targetUrl;
     }
   });
 }
