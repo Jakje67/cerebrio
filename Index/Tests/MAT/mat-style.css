@@ -1,1 +1,471 @@
+/* ==========================================
+   1. GLOBÁLNÍ PROMĚNNÉ A ZÁKLADNÍ NASTAVENÍ
+   ================================---------- */
+:root {
+  color-scheme: light;
+  --cream: #faf6ee;
+  --paper: #fffdf8;
+  --beige: #f0e4d4;
+  --brown: #593b2b;
+  --brown-light: #80583e;
+  --caramel: #bd8757;
+  --ink: #382b23;
+  --muted: #78695d;
+  --border: #e5d6c4;
+  --green: #276746;
+  --green-bg: #e8f5eb;
+  --red: #9b3737;
+  --red-bg: #fbeaea;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(89, 59, 43, .08);
+}
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: radial-gradient(ellipse at 90% 5%, #ecd9c2 0, transparent 32rem), var(--cream);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--brown-light);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--caramel);
+}
+
+button, input {
+  font: inherit;
+}
+
+button, a, input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid var(--caramel);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================
+   2. HLAVIČKA
+   ================================---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 15px max(22px, calc((100% - 1080px) / 2));
+  background: rgba(250, 246, 238, .95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.brand {
+  color: var(--brown);
+  font-size: 1.5rem;
+  font-weight: 850;
+  letter-spacing: -.06em;
+}
+
+.brand span {
+  color: var(--caramel);
+}
+
+/* ==========================================
+   3. SEKCE A TESTOVACÍ KARTA
+   ================================---------- */
+section {
+  padding: 76px 24px;
+  scroll-margin-top: 80px;
+}
+
+.test-section {
+  background: linear-gradient(180deg, #f3e8d9, var(--cream));
+}
+
+.test-section > * {
+  width: 100%;
+  max-width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.eyebrow {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--brown-light);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+h2, h3 {
+  color: var(--brown);
+  line-height: 1.2;
+  letter-spacing: -.04em;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.section-intro {
+  max-width: 760px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.test-card {
+  max-width: 820px;
+  margin: 28px auto 0;
+  padding: clamp(22px, 5vw, 42px);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.test-card h3 {
+  margin-top: 0;
+  font-size: 1.55rem;
+}
+
+.test-card p {
+  color: var(--muted);
+}
+
+.test-card label {
+  display: block;
+  margin: 20px 0 7px;
+  color: var(--brown);
+  font-weight: 700;
+}
+
+.test-card input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.test-card input:focus {
+  border-color: var(--caramel);
+}
+
+/* ==========================================
+   4. TLAČÍTKA
+   ================================---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin: 6px 8px 6px 0;
+  padding: 12px 21px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background .2s, transform .2s, border-color .2s;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--brown);
+  color: white;
+  border-color: var(--brown);
+}
+
+.button-primary:hover {
+  background: var(--brown-light);
+  color: white;
+}
+
+.button-secondary {
+  background: rgba(255, 253, 248, .75);
+  color: var(--brown);
+  border-color: var(--border);
+}
+
+.button-secondary:hover {
+  background: white;
+  color: var(--brown);
+}
+
+/* ==========================================
+   5. KVÍZ A PROGRESS
+   ================================---------- */
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.timer {
+  padding: 5px 12px;
+  color: var(--brown);
+  background: var(--beige);
+  border-radius: 99px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 8px;
+  margin: 17px 0 28px;
+  overflow: hidden;
+  background: var(--beige);
+  border-radius: 99px;
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: var(--caramel);
+  transition: width .25s ease;
+}
+
+.question-title {
+  margin: 0 0 22px;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+.answers {
+  display: grid;
+  gap: 11px;
+}
+
+.answer {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 16px;
+  text-align: left;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.answer:hover:not(:disabled) {
+  background: #f3e6d5;
+  border-color: var(--caramel);
+}
+
+.answer:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.answer.answer-correct {
+  color: var(--green);
+  background: var(--green-bg);
+  border-color: #7daf91;
+}
+
+.answer.answer-incorrect {
+  color: var(--red);
+  background: var(--red-bg);
+  border-color: #d8a1a1;
+}
+
+.feedback {
+  margin: 18px 0 8px;
+  font-weight: 750;
+}
+
+.feedback-correct {
+  color: var(--green) !important;
+}
+
+.feedback-incorrect {
+  color: var(--red) !important;
+}
+
+.explanation {
+  margin: 12px 0 20px;
+  padding: 15px 17px;
+  color: var(--ink);
+  background: #f5f0e8;
+  border-left: 4px solid var(--caramel);
+  border-radius: 9px;
+}
+
+#next-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================================
+   6. VÝSLEDKY A IQ PŘEHLED
+   ================================---------- */
+.iq-result {
+  margin: 24px 0;
+  padding: 28px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #f3e7d6, #fffaf2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.iq-label {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.result-score {
+  margin: 8px 0;
+  color: var(--brown);
+  font-size: clamp(3.5rem, 10vw, 5rem);
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.iq-status {
+  display: inline-block;
+  margin: 0;
+  padding: 4px 12px;
+  color: var(--brown-light);
+  background: #fffdf8;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 750;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+.overview-label {
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.overview-item strong {
+  color: var(--brown);
+  font-size: 1.25rem;
+}
+
+.iq-warning {
+  margin: 22px 0;
+  padding: 17px 19px;
+  color: #674a2e;
+  background: #fff4df;
+  border: 1px solid #e7c998;
+  border-left: 4px solid #bd8757;
+  border-radius: 10px;
+}
+
+.iq-warning strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.iq-warning p {
+  margin: 0;
+  color: #674a2e;
+  font-size: .9rem;
+}
+
+/* ==========================================
+   7. PATIČKA A RESPONSIVITA
+   ================================---------- */
+.site-footer {
+  padding: 28px 20px;
+  text-align: center;
+  background: #eee0ce;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.site-footer .footer-note {
+  margin-top: 5px;
+  font-size: .8rem;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    padding: 14px 20px;
+  }
+
+  section {
+    padding: 52px 19px;
+  }
+
+  .test-card {
+    padding: 23px 17px;
+  }
+
+  .button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
