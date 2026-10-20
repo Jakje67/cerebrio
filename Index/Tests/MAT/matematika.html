@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf6ee">
+  <meta name="description" content="Matematický a logický test — Cerebrio.">
+  <title>Matematický test | Cerebrio</title>
+  <link rel="stylesheet" href="./mat-style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="./TestMat.js" defer></script>
+  <script src="./mat-script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../index.html">Cerebrio<span>.</span></a>
+    <a class="button button-secondary" href="../../index.html">← Zpět na hlavní stránku</a>
+  </header>
+
+  <main>
+    <section class="test-section" id="test">
+      <p class="eyebrow">MATEMATICKÝ TEST</p>
+      <h2>Prověř své uvažování</h2>
+      <p class="section-intro">
+        Test obsahuje 30 úloh zaměřených na logické a matematické uvažování.
+      </p>
+
+      <div class="test-card" id="test-card">
+        <div id="welcome-screen">
+          <h3>Připraven/a začít?</h3>
+          <p>
+            Vyhraď si několik minut. Vyber vždy jednu odpověď.
+            Po odpovědi uvidíš vysvětlení a můžeš pokračovat.
+          </p>
+          <label for="player-name">Jméno (nepovinné)</label>
+          <input id="player-name" type="text" maxlength="40" placeholder="Jak ti máme říkat?">
+          <button class="button button-primary" id="start-button" type="button">
+            Začít test
+          </button>
+        </div>
+
+        <div id="quiz-screen" hidden>
+          <div class="quiz-meta">
+            <span id="question-count">Otázka 1 z 10</span>
+            <span class="timer" id="timer" aria-live="off">00:00</span>
+          </div>
+          <div class="progress-track"
+               role="progressbar"
+               aria-label="Postup testem"
+               aria-valuemin="0"
+               aria-valuemax="30"
+               aria-valuenow="0"
+               id="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+
+          <h3 id="question-text" class="question-title"></h3>
+          <div id="answers" class="answers"></div>
+          <p id="feedback" class="feedback" aria-live="polite"></p>
+          <div id="explanation" class="explanation" hidden></div>
+          <button class="button button-primary" id="next-button" type="button" disabled>
+            Další otázka →
+          </button>
+        </div>
+
+        <div id="result-screen" hidden aria-live="polite">
+          <p class="eyebrow">CEREBRIO · VÝSLEDEK</p>
+          <h3 id="result-heading">Výsledky testu</h3>
+
+          <div class="iq-result">
+            <p class="iq-label">Tvůj odhad IQ</p>
+            <p class="result-score" id="result-score">—</p>
+            <p class="iq-status">Předběžný odhad</p>
+          </div>
+
+          <div class="overview-grid">
+            <div class="overview-item">
+              <span class="overview-label">Správné odpovědi</span>
+              <strong id="result-correct">— / 30</strong>
+            </div>
+            <div class="overview-item">
+              <span class="overview-label">Dokončení testu</span>
+              <strong id="result-time">—</strong>
+            </div>
+          </div>
+
+          <p id="result-message"></p>
+
+          <div class="iq-warning" role="note">
+            <strong>Upozornění</strong>
+            <p>
+              Hodnota IQ je zatím pouze orientační odhad vytvořený z výsledku
+              tohoto testu. Test není standardizovaný ani odborně normovaný
+              a výsledek nelze považovat za skutečně změřené IQ.
+            </p>
+          </div>
+
+          <button class="button button-primary" id="restart-button" type="button">
+            Zopakovat test
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Cerebrio · Trénink logického myšlení</p>
+    <p class="footer-note">Výsledky jsou orientační a nejsou měřením IQ.</p>
+  </footer>
+</body>
+</html>
