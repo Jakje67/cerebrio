@@ -1,4 +1,6 @@
-
+/* ==========================================
+   1. GLOBÁLNÍ PROMĚNNÉ A ZÁKLADNÍ NASTAVENÍ
+   ================================---------- */
 :root {
   color-scheme: light;
   --cream: #faf6ee;
@@ -18,7 +20,7 @@
   --shadow: 0 10px 30px rgba(89, 59, 43, .08);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -30,9 +32,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(ellipse at 90% 5%, #ecd9c2 0, transparent 32rem),
-    var(--cream);
+  background: radial-gradient(ellipse at 90% 5%, #ecd9c2 0, transparent 32rem), var(--cream);
   color: var(--ink);
   font-family: Inter, "Segoe UI", system-ui, sans-serif;
   font-size: 16px;
@@ -65,6 +65,9 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   display: none !important;
 }
 
+/* ==========================================
+   2. HLAVIČKA A NAVIGACE
+   ================================---------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -102,6 +105,9 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   font-weight: 650;
 }
 
+/* ==========================================
+   3. SEKCE A HERO
+   ================================---------- */
 section {
   padding: 76px 24px;
   scroll-margin-top: 80px;
@@ -156,6 +162,9 @@ h2 {
   font-size: 1.12rem;
 }
 
+/* ==========================================
+   4. TLAČÍTKA
+   ================================---------- */
 .button {
   display: inline-flex;
   align-items: center;
@@ -196,6 +205,9 @@ h2 {
   color: var(--brown);
 }
 
+/* ==========================================
+   5. O PROJEKTU A KARTY
+   ================================---------- */
 .about {
   background: rgba(255, 253, 248, .55);
 }
@@ -243,6 +255,9 @@ h2 {
   color: var(--muted);
 }
 
+/* ==========================================
+   6. TESTOVACÍ SEKCE A KVÍZ
+   ================================---------- */
 .test-section {
   background: linear-gradient(180deg, #f3e8d9, var(--cream));
 }
@@ -398,75 +413,9 @@ h2 {
   transform: none;
 }
 
-.result-score {
-  margin: 18px 0;
-  color: var(--brown);
-  font-size: clamp(2.4rem, 7vw, 4rem);
-  font-weight: 850;
-  line-height: 1.2;
-}
-
-.result-time {
-  font-weight: 700;
-}
-
-.site-footer {
-  padding: 28px 20px;
-  text-align: center;
-  background: #eee0ce;
-  border-top: 1px solid var(--border);
-}
-
-.site-footer p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .9rem;
-}
-
-.site-footer .footer-note {
-  margin-top: 5px;
-  font-size: .8rem;
-}
-
-@media (max-width: 700px) {
-  .site-header {
-    position: relative;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-    padding: 14px 20px;
-  }
-
-  .site-header nav {
-    gap: 12px 18px;
-  }
-
-  section {
-    padding: 52px 19px;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .test-card {
-    padding: 23px 17px;
-  }
-
-  .button {
-    max-width: 100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
-}
-
-
-
+/* ==========================================
+   7. VÝSLEDKY A IQ PŘEHLED
+   ================================---------- */
 .iq-result {
   margin: 24px 0;
   padding: 28px 20px;
@@ -547,17 +496,14 @@ h2 {
   font-size: .9rem;
 }
 
-@media (max-width: 480px) {
-  .overview-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* ==========================================
+   8. AUTENTIZACE A MODÁLNÍ OKNO
+   ================================---------- */
 .auth-panel {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .auth-panel .button {
@@ -565,42 +511,6 @@ h2 {
   min-height: 42px;
   padding: 9px 14px;
   font-size: 0.88rem;
-}
-
-#user-panel {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-#user-label {
-  color: var(--brown);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-#auth-message {
-  flex-basis: 100%;
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-@media (max-width: 700px) {
-  .auth-panel {
-    width: 100%;
-  }
-}
-.auth-panel {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.auth-panel .button {
-  margin: 0;
 }
 
 #user-panel {
@@ -781,17 +691,9 @@ h2 {
   font-size: .78rem;
 }
 
-@media (max-width: 700px) {
-  .auth-panel {
-    width: 100%;
-  }
-
-  .auth-modal {
-    padding: 29px 20px 22px;
-  }
-}
-
-
+/* ==========================================
+   9. UŽIVATELSKÉ MENU
+   ================================---------- */
 .user-menu {
   position: relative;
   display: inline-block;
@@ -834,4 +736,76 @@ h2 {
 
 .user-menu-links[hidden] {
   display: none;
+}
+
+/* ==========================================
+   10. PATIČKA A RESPONSIVITA
+   ================================---------- */
+.site-footer {
+  padding: 28px 20px;
+  text-align: center;
+  background: #eee0ce;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.site-footer .footer-note {
+  margin-top: 5px;
+  font-size: .8rem;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    position: relative;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 20px;
+  }
+
+  .site-header nav {
+    gap: 12px 18px;
+  }
+
+  section {
+    padding: 52px 19px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .test-card {
+    padding: 23px 17px;
+  }
+
+  .button {
+    max-width: 100%;
+  }
+
+  .auth-panel {
+    width: 100%;
+  }
+
+  .auth-modal {
+    padding: 29px 20px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
