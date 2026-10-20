@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -9,6 +8,7 @@
   <title>Cerebrio — trénink logického myšlení</title>
   <link rel="stylesheet" href="./style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="./TestMat.js" defer></script>
   <script src="./script.js" defer></script>
 </head>
 <body>
@@ -19,119 +19,103 @@
       <a href="#about">O projektu</a>
       <a href="#test">Test</a>
     </nav>
-    
-<div class="auth-panel">
-  <button
-    class="button button-secondary"
-    id="login-button"
-    type="button"
-  >
-    Přihlásit se
-  </button>
-
-  
-<div id="user-panel" hidden>
-  <div class="user-menu" id="user-menu">
-    <button
-      type="button"
-      id="user-label"
-      class="user-menu-toggle"
-      aria-expanded="false"
-      aria-controls="user-menu-links"
-    >
-      Můj účet ▾
-    </button>
-
-    <div class="user-menu-links" id="user-menu-links" hidden>
-      <a href="Klient-karta/klient.html">
-        Matematika náhled
-      </a>
-    </div>
-  </div>
-
-  <button
-    class="button button-secondary"
-    id="logout-button"
-    type="button"
-  >
-    Odhlásit se
-  </button>
-</div>
-
-      Odhlásit se
-    </button>
-  </div>
-</div>
-  </header>
-<div class="auth-overlay" id="auth-modal" hidden>
-  <section
-    class="auth-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="auth-title"
-  >
-    <button
-      class="auth-close"
-      id="auth-close"
-      type="button"
-      aria-label="Zavřít"
-    >×</button>
-
-    <h2 id="auth-title">Přihlášení do Cerebrio</h2>
-    <p class="auth-subtitle" id="auth-subtitle">
-      Přihlas se ke svému účtu.
-    </p>
-
-    <button class="auth-provider" id="github-login" type="button">
-      <span aria-hidden="true">●</span> Pokračovat přes GitHub
-    </button>
-
-    <button class="auth-provider" id="google-login" type="button">
-      <span class="google-mark" aria-hidden="true">G</span>
-      Pokračovat přes Google
-    </button>
-
-    <div class="auth-divider"><span>nebo e-mailem</span></div>
-
-    <form id="email-auth-form">
-      <label for="auth-email">E-mail</label>
-      <input
-        id="auth-email"
-        name="email"
-        type="email"
-        autocomplete="email"
-        placeholder="tvuj@email.cz"
-        required
-      >
-
-      <label for="auth-password">Heslo</label>
-      <input
-        id="auth-password"
-        name="password"
-        type="password"
-        autocomplete="current-password"
-        minlength="8"
-        placeholder="Alespoň 8 znaků"
-        required
-      >
-
-      <button class="button button-primary auth-submit" id="email-submit" type="submit">
+      
+    <div class="auth-panel">
+      <button class="button button-secondary" id="login-button" type="button">
         Přihlásit se
       </button>
-    </form>
 
-    <p class="auth-switch">
-      <span id="auth-switch-label">Nemáš účet?</span>
-      <button id="auth-switch-button" type="button">Zaregistrovat se</button>
-    </p>
+      <div id="user-panel" hidden>
+        <div class="user-menu" id="user-menu">
+          <button
+            type="button"
+            id="user-label"
+            class="user-menu-toggle"
+            aria-expanded="false"
+            aria-controls="user-menu-links"
+          >
+            Můj účet ▾
+          </button>
 
-    <p id="auth-message" role="status" aria-live="polite"></p>
+          <div class="user-menu-links" id="user-menu-links" hidden>
+            <a href="Klient-karta/klient.html">
+              Matematika náhled
+            </a>
+          </div>
+        </div>
 
-    <p class="auth-footnote">
-      Test CerebrIQ můžeš používat i bez přihlášení.
-    </p>
-  </section>
-</div>
+        <button class="button button-secondary" id="logout-button" type="button">
+          Odhlásit se
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="auth-overlay" id="auth-modal" hidden>
+    <section
+      class="auth-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-title"
+    >
+      <button class="auth-close" id="auth-close" type="button" aria-label="Zavřít">×</button>
+
+      <h2 id="auth-title">Přihlášení do Cerebrio</h2>
+      <p class="auth-subtitle" id="auth-subtitle">
+        Přihlas se ke svému účtu.
+      </p>
+
+      <button class="auth-provider" id="github-login" type="button">
+        <span aria-hidden="true">●</span> Pokračovat přes GitHub
+      </button>
+
+      <button class="auth-provider" id="google-login" type="button">
+        <span class="google-mark" aria-hidden="true">G</span>
+        Pokračovat přes Google
+      </button>
+
+      <div class="auth-divider"><span>nebo e-mailem</span></div>
+
+      <form id="email-auth-form">
+        <label for="auth-email">E-mail</label>
+        <input
+          id="auth-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="tvuj@email.cz"
+          required
+        >
+
+        <label for="auth-password">Heslo</label>
+        <input
+          id="auth-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          minlength="8"
+          placeholder="Alespoň 8 znaků"
+          required
+        >
+
+        <button class="button button-primary auth-submit" id="email-submit" type="submit">
+          Přihlásit se
+        </button>
+      </form>
+
+      <p class="auth-switch">
+        <span id="auth-switch-label">Nemáš účet?</span>
+        <button id="auth-switch-button" type="button">Zaregistrovat se</button>
+      </p>
+
+      <p id="auth-message" role="status" aria-live="polite"></p>
+
+      <p class="auth-footnote">
+        Test Cerebrio můžeš používat i bez přihlášení.
+      </p>
+    </section>
+  </div>
+
   <main>
     <section class="hero" id="home">
       <p class="eyebrow">MYSLI · OBJEVUJ · ROZVÍJEJ SE</p>
@@ -186,8 +170,7 @@
             Po odpovědi uvidíš vysvětlení a můžeš pokračovat.
           </p>
           <label for="player-name">Jméno (nepovinné)</label>
-          <input id="player-name" type="text" maxlength="40"
-                 placeholder="Jak ti máme říkat?">
+          <input id="player-name" type="text" maxlength="40" placeholder="Jak ti máme říkat?">
           <button class="button button-primary" id="start-button" type="button">
             Začít test
           </button>
@@ -195,14 +178,14 @@
 
         <div id="quiz-screen" hidden>
           <div class="quiz-meta">
-            <span id="question-count">Otázka 1 z 10</span>
+            <span id="question-count">Otázka 1 z 30</span>
             <span class="timer" id="timer" aria-live="off">00:00</span>
           </div>
           <div class="progress-track"
                role="progressbar"
                aria-label="Postup testem"
                aria-valuemin="0"
-               aria-valuemax="10"
+               aria-valuemax="30"
                aria-valuenow="0"
                id="progress-track">
             <div class="progress-fill" id="progress-fill"></div>
@@ -212,50 +195,46 @@
           <div id="answers" class="answers"></div>
           <p id="feedback" class="feedback" aria-live="polite"></p>
           <div id="explanation" class="explanation" hidden></div>
-          <button class="button button-primary" id="next-button"
-                  type="button" disabled>
+          <button class="button button-primary" id="next-button" type="button" disabled>
             Další otázka →
           </button>
         </div>
 
-        
-<div id="result-screen" hidden aria-live="polite">
-  <p class="eyebrow">CEREBRIQ · OVERVIEW</p>
-  <h3 id="result-heading">Výsledky testu</h3>
+        <div id="result-screen" hidden aria-live="polite">
+          <p class="eyebrow">CEREBRIO · OVERVIEW</p>
+          <h3 id="result-heading">Výsledky testu</h3>
 
-  <div class="iq-result">
-    <p class="iq-label">Tvůj odhad IQ</p>
-    <p class="result-score" id="result-score">—</p>
-    <p class="iq-status">Předběžný odhad</p>
-  </div>
+          <div class="iq-result">
+            <p class="iq-label">Tvůj odhad IQ</p>
+            <p class="result-score" id="result-score">—</p>
+            <p class="iq-status">Předběžný odhad</p>
+          </div>
 
-  <div class="overview-grid">
-    <div class="overview-item">
-      <span class="overview-label">Správné odpovědi</span>
-      <strong id="result-correct">— / 30</strong>
-    </div>
-    <div class="overview-item">
-      <span class="overview-label">Dokončení testu</span>
-      <strong id="result-time">—</strong>
-    </div>
-  </div>
+          <div class="overview-grid">
+            <div class="overview-item">
+              <span class="overview-label">Správné odpovědi</span>
+              <strong id="result-correct">— / 30</strong>
+            </div>
+            <div class="overview-item">
+              <span class="overview-label">Dokončení testu</span>
+              <strong id="result-time">—</strong>
+            </div>
+          </div>
 
-  <p id="result-message"></p>
+          <p id="result-message"></p>
 
-  <div class="iq-warning" role="note">
-    <strong>Upozornění</strong>
-    <p>
-      Hodnota IQ je zatím pouze orientační odhad vytvořený z výsledku
-      tohoto testu. Test není standardizovaný ani odborně normovaný
-      a výsledek nelze považovat za skutečně změřené IQ.
-    </p>
-  </div>
+          <div class="iq-warning" role="note">
+            <strong>Upozornění</strong>
+            <p>
+              Hodnota IQ je zatím pouze orientační odhad vytvořený z výsledku
+              tohoto testu. Test není standardizovaný ani odborně normovaný
+              a výsledek nelze považovat za skutečně změřené IQ.
+            </p>
+          </div>
 
-  <button class="button button-primary" id="restart-button" type="button">
-    Zopakovat test
-  </button>
-</div>
-
+          <button class="button button-primary" id="restart-button" type="button">
+            Zopakovat test
+          </button>
         </div>
       </div>
     </section>
