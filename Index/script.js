@@ -34,11 +34,13 @@ let startedAt = 0;
 let timerInterval = null;
 let finished = false;
 
+// Bezpečné nastavení roku
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
 
-if (progressTrack) {
+// Bezpečné nastavení progress baru jen v případě, že otázky existují
+if (progressTrack && typeof questions !== "undefined" && Array.isArray(questions)) {
   progressTrack.setAttribute("aria-valuemax", String(questions.length));
 }
 
@@ -62,6 +64,8 @@ function updateTimer() {
 }
 
 function startTest() {
+  if (typeof questions === "undefined" || !Array.isArray(questions)) return;
+
   currentQuestion = 0;
   score = 0;
   answered = false;
@@ -72,13 +76,13 @@ function startTest() {
     clearInterval(timerInterval);
   }
 
-  welcomeScreen.hidden = true;
-  resultScreen.hidden = true;
-  quizScreen.hidden = false;
+  if (welcomeScreen) welcomeScreen.hidden = true;
+  if (resultScreen) resultScreen.hidden = true;
+  if (quizScreen) quizScreen.hidden = false;
 
-  timerElement.textContent = "00:00";
-  progressFill.style.width = "0%";
-  progressTrack.setAttribute("aria-valuenow", "0");
+  if (timerElement) timerElement.textContent = "00:00";
+  if (progressFill) progressFill.style.width = "0%";
+  if (progressTrack) progressTrack.setAttribute("aria-valuenow", "0");
 
   timerInterval = setInterval(updateTimer, 1000);
 
@@ -86,55 +90,66 @@ function startTest() {
 }
 
 function renderQuestion() {
-  answered = false;
+  if (typeof questions === "undefined" || !questions[currentQuestion]) return;
 
+  answered = false;
   const item = questions[currentQuestion];
 
-  questionCount.textContent = `Otázka ${currentQuestion + 1} z ${questions.length}`;
-  questionText.textContent = item.question;
+  if (questionCount) questionCount.textContent = `Otázka ${currentQuestion + 1} z ${questions.length}`;
+  if (questionText) questionText.textContent = item.question;
 
-  answersContainer.replaceChildren();
+  if (answersContainer) {
+    answersContainer.replaceChildren();
 
-  feedback.textContent = "";
-  feedback.className = "feedback";
+    item.answers.forEach((answerText, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "answer";
+      button.textContent = `${String.fromCharCode(65 + index)}. ${answerText}`;
+      button.addEventListener("click", () => checkAnswer(index));
+      answersContainer.appendChild(button);
+    });
+  }
 
-  explanation.textContent = "";
-  explanation.hidden = true;
+  if (feedback) {
+    feedback.textContent = "";
+    feedback.className = "feedback";
+  }
 
-  nextButton.disabled = true;
-  nextButton.textContent = currentQuestion === questions.length - 1
-    ? "Zobrazit výsledek"
-    : "Další otázka →";
+  if (explanation) {
+    explanation.textContent = "";
+    explanation.hidden = true;
+  }
 
-  progressFill.style.width = `${(currentQuestion / questions.length) * 100}%`;
-  progressTrack.setAttribute("aria-valuenow", String(currentQuestion));
+  if (nextButton) {
+    nextButton.disabled = true;
+    nextButton.textContent = currentQuestion === questions.length - 1
+      ? "Zobrazit výsledek"
+      : "Další otázka →";
+  }
 
-  item.answers.forEach((answerText, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "answer";
-    button.textContent = `${String.fromCharCode(65 + index)}. ${answerText}`;
-    button.addEventListener("click", () => checkAnswer(index));
-    answersContainer.appendChild(button);
-  });
+  if (progressFill) progressFill.style.width = `${(currentQuestion / questions.length) * 100}%`;
+  if (progressTrack) progressTrack.setAttribute("aria-valuenow", String(currentQuestion));
 }
 
 function checkAnswer(selectedIndex) {
-  if (answered || finished) return;
+  if (answered || finished || typeof questions === "undefined") return;
 
   answered = true;
 
   const item = questions[currentQuestion];
-  const answerButtons = answersContainer.querySelectorAll(".answer");
+  const answerButtons = answersContainer ? answersContainer.querySelectorAll(".answer") : [];
   const isCorrect = selectedIndex === item.correct;
 
-  if (isCorrect) {
-    score++;
-    feedback.textContent = "Správně.";
-    feedback.classList.add("feedback-correct");
-  } else {
-    feedback.textContent = `Nesprávně. Správná odpověď je ${String.fromCharCode(65 + item.correct)}. ${item.answers[item.correct]}`;
-    feedback.classList.add("feedback-incorrect");
+  if (feedback) {
+    if (isCorrect) {
+      score++;
+      feedback.textContent = "Správně.";
+      feedback.classList.add("feedback-correct");
+    } else {
+      feedback.textContent = `Nesprávně. Správná odpověď je ${String.fromCharCode(65 + item.correct)}. ${item.answers[item.correct]}`;
+      feedback.classList.add("feedback-incorrect");
+    }
   }
 
   answerButtons.forEach((button, index) => {
@@ -147,16 +162,18 @@ function checkAnswer(selectedIndex) {
     }
   });
 
-  explanation.textContent = item.explanation;
-  explanation.hidden = false;
-  nextButton.disabled = false;
+  if (explanation) {
+    explanation.textContent = item.explanation;
+    explanation.hidden = false;
+  }
+  if (nextButton) nextButton.disabled = false;
 
-  progressFill.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
-  progressTrack.setAttribute("aria-valuenow", String(currentQuestion + 1));
+  if (progressFill) progressFill.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+  if (progressTrack) progressTrack.setAttribute("aria-valuenow", String(currentQuestion + 1));
 }
 
 function nextQuestion() {
-  if (!answered || finished) return;
+  if (!answered || finished || typeof questions === "undefined") return;
 
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
@@ -167,7 +184,7 @@ function nextQuestion() {
 }
 
 function showResults() {
-  if (finished) return;
+  if (finished || typeof questions === "undefined") return;
 
   finished = true;
 
@@ -187,16 +204,19 @@ function showResults() {
   const combinedScore = 0.8 * accuracyScore + 0.2 * speedScore;
   const ciq = Math.min(250, Math.max(40, Math.round(40 + 210 * combinedScore)));
 
-  resultScore.textContent = `${ciq} CIQ`;
-  document.querySelector("#result-correct").textContent = `${score} / ${totalQuestions}`;
-  resultTime.textContent = formatTime(elapsedSeconds);
+  if (resultScore) resultScore.textContent = `${ciq} CIQ`;
+  const resultCorrect = document.querySelector("#result-correct");
+  if (resultCorrect) resultCorrect.textContent = `${score} / ${totalQuestions}`;
+  if (resultTime) resultTime.textContent = formatTime(elapsedSeconds);
 
-  resultMessage.textContent =
-    "Tvé CerebrIQ skóre kombinuje správnost odpovědí a rychlost řešení. " +
-    "Bodovací systém je experimentální a výsledek není skutečně změřené IQ.";
+  if (resultMessage) {
+    resultMessage.textContent =
+      "Tvé CerebrIQ skóre kombinuje správnost odpovědí a rychlost řešení. " +
+      "Bodovací systém je experimentální a výsledek není skutečně změřené IQ.";
+  }
 
-  quizScreen.hidden = true;
-  resultScreen.hidden = false;
+  if (quizScreen) quizScreen.hidden = true;
+  if (resultScreen) resultScreen.hidden = false;
 
   saveCerebriqResult({
     ciq,
@@ -206,9 +226,9 @@ function showResults() {
   });
 }
 
-startButton.addEventListener("click", startTest);
-nextButton.addEventListener("click", nextQuestion);
-restartButton.addEventListener("click", startTest);
+if (startButton) startButton.addEventListener("click", startTest);
+if (nextButton) nextButton.addEventListener("click", nextQuestion);
+if (restartButton) restartButton.addEventListener("click", startTest);
 
 // ==========================================
 // 3. SUPABASE AUTENTIZACE A SPRÁVA ÚČTU
@@ -242,59 +262,63 @@ let supabaseClient = null;
 let authMode = "login";
 
 function showAuthMessage(message, isError = true) {
+  if (!authMessage) return;
   authMessage.textContent = message;
   authMessage.style.color = isError ? "var(--red)" : "var(--green)";
 }
 
 function openAuthModal() {
-  if (!supabaseClient) return;
+  if (!authModal) return;
   authModal.hidden = false;
   showAuthMessage("");
-  authClose.focus();
+  if (authClose) authClose.focus();
 }
 
 function closeAuthModal() {
+  if (!authModal) return;
   authModal.hidden = true;
   showAuthMessage("");
-  loginButton.focus();
+  if (loginButton) loginButton.focus();
 }
 
 function setAuthMode(mode) {
   authMode = mode;
   const isSignup = mode === "signup";
 
-  authTitle.textContent = isSignup ? "Vytvoření účtu" : "Přihlášení do Cerebrio";
-  authSubtitle.textContent = isSignup ? "Založ si účet pro přístup ke svým uloženým výsledkům." : "Přihlas se ke svému účtu.";
-  emailSubmit.textContent = isSignup ? "Zaregistrovat se" : "Přihlásit se";
-  authSwitchLabel.textContent = isSignup ? "Už máš účet?" : "Nemáš účet?";
-  authSwitchButton.textContent = isSignup ? "Přihlásit se" : "Zaregistrovat se";
-  passwordInput.autocomplete = isSignup ? "new-password" : "current-password";
+  if (authTitle) authTitle.textContent = isSignup ? "Vytvoření účtu" : "Přihlášení do Cerebrio";
+  if (authSubtitle) authSubtitle.textContent = isSignup ? "Založ si účet pro přístup ke svým uloženým výsledkům." : "Přihlas se ke svému účtu.";
+  if (emailSubmit) emailSubmit.textContent = isSignup ? "Zaregistrovat se" : "Přihlásit se";
+  if (authSwitchLabel) authSwitchLabel.textContent = isSignup ? "Už máš účet?" : "Nemáš účet?";
+  if (authSwitchButton) authSwitchButton.textContent = isSignup ? "Přihlásit se" : "Zaregistrovat se";
+  if (passwordInput) passwordInput.autocomplete = isSignup ? "new-password" : "current-password";
 
   showAuthMessage("");
 }
 
 function updateAuthUI(user) {
-  loginButton.hidden = Boolean(user);
-  userPanel.hidden = !user;
+  if (loginButton) loginButton.hidden = Boolean(user);
+  if (userPanel) userPanel.hidden = !user;
 
   if (user) {
-    userLabel.textContent =
-      user.user_metadata?.user_name ||
-      user.user_metadata?.preferred_username ||
-      user.user_metadata?.full_name ||
-      user.email ||
-      "Přihlášený uživatel";
-    authModal.hidden = true;
+    if (userLabel) {
+      userLabel.textContent =
+        user.user_metadata?.user_name ||
+        user.user_metadata?.preferred_username ||
+        user.user_metadata?.full_name ||
+        user.email ||
+        "Přihlášený uživatel";
+    }
+    if (authModal) authModal.hidden = true;
   } else {
-    userLabel.textContent = "";
+    if (userLabel) userLabel.textContent = "";
   }
 }
 
 async function signInWithProvider(provider) {
   if (!supabaseClient) return;
 
-  githubButton.disabled = true;
-  googleButton.disabled = true;
+  if (githubButton) githubButton.disabled = true;
+  if (googleButton) googleButton.disabled = true;
   showAuthMessage("Přesměrovávám na přihlášení…", false);
 
   try {
@@ -309,97 +333,106 @@ async function signInWithProvider(provider) {
   } catch {
     showAuthMessage("Nastala chyba při přihlašování.");
   } finally {
-    githubButton.disabled = false;
-    googleButton.disabled = false;
+    if (githubButton) githubButton.disabled = false;
+    if (googleButton) googleButton.disabled = false;
   }
 }
 
-loginButton.addEventListener("click", openAuthModal);
-authClose.addEventListener("click", closeAuthModal);
+// Navázání událostí pro přihlašovací okno
+if (loginButton) loginButton.addEventListener("click", openAuthModal);
+if (authClose) authClose.addEventListener("click", closeAuthModal);
 
-authModal.addEventListener("click", (event) => {
-  if (event.target === authModal) {
-    closeAuthModal();
-  }
-});
+if (authModal) {
+  authModal.addEventListener("click", (event) => {
+    if (event.target === authModal) {
+      closeAuthModal();
+    }
+  });
+}
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !authModal.hidden) {
+  if (event.key === "Escape" && authModal && !authModal.hidden) {
     closeAuthModal();
   }
 });
 
-githubButton.addEventListener("click", () => signInWithProvider("github"));
-googleButton.addEventListener("click", () => signInWithProvider("google"));
+if (githubButton) githubButton.addEventListener("click", () => signInWithProvider("github"));
+if (googleButton) googleButton.addEventListener("click", () => signInWithProvider("google"));
 
-authSwitchButton.addEventListener("click", () => {
-  setAuthMode(authMode === "login" ? "signup" : "login");
-});
+if (authSwitchButton) {
+  authSwitchButton.addEventListener("click", () => {
+    setAuthMode(authMode === "login" ? "signup" : "login");
+  });
+}
 
-emailForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  if (!supabaseClient) return;
+if (emailForm) {
+  emailForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!supabaseClient) return;
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
+    const email = emailInput ? emailInput.value.trim() : "";
+    const password = passwordInput ? passwordInput.value : "";
 
-  emailSubmit.disabled = true;
-  showAuthMessage(authMode === "signup" ? "Vytvářím účet…" : "Přihlašuji tě…", false);
+    if (emailSubmit) emailSubmit.disabled = true;
+    showAuthMessage(authMode === "signup" ? "Vytvářím účet…" : "Přihlašuji tě…", false);
 
-  try {
-    if (authMode === "signup") {
-      const { data, error } = await supabaseClient.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: window.location.origin }
-      });
+    try {
+      if (authMode === "signup") {
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: window.location.origin }
+        });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      if (data.session) {
-        showAuthMessage("Účet byl vytvořen a jsi přihlášen/a.", false);
-        updateAuthUI(data.user);
+        if (data.session) {
+          showAuthMessage("Účet byl vytvořen a jsi přihlášen/a.", false);
+          updateAuthUI(data.user);
+        } else {
+          showAuthMessage("Registrace proběhla. Pokud je vyžadováno potvrzení e-mailu, otevři zprávu ve své schránce.", false);
+        }
       } else {
-        showAuthMessage("Registrace proběhla. Pokud je vyžadováno potvrzení e-mailu, otevři zprávu ve své schránce.", false);
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        updateAuthUI(data.user);
+        showAuthMessage("Přihlášení proběhlo úspěšně.", false);
       }
-    } else {
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    } catch (error) {
+      if (error.message?.includes("Invalid login credentials")) {
+        showAuthMessage("Nesprávný e-mail nebo heslo.");
+      } else if (error.message?.includes("already registered")) {
+        showAuthMessage("Tento e-mail už má účet. Zkus se přihlásit.");
+      } else {
+        showAuthMessage(error.message || "Operace se nezdařila. Zkus to znovu.");
+      }
+    } finally {
+      if (emailSubmit) emailSubmit.disabled = false;
+    }
+  });
+}
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", async () => {
+    if (!supabaseClient) return;
+    logoutButton.disabled = true;
+
+    try {
+      const { error } = await supabaseClient.auth.signOut();
       if (error) throw error;
-
-      updateAuthUI(data.user);
-      showAuthMessage("Přihlášení proběhlo úspěšně.", false);
+      updateAuthUI(null);
+    } catch {
+      alert("Odhlášení se nezdařilo. Zkus to znovu.");
+    } finally {
+      logoutButton.disabled = false;
     }
-  } catch (error) {
-    if (error.message?.includes("Invalid login credentials")) {
-      showAuthMessage("Nesprávný e-mail nebo heslo.");
-    } else if (error.message?.includes("already registered")) {
-      showAuthMessage("Tento e-mail už má účet. Zkus se přihlásit.");
-    } else {
-      showAuthMessage(error.message || "Operace se nezdařila. Zkus to znovu.");
-    }
-  } finally {
-    emailSubmit.disabled = false;
-  }
-});
-
-logoutButton.addEventListener("click", async () => {
-  if (!supabaseClient) return;
-  logoutButton.disabled = true;
-
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-    updateAuthUI(null);
-  } catch {
-    alert("Odhlášení se nezdařilo. Zkus to znovu.");
-  } finally {
-    logoutButton.disabled = false;
-  }
-});
+  });
+}
 
 async function initializeAuth() {
   if (!window.supabase) {
-    loginButton.disabled = true;
+    if (loginButton) loginButton.disabled = true;
     return;
   }
 
@@ -424,7 +457,7 @@ async function saveCerebriqResult({ ciq, correctAnswers, totalQuestions, elapsed
   const statusId = "result-save-status";
   let status = document.getElementById(statusId);
 
-  if (!status) {
+  if (!status && resultMessage) {
     status = document.createElement("p");
     status.id = statusId;
     status.setAttribute("role", "status");
@@ -437,7 +470,7 @@ async function saveCerebriqResult({ ciq, correctAnswers, totalQuestions, elapsed
     await authReady;
 
     if (!supabaseClient) {
-      status.textContent = "Výsledek se zobrazuje, ale databáze není dostupná.";
+      if (status) status.textContent = "Výsledek se zobrazuje, ale databáze není dostupná.";
       return;
     }
 
@@ -445,11 +478,11 @@ async function saveCerebriqResult({ ciq, correctAnswers, totalQuestions, elapsed
     if (userError) throw userError;
 
     if (!user) {
-      status.textContent = "Výsledek není uložen. Přihlas se, pokud ho chceš mít ve svém účtu.";
+      if (status) status.textContent = "Výsledek není uložen. Přihlas se, pokud ho chceš mít ve svém účtu.";
       return;
     }
 
-    status.textContent = "Ukládám výsledek…";
+    if (status) status.textContent = "Ukládám výsledek…";
 
     const { error } = await supabaseClient
       .from("cerebriq_results")
@@ -465,12 +498,16 @@ async function saveCerebriqResult({ ciq, correctAnswers, totalQuestions, elapsed
 
     if (error) throw error;
 
-    status.textContent = "Výsledek byl uložen do tvého účtu.";
-    status.style.color = "var(--green)";
+    if (status) {
+      status.textContent = "Výsledek byl uložen do tvého účtu.";
+      status.style.color = "var(--green)";
+    }
   } catch (error) {
     console.error("Uložení výsledku selhalo:", error);
-    status.textContent = "Výsledek se zobrazil, ale nepodařilo se ho uložit. Zkus to znovu později.";
-    status.style.color = "var(--red)";
+    if (status) {
+      status.textContent = "Výsledek se zobrazil, ale nepodařilo se ho uložit. Zkus to znovu později.";
+      status.style.color = "var(--red)";
+    }
   }
 }
 
@@ -494,19 +531,17 @@ if (userMenuToggle && userMenuLinks) {
     }
   });
 }
+
 // ==========================================
-// KONTROLA PŘIHLÁŠENÍ PŘED SPUŠTĚNÍM TESTU
+// 5. KONTROLA PŘIHLÁŠENÍ PŘED SPUŠTĚNÍM TESTU
 // ==========================================
 const startMatLink = document.querySelector("#start-mat-link");
 
 if (startMatLink) {
   startMatLink.addEventListener("click", async (event) => {
-    // 1. Okamžitě zastavíme výchozí přechod na stránku testu
     event.preventDefault();
-
     const targetUrl = startMatLink.getAttribute("href");
 
-    // Pokud Supabase ještě není načtený, pustíme ho rovnou dál
     if (!supabaseClient) {
       window.location.href = targetUrl;
       return;
@@ -518,23 +553,20 @@ if (startMatLink) {
       if (error) throw error;
 
       if (user) {
-        // 2. Pokud JE přihlášen, pošleme ho do testu
         window.location.href = targetUrl;
       } else {
-        // 3. Pokud NENÍ přihlášen, otevřeme modál
         openAuthModal();
 
-        const authTitle = document.querySelector("#auth-title");
-        const authSubtitle = document.querySelector("#auth-subtitle");
-        
-        if (authTitle) authTitle.textContent = "Uložení výsledků testu";
-        if (authSubtitle) authSubtitle.textContent = "Přihlas se, aby se ti výsledek automaticky uložil do profilu.";
+        const currentAuthTitle = document.querySelector("#auth-title");
+        const currentAuthSubtitle = document.querySelector("#auth-subtitle");
+
+        if (currentAuthTitle) currentAuthTitle.textContent = "Uložení výsledků testu";
+        if (currentAuthSubtitle) currentAuthSubtitle.textContent = "Přihlas se, aby se ti výsledek automaticky uložil do profilu.";
 
         showAuthMessage("Můžeš se přihlásit, nebo okno křížkem zavřít.", false);
       }
     } catch (error) {
       console.error("Chyba při ověřování přihlášení:", error);
-      // Při chybě sítě uživatele raději pustíme dál do testu
       window.location.href = targetUrl;
     }
   });
