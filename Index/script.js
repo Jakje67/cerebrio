@@ -39,7 +39,7 @@ if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
 
-// Bezpečné nastavení progress baru jen v případě, že otázky existují
+// Bezpečné nastavení progress baru
 if (progressTrack && typeof questions !== "undefined" && Array.isArray(questions)) {
   progressTrack.setAttribute("aria-valuemax", String(questions.length));
 }
@@ -257,9 +257,11 @@ const authTitle = document.querySelector("#auth-title");
 const authSubtitle = document.querySelector("#auth-subtitle");
 const authSwitchLabel = document.querySelector("#auth-switch-label");
 const authSwitchButton = document.querySelector("#auth-switch-button");
+const authGuestButton = document.querySelector("#auth-guest-button");
 
 let supabaseClient = null;
 let authMode = "login";
+let pendingTestUrl = null;
 
 function showAuthMessage(message, isError = true) {
   if (!authMessage) return;
@@ -267,8 +269,21 @@ function showAuthMessage(message, isError = true) {
   authMessage.style.color = isError ? "var(--red)" : "var(--green)";
 }
 
-function openAuthModal() {
+function openAuthModal(testUrl = null) {
   if (!authModal) return;
+  
+  pendingTestUrl = testUrl;
+
+  if (testUrl) {
+    if (authTitle) authTitle.textContent = "Uložení výsledků testu";
+    if (authSubtitle) authSubtitle.textContent = "Přihlas se, aby se ti výsledky automaticky uložily. Nebo pokračuj bez přihlášení.";
+    if (authGuestButton) authGuestButton.hidden = false;
+  } else {
+    if (authTitle) authTitle.textContent = "Přihlášení do Cerebrio";
+    if (authSubtitle) authSubtitle.textContent = "Přihlas se ke svému účtu.";
+    if (authGuestButton) authGuestButton.hidden = true;
+  }
+
   authModal.hidden = false;
   showAuthMessage("");
   if (authClose) authClose.focus();
@@ -277,6 +292,8 @@ function openAuthModal() {
 function closeAuthModal() {
   if (!authModal) return;
   authModal.hidden = true;
+  pendingTestUrl = null;
+  if (authGuestButton) authGuestButton.hidden = true;
   showAuthMessage("");
   if (loginButton) loginButton.focus();
 }
@@ -285,8 +302,11 @@ function setAuthMode(mode) {
   authMode = mode;
   const isSignup = mode === "signup";
 
-  if (authTitle) authTitle.textContent = isSignup ? "Vytvoření účtu" : "Přihlášení do Cerebrio";
-  if (authSubtitle) authSubtitle.textContent = isSignup ? "Založ si účet pro přístup ke svým uloženým výsledkům." : "Přihlas se ke svému účtu.";
+  if (!pendingTestUrl) {
+    if (authTitle) authTitle.textContent = isSignup ? "Vytvoření účtu" : "Přihlášení do Cerebrio";
+    if (authSubtitle) authSubtitle.textContent = isSignup ? "Založ si účet pro přístup ke svým uloženým výsledkům." : "Přihlas se ke svému účtu.";
+  }
+
   if (emailSubmit) emailSubmit.textContent = isSignup ? "Zaregistrovat se" : "Přihlásit se";
   if (authSwitchLabel) authSwitchLabel.textContent = isSignup ? "Už máš účet?" : "Nemáš účet?";
   if (authSwitchButton) authSwitchButton.textContent = isSignup ? "Přihlásit se" : "Zaregistrovat se";
@@ -308,6 +328,14 @@ function updateAuthUI(user) {
         user.email ||
         "Přihlášený uživatel";
     }
+    
+    if (pendingTestUrl) {
+      const url = pendingTestUrl;
+      pendingTestUrl = null;
+      window.location.href = url;
+      return;
+    }
+
     if (authModal) authModal.hidden = true;
   } else {
     if (userLabel) userLabel.textContent = "";
@@ -338,9 +366,18 @@ async function signInWithProvider(provider) {
   }
 }
 
-// Navázání událostí pro přihlašovací okno
-if (loginButton) loginButton.addEventListener("click", openAuthModal);
+if (loginButton) loginButton.addEventListener("click", () => openAuthModal(null));
 if (authClose) authClose.addEventListener("click", closeAuthModal);
+
+if (authGuestButton) {
+  authGuestButton.addEventListener("click", () => {
+    if (pendingTestUrl) {
+      window.location.href = pendingTestUrl;
+    } else {
+      closeAuthModal();
+    }
+  });
+}
 
 if (authModal) {
   authModal.addEventListener("click", (event) => {
@@ -542,32 +579,27 @@ if (startMatLink) {
     event.preventDefault();
     const targetUrl = startMatLink.getAttribute("href");
 
+    // Čekáme na dokončení načtení Supabase
+    await authReady;
+
     if (!supabaseClient) {
-      window.location.href = targetUrl;
+      openAuthModal(targetUrl);
       return;
     }
 
     try {
       const { data: { user }, error } = await supabaseClient.auth.getUser();
 
-      if (error) throw error;
-
-      if (user) {
-        window.location.href = targetUrl;
+      if (error || !user) {
+        // Uživatel NENÍ přihlášen -> zobrazíme přihlašovací okno
+        openAuthModal(targetUrl);
       } else {
-        openAuthModal();
-
-        const currentAuthTitle = document.querySelector("#auth-title");
-        const currentAuthSubtitle = document.querySelector("#auth-subtitle");
-
-        if (currentAuthTitle) currentAuthTitle.textContent = "Uložení výsledků testu";
-        if (currentAuthSubtitle) currentAuthSubtitle.textContent = "Přihlas se, aby se ti výsledek automaticky uložil do profilu.";
-
-        showAuthMessage("Můžeš se přihlásit, nebo okno křížkem zavřít.", false);
+        // Uživatel JE přihlášen -> jde rovnou do testu
+        window.location.href = targetUrl;
       }
     } catch (error) {
       console.error("Chyba při ověřování přihlášení:", error);
-      window.location.href = targetUrl;
+      openAuthModal(targetUrl);
     }
   });
 }
