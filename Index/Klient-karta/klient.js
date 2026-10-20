@@ -1,3 +1,4 @@
+"use strict";
 
 const SUPABASE_URL = "https://wecdhuqrfotybypnszxi.supabase.co";
 const SUPABASE_KEY = "sb_publishable_1AF0NrMIx7oUMT3jy4lJbQ_LqrMD1nC";
@@ -76,6 +77,7 @@ async function loadProfile() {
     const name =
       user.user_metadata?.full_name ||
       user.user_metadata?.name ||
+      user.user_metadata?.user_name ||
       user.email ||
       "Můj profil";
 
@@ -101,7 +103,7 @@ async function loadProfile() {
 
       showHistory([]);
 
-      setStatus("Zatím nemáš uložený žádný test. Dokonči CerebrIQ a výsledek se zde objeví.");
+      setStatus("Zatím nemáš uložený žádný test. Dokonči test a výsledek se zde objeví.");
       return;
     }
 
