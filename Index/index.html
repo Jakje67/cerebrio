@@ -8,7 +8,6 @@
   <title>Cerebrio — trénink logického myšlení</title>
   <link rel="stylesheet" href="./style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-  <script src="./TestMat.js" defer></script>
   <script src="./script.js" defer></script>
 </head>
 <body>
@@ -17,7 +16,7 @@
     <nav aria-label="Hlavní navigace">
       <a href="#home">Domů</a>
       <a href="#about">O projektu</a>
-      <a href="#test">Test</a>
+      <a href="#test">Testy</a>
     </nav>
       
     <div class="auth-panel">
@@ -156,86 +155,19 @@
     </section>
 
     <section class="test-section" id="test">
-      <p class="eyebrow">INTERAKTIVNÍ TEST</p>
-      <h2>Vyzkoušej své uvažování</h2>
+      <p class="eyebrow">INTERAKTIVNÍ TESTY</p>
+      <h2>Vyber si svůj test uvažování</h2>
       <p class="section-intro">
-        Test obsahuje 30 úloh rozdělených do tří částí.
+        Vyber si oblast, kterou chceš procvičit, a otestuj své schopnosti.
       </p>
 
-      <div class="test-card" id="test-card">
-        <div id="welcome-screen">
-          <h3>Připraven/a začít?</h3>
-          <p>
-            Vyhraď si několik minut. Vyber vždy jednu odpověď.
-            Po odpovědi uvidíš vysvětlení a můžeš pokračovat.
-          </p>
-          <label for="player-name">Jméno (nepovinné)</label>
-          <input id="player-name" type="text" maxlength="40" placeholder="Jak ti máme říkat?">
-          <button class="button button-primary" id="start-button" type="button">
-            Začít test
-          </button>
-        </div>
-
-        <div id="quiz-screen" hidden>
-          <div class="quiz-meta">
-            <span id="question-count">Otázka 1 z 30</span>
-            <span class="timer" id="timer" aria-live="off">00:00</span>
-          </div>
-          <div class="progress-track"
-               role="progressbar"
-               aria-label="Postup testem"
-               aria-valuemin="0"
-               aria-valuemax="30"
-               aria-valuenow="0"
-               id="progress-track">
-            <div class="progress-fill" id="progress-fill"></div>
-          </div>
-
-          <h3 id="question-text" class="question-title"></h3>
-          <div id="answers" class="answers"></div>
-          <p id="feedback" class="feedback" aria-live="polite"></p>
-          <div id="explanation" class="explanation" hidden></div>
-          <button class="button button-primary" id="next-button" type="button" disabled>
-            Další otázka →
-          </button>
-        </div>
-
-        <div id="result-screen" hidden aria-live="polite">
-          <p class="eyebrow">CEREBRIO · OVERVIEW</p>
-          <h3 id="result-heading">Výsledky testu</h3>
-
-          <div class="iq-result">
-            <p class="iq-label">Tvůj odhad IQ</p>
-            <p class="result-score" id="result-score">—</p>
-            <p class="iq-status">Předběžný odhad</p>
-          </div>
-
-          <div class="overview-grid">
-            <div class="overview-item">
-              <span class="overview-label">Správné odpovědi</span>
-              <strong id="result-correct">— / 30</strong>
-            </div>
-            <div class="overview-item">
-              <span class="overview-label">Dokončení testu</span>
-              <strong id="result-time">—</strong>
-            </div>
-          </div>
-
-          <p id="result-message"></p>
-
-          <div class="iq-warning" role="note">
-            <strong>Upozornění</strong>
-            <p>
-              Hodnota IQ je zatím pouze orientační odhad vytvořený z výsledku
-              tohoto testu. Test není standardizovaný ani odborně normovaný
-              a výsledek nelze považovat za skutečně změřené IQ.
-            </p>
-          </div>
-
-          <button class="button button-primary" id="restart-button" type="button">
-            Zopakovat test
-          </button>
-        </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon">∑</span>
+          <h3>Matematika & Logika</h3>
+          <p>30 úloh zaměřených na logické a matematické uvažování.</p>
+          <a class="button button-primary" href="Tests/MAT/matematika.html" style="margin-top: 16px;">Spustit test MAT →</a>
+        </article>
       </div>
     </section>
   </main>
