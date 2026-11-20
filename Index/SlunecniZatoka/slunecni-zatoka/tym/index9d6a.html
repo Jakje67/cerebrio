@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/tym/?login=1 by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Náš tým | Sluneční zátoka</title>
+  <link rel="icon" href="../assets/img/logo-favicon.png" type="image/png">
+  <meta name="description" content="Seznamte se s týmem vedoucích, zdravotníků a praktikantů tábora Sluneční zátoka.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+    .team-page-banner {
+      display: block;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto 20px;
+      line-height: 0;
+    }
+    .team-page-banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+    @media (max-width: 600px) {
+      .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+    .team-page-banner {
+        max-width: 100%;
+        margin: 0 0 16px;
+        border-radius: 12px;
+      }
+      .team-page-banner img {
+        border-radius: 12px;
+      }
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+      margin-top: 16px;
+    }
+    .team-card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+      display: flex;
+      flex-direction: column;
+    }
+    /* Rám fotky – stejný poměr 3,5:4,5 jako v admin náhledu */
+    .team-card-photo {
+      aspect-ratio: 3.5 / 4.5;
+      width: calc(100% - 24px);
+      max-width: 260px;
+      margin: 12px auto 0;
+      background: linear-gradient(145deg, #e8f0ec, #f5f7f6);
+      border-radius: 16px;
+      overflow: hidden;
+      clip-path: inset(0 round 16px);
+      position: relative;
+    }
+    .team-card-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+      /* object-fit / object-position jen inline ze uloženého výřezu */
+    }
+    .team-card-photo .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #b7c9be;
+    }
+    .team-photo-frame {
+      aspect-ratio: 3.5 / 4.5;
+      width: 200px;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #e8eee9;
+      border-radius: 16px;
+      overflow: hidden;
+      clip-path: inset(0 round 16px);
+      border: 1px solid #ccc;
+      position: relative;
+    }
+    .team-photo-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+    .team-card-body {
+      padding: 14px 14px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .team-card-text {
+      background: #f7faf8;
+      border: 1px solid #e2ebe6;
+      border-radius: 12px;
+      padding: 14px 16px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .team-card-text h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: var(--green-dark, #1b4332);
+      line-height: 1.3;
+    }
+    .team-role {
+      color: #2d6a4f;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .team-meta {
+      font-size: 0.88rem;
+      color: #666;
+      margin: 0;
+    }
+    .team-bio {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #333;
+      margin: 8px 0 0;
+      padding-top: 10px;
+      border-top: 1px solid #e2ebe6;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .team-footer-nav {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .team-login-box {
+      max-width: 560px;
+      margin: 24px 0;
+      padding: 22px 20px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+    .team-login-box h2 { margin-top: 0; }
+    .team-profile-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8px 0 32px;
+    }
+    .team-profile-page .admin-form label { display: block; margin-bottom: 14px; }
+    .team-profile-page .admin-form input[type="text"],
+    .team-profile-page .admin-form input[type="email"],
+    .team-profile-page .admin-form input[type="number"],
+    .team-profile-page .admin-form input[type="password"],
+    .team-profile-page .admin-form input[type="file"],
+    .team-profile-page .admin-form select,
+    .team-profile-page .admin-form textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    /* fotka v profilu = karta 3,5 × 4,5 cm, celá fotka bez ořezu */
+    .team-profile-photo-wrap {
+      margin: 0 0 16px;
+      width: 3.5cm;
+      max-width: 3.5cm;
+      height: 4.5cm;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background: #e8eee9;
+      clip-path: inset(0 round 16px);
+    }
+    .team-profile-photo {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      border-radius: 16px !important;
+      border: none !important;
+      background: #e8eee9;
+      box-sizing: border-box;
+    }
+    .team-profile-photo-wrap.photo-mode-full .team-profile-photo {
+      object-fit: contain !important;
+      object-position: center center;
+    }
+    .team-profile-photo-wrap.photo-mode-face .team-profile-photo {
+      object-fit: cover !important;
+    }
+    .team-photo-editor {
+      margin: 0 0 16px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #f7f9f8;
+      max-width: 320px;
+    }
+    .team-photo-editor-preview {
+      width: 3.5cm;
+      height: 4.5cm;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background: #e8eee9;
+      clip-path: inset(0 round 16px);
+    }
+    .team-photo-editor-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+    .team-photo-editor label { margin-bottom: 8px; font-size: 0.9rem; }
+    .team-photo-editor input[type="range"] { width: 100%; }
+
+  </style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html"><img src="../assets/img/logo-header.png" alt="Tábor Ledeč" class="site-logo site-logo-header" width="44" height="44"><span>Tábor Ledeč<small>Letní dětský sportovní tábor u Ledče nad Sázavou</small></span></a><button class="nav-toggle" aria-label="Menu" type="button">☰</button><nav class="main-nav"><div class="nav-item has-sub"><a href="../strankac5d4.html?slug=o-tabore" class="nav-link">O táboře <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../strankadf97.html?slug=program" role="menuitem">Program</a><a href="../stranka2d85.html?slug=historie" role="menuitem">Historie</a><a href="../stranka85bb.html?slug=ubytovani" role="menuitem">Ubytování a strava</a></div></div><a href="index.html" class="nav-link">Náš tým</a><a href="../terminy/index.html" class="nav-link">Termín tábora</a><div class="nav-item has-sub"><a href="../strankabd05.html?slug=pro-rodice" class="nav-link">Pro rodiče <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../stranka0b05.html?slug=co-s-sebou" role="menuitem">Co s sebou</a><a href="../stranka9214.html?slug=zdravi" role="menuitem">Zdravotní péče</a><a href="../strankac5dd.html?slug=doprava" role="menuitem">Doprava</a></div></div><div class="nav-item has-sub"><a href="../galerie/index.html" class="nav-link">Galerie <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../galerie/index.html" role="menuitem">Fotogalerie</a><a href="../videa/index.html" role="menuitem">Videa</a></div></div><a href="../diskuse/index.html" class="nav-link">Diskuse</a><a href="../strankaffec.html?slug=kontakt" class="nav-link">Kontakt</a><a href="../ucet/index.html" class="nav-link">Účet rodiče</a><a href="../prihlaska.html" class="cta-btn nav-cta">Přihlásit dítě</a></nav></header>
+
+<main class="section">
+  <div class="section-inner">
+        
+    
+    <!-- <div class="team-page-banner">
+      <picture>
+        <source srcset="../assets/img/nas-tym-banner.webp" type="image/webp">
+        <img src="../assets/img/nas-tym-banner.webp"
+             alt="Náš tým"
+             width="1500"
+             height="500"
+             loading="eager"
+             decoding="async">
+      </picture>
+    </div> -->
+	
+	
+    <h1 class="section-title"><span class="icon">👥</span> Náš tým</h1>
+    <p class="section-lead">
+      Seznamte se s lidmi, kteří připravují tábor a starají se o děti ve Sluneční zátoce.
+    </p>
+
+          <div class="team-login-box">
+        <h2>Přihlášení člena týmu</h2>
+        <p>Přihlašovací údaje nastavuje administrátor tábora.</p>
+        <form method="post" class="admin-form" style="max-width:none;margin:0">
+          <input type="hidden" name="action" value="team_login">
+          <label>Přihlašovací jméno nebo e-mail
+            <input name="login" required autocomplete="username" value="">
+          </label>
+          <label>Heslo
+            <input type="password" name="password" required autocomplete="current-password">
+          </label>
+          <button type="submit" class="btn btn-primary">Přihlásit se</button>
+        </form>
+        <p style="margin-top:12px;text-align:center"><a href="index05bf.html?forgot=1">Zapomenuté heslo?</a></p>
+      </div>
+    
+            <div class="team-grid">
+                    <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261102194025-ec3a80e75f.jpg?v=1793655600"
+                     alt="Jana Haltufová"
+                     style="object-fit:cover !important;object-position:24% 25% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:scale(0.98);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Jana Haltufová</h2>
+                                  <div class="team-role">Hlavní vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 45                                                               ·                       <a href="mailto:Jana.H@taborledec.cz">Jana.H@taborledec.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj táborníci a příznivci tábora. Tábor je pro mě nejen rodinná tradice. Do Sluneční zátoky jezdil můj děda, jezdil můj taťka a i já, letos po 40. Jezdila jsem jako dítě, praktikant, vedoucí, zástupce hlavního vedoucího a již přes deset let jezdím i jako hlavní vedoucí. Tábor je pro mě také 14 dní neuvěřitelných zážitků a dobrodružství. Spolu s mým týmem děláme TÁBOR pro DĚTI. Naší vizí je dětem připravit bezpečné inspirativní prostředí pro zažití všeho, co jindy zažít nemohou. Stavíme na hodnotách a věříme, že tábor je kouzelným místem pro malé i velké. Moc se těším na společné táborové zážitky a na každého z vás, protože tu táborovou atmosféru tvoříme všichni společně.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261102194552-ca16752429.jpg?v=1793655900"
+                     alt="Marcel Šverčič"
+                     style="object-fit:cover !important;object-position:71% 61% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Marcel Šverčič</h2>
+                                  <div class="team-role">Zástupce hlavní vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 34                                                               ·                       <a href="mailto:Marcel.S@taborledec.cz">Marcel.S@taborledec.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj každému, kdo je tak odvážný a čte tato slova. Toto místo má zvláštní kouzlo, proto mě táhne zpátky a doufám, že to kouzlo zasahuje a bude zasahovat i vás. V první řadě mám strašně rád zvířata a neumím si bez nich život představit, jsou pro mě téměř vším. K tomu jezdím do vzdálených hor a lezu ferraty. Jsem člověk, který strašně rád něco předává ostatním, rád pomůžu, kde se dá… proto učím matematiku (nelekejte se), tělocvik, plavání a v poslední době i cvičím psy a jejich páníčky. Rozdávám rady, kde se dá. No a nechci si odpočinout od dětí ani o prázdninách, naopak můj odpočinek by bez vás nestál za to. Ať vám ten čas, než začne tábor, uteče rychle a ať vás provází síla.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261109185515-fd4acc4ca2.jpg?v=1794250500"
+                     alt="Tereza Vašenková"
+                     style="object-fit:cover !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Tereza Vašenková</h2>
+                                  <div class="team-role">Pravá ruka Janči</div>
+                                                                  <div class="team-meta">
+                                          Věk: 29                                                               ·                       <a href="mailto:tereza199723@gmail.com">tereza199723@gmail.com</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Nazdárek všem. Do krásné Sluneční Zátoky jedu letos po desáté a moc se těším. Na tábory jezdím už od malička, ať už jako dítě anebo jako vedoucí, a vždy mě velmi bavily. Nejraději ze všeho zpívám, také mám ráda čtení knížek, plavání a míčové hry. Pracuji jako vychovatelka ve školní družině a ve volném čase se věnuji kromě zpěvu práci s dětmi z pěstounských rodin. Věřím, že si tábor společně pořádně užijeme jako každý rok a odvezeme si spoustu dalších úžasných zážitků.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Alena Cikánková</h2>
+                                  <div class="team-role">Zdravotnice</div>
+                                                                  <div class="team-meta">
+                                          Věk: 48                                                          </div>
+                                                  <div class="team-bio" lang="cs">Říkají mi Ála (vlastní děti pak na táborech paní Alena) a v reálném životě se věnuji své rodině a provázení rodin dětí s postižením. Na táboře budu v roli zdravotnice, jsem původní profesí zdravotní sestra a porodní asistentka. Jako táborový odchovanec ze Sluneční zátoky se moc těším, že s vámi i letos prožiji báječné letní dobrodružství jako kdysi.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261111201702-d0902ae50e.jpg?v=1794424622"
+                     alt="Tereza Jírová"
+                     style="object-fit:cover !important;object-position:84% 22% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:scale(0.99);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Tereza Jírová</h2>
+                                  <div class="team-role">Zdravotnice</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                               ·                       <a href="mailto:terezka.jirova@gmail.com">terezka.jirova@gmail.com</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahojky tady Terka, jsem studentkou zdravotnické školy a na tábor jedu jako zdravotnice. Praxi získávám nejen v nemocnici, ale i v Dětském centru v Choceradech. Ráda se starám o ostatní, vzdělávám v oboru a trávím čas s přáteli. Tak ahoj v červenci.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Kateřina Hešlarová</h2>
+                                  <div class="team-role">Zdravotnice</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj všichni! Letos budu na táboře hlídat vaše odřená kolena, klíšťata a ranní bolesti bříška. Na tenhle tábor jsem jezdila už jako malý špunt, kdy mým největším problémem bylo, jestli bude k obědu rajská a jestli mě někdo nevybije při vybice. Od té doby jsem trochu vyrostla, ale vždy se sem ráda zpátky vrátím. Neskutečně se na vás všechny těším a doufám, že si to spolu moc užijeme.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261111193032-c66f54c09b.jpg?v=1794421832"
+                     alt="Náš hvězdný tým kuchyně"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Náš hvězdný tým kuchyně</h2>
+                                  <div class="team-role">Kuchyně</div>
+                                                                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261111194318-872e831579.jpg?v=1794422598"
+                     alt="Dagmar Veselá"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Dagmar Veselá</h2>
+                                  <div class="team-role">Herní terapeut</div>
+                                                                  <div class="team-meta">
+                                          Věk: 74                                                          </div>
+                                                  <div class="team-bio" lang="cs">Zdravím všechny táborníky. Věnovala jsem se pobytu na táboře na různých místech i funkcích jako táborník, praktikant, vedoucí oddílu, hlavní vedoucí a v poslední době jako zdravotnice s malými přestávkami skoro všechny prázdniny. I v profesním životě se věnuji dětem a mládeži jako lektorka, učitelka a vychovatelka. Vychovala jsem přitom i své tři děti a částečně i jejich pět dětí, takže zkušenost mi nechybí. Pobyt v přírodě a se ztělesněným mládím mně pořád baví, už se na vás moc těším.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109185038-c7250c8f92.webp?v=1794250200"
+                     alt="Matyáš Janda"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Matyáš Janda</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 24                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, nikdo mi neřekne jinak než Maty. Sluneční zátoka se pro mě stala srdcovou záležitostí, a tak se letos již po šesté s nadšením vracím. Mimo to jsem hlavní vedoucí příměstských táborů v Trutnově, odmala se věnuji hře na klavír a ochotnickému divadlu. Moc se těším na dalších společných čtrnáct dní plných nových zážitků.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>René Jindra</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 35                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jsem Rendy a mezi mé vášně patří zejména sport a hudba. Fotbal a volejbal jsou pro mě nejen odreagováním, ale i skvělým způsobem, jak spojit týmový duch s pohybem. Mám rád pěší výlety, kempování a vodácká dobrodružství, při kterých mě vždy doprovází má věrná kytara, která vždy zaručuje moře zábavy. Těším se na vás a na nezapomenutelné zážitky, které spolu na táboře prožijeme.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Váša Hégr</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 25                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Vašek a jsem z Prahy. Mým hlavním koníčkem jsou auta, jak jízda, tak i opravy. Pohybem také nepohrdnu. Těším se, že si tábor společně užijeme.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261111202503-c7a2978ecb.jpg?v=1794425103"
+                     alt="Kamila Filipová"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Kamila Filipová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                               ·                       <a href="mailto:kamca.filipova@atlas.cz">kamca.filipova@atlas.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Kamča a studuji všeobecné ošetřovatelství. Na různé letní tábory jezdím už od šesti let, takže mám k táborům a letní atmosféře opravdu blízko. Ve volném čase mě baví hlavně sport, především volejbal. Mám ráda dobrou partu lidí, zábavu a čas strávený venku. Už teď se moc těším na společné zážitky a letní dobrodružství na táboře!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Jan Sršeň</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 45                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Honza, pracuji hodně u počítače s čísly. Proto rád vyrážím s rodinkou do přírody, za sportem a novými zážitky. Jako vedoucí jedu na tábor i se svou dcerou Madlenkou už po čtvrté, tento rok se k nám přidá i dcera Markétka. Už se moc těšíme! Rád učím děti sportovat, plout na lodích, hrát kvízové a deskové hry. I ve svém věku se nebojím adrenalinových zážitků, závodů Spartan – nuda v životě není pro mě.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261102201836-4a4b2c219d.jpg?v=1793657880"
+                     alt="Pavel Svoboda"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:rotate(90deg) scale(1.34);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Pavel Svoboda</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 22                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Pavel, ale lidi mi říkají Pájo. Jsem velký sportovec a hraju závodně florbal. Na tábor jezdím už od svých 7 let a vždycky si beru domů ty nejlepší vzpomínky. Jsem pozitivní a vtipný člověk a mám rád práci s dětmi. Letos to pořádně rozjedeme a budu se na vás těšit. Ahoj a čau v červenci.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109185018-a6c7c18f92.jpg?v=1794250200"
+                     alt="Tereza Hofmanová"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Tereza Hofmanová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 23                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj táborníci, jmenuju se Terka, ale všichni mi říkají Blažena. Na tento tábor jezdím od mala, ale již sedmým rokem jako součást táborového týmu. Jsem pro každou srandu a pro jakoukoliv práci s dětmi. Doufám, že se těšíte stejně jako já na nezapomenutelných 14 dní v Ledči!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Michal Tomášek</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj! Jmenuji se Michal a letos jedu na tábor poprvé jako praktikant. Na tábory jezdím už od dětství a vždycky jsem si odnesl spoustu skvělých zážitků. Tentokrát si to užiju z trochu jiné role a budu se snažit, aby i pro vás byl tábor nezapomenutelný! Studuji na Obchodní akademii v Lysé nad Labem a ve volném čase rád trávím čas s kamarády na různých akcích. Baví mě sport, příroda a vše, co přinese dobrou náladu a zábavu. Těším se na vás a věřím, že si tábor společně pořádně užijeme!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Matěj Janíček</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Matěj a jsem studentem druhého ročníku střední školy. Na tábor jedu poprvé jako vedoucí, ale dříve jsem jezdil jako dítě. Mám rád, když je všude pohoda a zábava. Rád se s vámi zasměju a prožiju super léto.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261111204617-33a40ee790.jpg?v=1794426378"
+                     alt="Filip Čapek &quot;Fík&quot;"
+                     style="object-fit:cover !important;object-position:50% 0% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:scale(1.09);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Filip Čapek &quot;Fík&quot;</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                          </div>
+                                                  <div class="team-bio" lang="cs">Čau, jmenuju se Fíla, ale na táboře mi říkají spíš Fíku. Na tábor jezdím už od dětství a bez něj si neumím léto vůbec představit. Baví mě túry v přírodě, trávení času s kamarády a technika – i proto studuji na ČVUT FEL. Těším se na super partu a na všechny nové zážitky, které nás letos čekají!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261102184319-b0f6df461c.png?v=1793655780"
+                     alt="Jan Vaverka"
+                     style="object-fit:cover !important;object-position:67% 0% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Jan Vaverka</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                               ·                       <a href="mailto:ahujak.megs@seznam.cz">ahujak.megs@seznam.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Honza, chodím na IT průmyslovou střední školu a letos na táboře mi bude 20 let. Na tento tábor jezdím už několik posledních let a jsem si jistý, že si to spolu opět užijeme.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-face">
+                              <img src="../assets/uploads/team/20261102200128-c714fc29d3.jpg?v=1793656860"
+                     alt="Nikol Řeřichová"
+                     style="object-fit:cover !important;object-position:66% 27% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:rotate(90deg) scale(0.9916);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Nikol Řeřichová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahojky táborníci, jmenuji se Nikol. Na tento tábor už jezdím pěknou řádku let. Teď už ale ne jako dítě, ale jako vedoucí. Jsem studentkou na střední zdravotnické škole. Mám ráda volejbal (i když mi teda moc nejde), plavání a hlavně když je čemu se smát. Na tábor mám vždy plno krásných vzpomínek a zkušeností a tak doufám, že tento rok to bude zase skvělá jízda plná nových krásných zážitků.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109185710-7925e5162f.jpg?v=1794250620"
+                     alt="Daniela Dobrovodská"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Daniela Dobrovodská</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jsem Dáda a do Sluneční zátoky jedu na tábor jako vedoucí. Dříve jsem na tábor jezdila jako dítě a je to pro mne velká srdcovka. Každý rok si odvezu mnoho zážitků a vzpomínek. Mám ráda táborové diskotéky, táboráky, ranní taneční rozcvičky, šlofíky během poledňáku, ale i výlety. Ráda tvořím nabitý program plný zábavy a akce. Když zrovna neležím v učebnicích, tak se věnuji japonskému bojovému sportu chanbara, poslouchám hudbu, anebo si užívám volných chvilek s přáteli. Stejně jako každý rok se na tábor těším s myšlenkami, co všechno podnikneme a jaká dobrodružství zažijeme. Tak ahoj na táboře.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Magdalena Břeňová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahojky, jmenuji se Mája. Na tábory jezdím už 10 let a pokaždé nasbírám spoustu skvělých zážitků, zkušeností a vždy si najdu nové přátelé. Dny na táboře patří k mým nejoblíbenějším a také nejdůležitějším z celého léta. Mezi moje koníčky patří sport, turistika, příroda a hudba. Kouzlo a přátelé, které zde najdete, vás budou provázet už napořád. Moc se na vás všechny těším, uvidíme se na táboře, tak zatím…!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Anna Borusíková</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 23                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj všichni milovníci léta a táborů! Jmenuji se sice Anička, ale většina kamarádů mi říká Andy. Na tábory jezdím už odmalička, takže znám tábory nejen z pozice instruktorky, ale i z pohledu dítěte… A zrovna tento tábor v Ledči mi přirostl k srdíčku nejvíc, proto jsem se na něj již v loňském roce navrátila jako vedoucí. Kromě táborů mám také ráda zpěv, který studuji na vysoké škole v Ostravě a zároveň jej i vyučuji. Těším se, až se v létě uvidíme, společně se zasmějeme, zahrajeme spoustu her a nebo třeba zazpíváme u táboráku.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109201044-52912edb1e.jpg?v=1794255000"
+                     alt="Anna Heřmanová"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Anna Heřmanová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                               ·                       <a href="mailto:hermanova.any@gmail.com">hermanova.any@gmail.com</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahojky, jmenuji se Anička a jsem studentka FTVS. Sport je mou vášní a věnuji se závodně sportovnímu aerobiku. Také ráda běhám, plavu nebo si i občas zahraju nějaké soutěžní sporty. Mimo jiné mě těší poslouchání hudby nebo trávení volného času s blízkými. Na tento tábor jezdím už 12 let a těším se na další rok a nové zážitky, které spolu podnikneme.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Tereza Stanko</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 19                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Téra, letos mi bude 19 let a i po 9 letech ježdění na tábor to pořád miluji stejně. Studuji zdravotnickou školu, mám ráda hudbu a chození na procházky. Také si užívám společně strávený čas s přáteli a zkoušení nových věcí. Těším se, až si spolu tábor užijeme!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109195809-cd5c791c5a.jpg?v=1794254280"
+                     alt="Adéla Havlinová"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:rotate(90deg) scale(1.34);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Adéla Havlinová</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 21                                                               ·                       <a href="mailto:havlinovaadela@seznam.cz">havlinovaadela@seznam.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahojky! Jsem Áďa a na tábor jedu po čtvrté:)<br />
+Mimo to studuju speciální pedagogiku na vysoké škole, ve svém volném čase se ráda věnuju sportu (běhu/cvičení), procházkám v přírodě a kamarádům.<br />
+Tábor je za mě místem nových zážitků a zábavy pro každého.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Jan Kejda</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 19                                                          </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Honza, ale většina lidí mě zná pod přezdívkou „Vrána“. Na tábor jezdím od svých deseti let a vždy jsem si odnesl nezapomenutelné zážitky, proto letos už nepojedu jako dítě, ale jako praktikant. Studuji v Praze obor bezpečnostně právní činnost. Zajímám se o zdravovědu a laickou první pomoc, mám rád airsoft, hudbu, veškeré sporty a rád trávím čas v přírodě. Těším se na vás a doufám, že si tábor spolu užijeme a že si odnesete krásné chvíle a zážitky, jako jsem si vždy odnesl já.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109192215-f036f3fe58.jpg?v=1794252120"
+                     alt="Anna Kroužková"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:rotate(90deg) scale(1.34);">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Anna Kroužková</h2>
+                                  <div class="team-role">Praktikant</div>
+                                                                  <div class="team-meta">
+                                          Věk: 19                                                               ·                       <a href="mailto:annakrouzkova07@gmail.com">annakrouzkova07@gmail.com</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj, jmenuji se Anička, je mi 19 let a na letošním táboře se účastním jako praktikantka. Jsem bývalá reprezentantka v judu, sport je mi proto velmi blízký. Ve volném čase ráda trávím čas v přírodě a mám ráda hudbu. Na tábor se těším a věřím, že si společně užijeme příjemný čas plný zážitků.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109185624-b882e58359.jpg?v=1794250560"
+                     alt="Barbora Marýzková"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Barbora Marýzková</h2>
+                                  <div class="team-role">Praktikant</div>
+                                                                  <div class="team-meta">
+                                          Věk: 20                                                               ·                       <a href="mailto:barbora.maryzkova@seznam.cz">barbora.maryzkova@seznam.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Zdravím všechny táborníky! Jsem Barča a na tábory jezdím už od mala, letos poprvé jako praktikant. Studuju výživové poradenství a sportovní diagnostiku, ráda sportuju a ze všeho nejvíc miluju túry v přírodě. Ve volném čase si taky ráda přečtu nějakou knížku nebo uvařím a upeču něco dobrého. Na tábor se moc těším a doufám, že si to všichni užijeme!</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <img src="../assets/uploads/team/20261109192059-d15a99dc34.jpg?v=1794252060"
+                     alt="Martin Svobodník"
+                     style="object-fit:contain !important;object-position:50% 50% !important;width:100%;height:100%;display:block;position:absolute;inset:0;border-radius:16px;transform-origin:center center;transform:none;">
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Martin Svobodník</h2>
+                                  <div class="team-role">Vedoucí</div>
+                                                                  <div class="team-meta">
+                                          Věk: 19                                                               ·                       <a href="mailto:svobodnikmarta@seznam.cz">svobodnikmarta@seznam.cz</a>
+                                      </div>
+                                                  <div class="team-bio" lang="cs">Ahoj všichni, já jsem Martin a jsem praktikantem v našem úžasném týmu. Je mi 19 let a jsem vášnivým milovníkem přírody a pohybu. Sám se o fyzické zdraví zajímám. Moje koníčky jsou auta a jejich oprava a k tomu ještě focení. Bude to můj druhý turnus, tak se těším, jak si to všichni společně užijeme a odvezeme si domů spoustu zážitků.</div>
+                              </div>
+            </div>
+          </article>
+                <article class="team-card">
+            <div class="team-card-photo photo-mode-full">
+                              <span class="placeholder" aria-hidden="true">👤</span>
+                          </div>
+            <div class="team-card-body">
+              <div class="team-card-text">
+                <h2>Vítek Vala</h2>
+                                  <div class="team-role">Praktikant</div>
+                                                                  <div class="team-meta">
+                                          Věk: 18                                                          </div>
+                                                  <div class="team-bio" lang="cs">Čau! Jmenuji se Vítek a na tento tábor jedu už desátým rokem, ale tento rok dělám výjimku a jedu jako praktikant. Je mi už nějaký ten pátek, ale klouby mám stále v perfektní kondici. Zajímám se o fyzické zdraví, auta a prakticky vše, co má motor. Moc se na všechny těším a doufám, že si společně ten tábor pořádně užijeme!</div>
+                              </div>
+            </div>
+          </article>
+              </div>
+    
+    <div class="team-footer-nav">
+      <a href="../index.html">← Zpět na úvod</a>
+      <a href="index9d6a.html?login=1">Přihlášení člena týmu →</a>
+    </div>
+
+      </div>
+</main>
+
+<footer id="kontakt" class="site-footer"><div class="footer-inner"><div class="footer-brand"><strong><img src="../assets/img/logo-footer.png" alt="Tábor Ledeč" class="site-logo site-logo-footer" width="40" height="40"> Tábor Ledeč</strong><p>Letní dětský sportovní tábor u Ledče nad Sázavou<br>Dobrodružství v přírodě nikdy nekončí…</p><div class="socials"><a href="https://www.facebook.com/taborledec/?locale=cs_CZ" target="_blank" aria-label="Facebook">f</a><a href="https://www.instagram.com/tabor.ledec?xtok=MWhwMXVzOHd4d2oycQ==" target="_blank" aria-label="Instagram">ig</a></div></div><div class="footer-col"><h4>Rychlé odkazy</h4><a href="../strankac5d4.html?slug=o-tabore">O táboře</a><a href="../strankadf97.html?slug=program">Program</a><a href="../terminy/index.html">Termín</a><a href="../galerie/index.html">Fotogalerie</a><a href="../videa/index.html">Videa</a><a href="../prihlaska.html">Přihláška</a></div><div class="footer-col"><h4>Kontakt</h4><p><strong>Jana Haltufová</strong> (předseda z.s.)</p><p>✉ infotaborledec@gmail.com</p><p>📞 +420 732 228 657</p><p>📍 Pod Hájem 1309, Ledeč nad Sázavou, 584 01</p><p>IČO: 01440594</p></div><div class="footer-col"><h4>Pro rodiče</h4><a href="../prihlaska.html">Přihlásit dítě</a><a href="../terminy/index.html">Termín a ceny</a></div></div><div class="footer-bottom"><span>© 2026 TachoEdu.eu , TestEdu.eu - Ing. Jan Vaverka</span><a href="../stranka8960.html?slug=gdpr" class="js-gdpr-modal" style="opacity:0.85;color:inherit">Ochrana osobních údajů (GDPR)</a><a href="../stranka5237.html?slug=cookies" style="opacity:0.85;color:inherit">Cookies</a><a href="../admin/index.html">Administrace</a></div></footer><div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title">
+  <div class="cookie-consent-card">
+    <div class="cookie-consent-head">
+      <span class="cookie-consent-icon" aria-hidden="true">🍪</span>
+      <h2 id="cookie-consent-title">Používáme cookies pro váš lepší zážitek</h2>
+    </div>
+    <div class="cookie-consent-body" id="cookie-consent-main">
+      <p>Naše webové stránky používají soubory cookies k zajištění správného fungování webu, analýze návštěvnosti a personalizaci. Nezbytné cookies ukládáme automaticky, ostatní pouze s vaším souhlasem.</p>
+      <p>Více informací naleznete v <a href="#" data-cookie-action="policy">Zásadách používání cookies</a>. Kliknutím na „Přijmout vše“ souhlasíte s používáním všech cookies.</p>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="settings">Nastavení</button>
+        <button type="button" class="cookie-btn cookie-btn-reject" data-cookie-action="reject">Odmítnout vše</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+      </div>
+    </div>
+    <div class="cookie-consent-body cookie-consent-settings" id="cookie-consent-settings" hidden>
+      <p class="cookie-settings-intro">Zvolte, které kategorie cookies povolíte. Nezbytné cookies nelze vypnout.</p>
+      <label class="cookie-opt">
+        <input type="checkbox" checked disabled>
+        <span>
+          <strong>Nezbytné (technické)</strong>
+          <small>Základní funkce webu, přihlášení, zabezpečení. Vždy aktivní.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-analytics" checked>
+        <span>
+          <strong>Analytické</strong>
+          <small>Statistiky návštěvnosti (anonymní). Max. 2 roky. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-preferences" checked>
+        <span>
+          <strong>Preferenční</strong>
+          <small>Zapamatování vašich nastavení. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-marketing">
+        <span>
+          <strong>Marketingové</strong>
+          <small>Personalizovaná reklama. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="back">Zpět</button>
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="policy">Zásady</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="save">Uložit volbu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-policy-title">
+  <div class="cookie-policy-backdrop" data-cookie-action="close-policy"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="cookie-policy-title">Zásady používání cookies</strong>
+      <button type="button" class="cookie-policy-close" data-cookie-action="close-policy" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content">
+      <div class="cookie-policy-header">
+        <h2>Zásady používání cookies</h2>
+        <p>Poslední aktualizace: 18. června 2026</p>
+      </div>
+      <h3>1. Co jsou cookies?</h3>
+      <p>Cookies jsou malé textové soubory, které se ukládají do vašeho zařízení při návštěvě našich webových stránek. Používáme je k zajištění správného fungování webu, analýze návštěvnosti a zlepšení uživatelského zážitku.</p>
+      <h3>2. Typy cookies, které používáme</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Kategorie</th><th>Účel</th><th>Doba uložení</th><th>Právní základ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Nezbytné (technické)</strong></td><td>Základní funkce webu, přihlášení, zabezpečení</td><td>Session / max. 1 rok</td><td>Oprávněný zájem / smlouva</td></tr>
+            <tr><td><strong>Analytické</strong></td><td>Statistiky návštěvnosti (anonymní)</td><td>max. 2 roky</td><td>Souhlas</td></tr>
+            <tr><td><strong>Preferenční</strong></td><td>Zapamatování vašich nastavení</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+            <tr><td><strong>Marketingové</strong></td><td>Personalizovaná reklama</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>3. Konkrétní cookies</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Název cookie</th><th>Kategorie</th><th>Účel</th><th>Doba platnosti</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>cookie_consent</td><td>Nezbytné</td><td>Uložení vašeho souhlasu s cookies</td><td>1 rok</td></tr>
+            <tr><td>analytics</td><td>Analytické</td><td>Sledování anonymní návštěvnosti</td><td>1 rok</td></tr>
+            <tr><td>preferences</td><td>Preferenční</td><td>Uložení uživatelských preferencí</td><td>1 rok</td></tr>
+            <tr><td>marketing</td><td>Marketingové</td><td>Personalizace reklamy</td><td>1 rok</td></tr>
+            <tr><td>PHPSESSID</td><td>Nezbytné</td><td>Technická session</td><td>Session</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>4. Jak spravovat cookies?</h3>
+      <p>Své preference můžete kdykoli změnit kliknutím na „Nastavení cookies“ v cookie liště nebo odkazem v patičce webu. Cookies můžete také blokovat nebo smazat přímo v nastavení vašeho prohlížeče.</p>
+      <h3>5. Kontakt</h3>
+      <p>Pokud máte jakékoli dotazy k používání cookies, kontaktujte nás na:</p>
+      <p><strong>E-mail:</strong> infotaborledec@gmail.com<br>
+      <strong>Telefon:</strong> +420 732 228 657<br></p>
+      <p><em>Tyto zásady jsou v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR) a zákonem č. 480/2004 Sb. o některých službách informační společnosti.</em></p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="close-policy">Zavřít</button>
+      <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+    </div>
+  </div>
+</div>
+<!-- <button type="button" id="cookie-reopen" class="cookie-reopen" title="Nastavení cookies" aria-label="Nastavení cookies" hidden>🍪</button> --><div id="gdpr-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gdpr-policy-title">
+  <div class="cookie-policy-backdrop" data-gdpr-action="close"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="gdpr-policy-title">Ochrana osobních údajů (GDPR)</strong>
+      <button type="button" class="cookie-policy-close" data-gdpr-action="close" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content gdpr-policy-content">
+      <h2>Zásady ochrany osobních údajů</h2>
+<p>Správce osobních údajů: <strong>Nudafuč z.s.</strong> (dále jen „správce“), provozovatel dětského tábora ve Sluneční zátoce u Ledče nad Sázavou. Kontakt: info@taborledec.cz, tel. +420 732 228 657.</p>
+<h3>Jaké údaje zpracováváme</h3>
+<ul>
+<li>Jméno a příjmení dítěte, věk</li>
+<li>Jméno a příjmení zákonného zástupce</li>
+<li>E-mail a telefon zákonného zástupce</li>
+<li>Údaje o zvoleném termínu tábora</li>
+<li>Poznámky uvedené v přihlášce (např. zdravotní omezení, kamarád)</li>
+</ul>
+<h3>Účel a právní základ</h3>
+<p>Údaje zpracováváme za účelem vyřízení přihlášky, organizace tábora, komunikace s rodiči a plnění zákonných povinností (včetně evidence účastníků a zdravotní dokumentace). Právním základem je plnění smlouvy (přihláška) a oprávněný zájem / právní povinnost.</p>
+<h3>Doba uchování</h3>
+<p>Přihlášky a související údaje uchováváme po dobu nezbytně nutnou, zpravidla maximálně <strong>2 roky</strong> od skončení příslušného ročníku tábora, pokud zákon nevyžaduje delší dobu (např. účetní doklady).</p>
+<h3>Příjemci údajů</h3>
+<p>Údaje nepředáváme třetím stranám k marketingu. Mohou být zpřístupněny zpracovatelům (např. poskytovatel hostingu, e-mailové služby) v rozsahu nutném pro provoz webu a komunikaci, a orgánům veřejné moci, pokud to vyžaduje zákon.</p>
+<h3>Vaše práva</h3>
+<p>Máte právo na přístup k údajům, jejich opravu, výmaz (je-li to možné), omezení zpracování, námitku a stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).</p>
+<p>Pro uplatnění práv napište na <a href="mailto:info@taborledec.cz">info@taborledec.cz</a>.</p>
+<p>Tyto zásady jsou účinné od data zveřejnění na webu. Text můžete upravit v administraci (Nastavení / stránka GDPR).</p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-gdpr-action="close">Zavřít</button>
+    </div>
+  </div>
+</div><script src="../assets/js/app.js"></script>
+</body>
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/tym/?login=1 by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:41 GMT -->
+</html>

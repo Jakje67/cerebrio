@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/ucet/ by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Můj účet | Sluneční zátoka</title>
+  <link rel="icon" href="../assets/img/logo-favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .acct-wrap {
+      width: min(900px, 100%);
+      max-width: 900px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .acct-login-box {
+      max-width: 420px;
+      margin: 28px auto 0;
+      background: #fafcf8;
+      border: 1px solid #e0e5dc;
+      border-radius: 16px;
+      padding: 28px 26px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .acct-login-box h2 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      color: var(--green-dark);
+      text-align: center;
+    }
+    .acct-login-box .section-lead {
+      text-align: center;
+      max-width: none;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+    .acct-login-box .admin-form { max-width: none; margin: 0; }
+    .acct-login-box .btn { width: 100%; }
+    .acct-hint {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    .acct-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .acct-card {
+      background: #fafcf8;
+      border: 1px solid #e0e5dc;
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .acct-card h2 { margin: 0 0 12px; font-size: 1.15rem; color: var(--green-dark); }
+    .app-row {
+      border: 1px solid #e0e5dc;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    .app-row strong { color: var(--green-dark); }
+    .st-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #eef3ea;
+    }
+    .st-pill.paid { background: #d4edda; color: #155724; }
+    .st-pill.new { background: #fff3cd; color: #856404; }
+    @media (max-width: 800px) {
+      .acct-grid { grid-template-columns: 1fr; }
+      .acct-login-box { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html"><img src="../assets/img/logo-header.png" alt="Tábor Ledeč" class="site-logo site-logo-header" width="44" height="44"><span>Tábor Ledeč<small>Letní dětský sportovní tábor u Ledče nad Sázavou</small></span></a><button class="nav-toggle" aria-label="Menu" type="button">☰</button><nav class="main-nav"><div class="nav-item has-sub"><a href="../strankac5d4.html?slug=o-tabore" class="nav-link">O táboře <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../strankadf97.html?slug=program" role="menuitem">Program</a><a href="../stranka2d85.html?slug=historie" role="menuitem">Historie</a><a href="../stranka85bb.html?slug=ubytovani" role="menuitem">Ubytování a strava</a></div></div><a href="../tym/index.html" class="nav-link">Náš tým</a><a href="../terminy/index.html" class="nav-link">Termín tábora</a><div class="nav-item has-sub"><a href="../strankabd05.html?slug=pro-rodice" class="nav-link">Pro rodiče <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../stranka0b05.html?slug=co-s-sebou" role="menuitem">Co s sebou</a><a href="../stranka9214.html?slug=zdravi" role="menuitem">Zdravotní péče</a><a href="../strankac5dd.html?slug=doprava" role="menuitem">Doprava</a></div></div><div class="nav-item has-sub"><a href="../galerie/index.html" class="nav-link">Galerie <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="../galerie/index.html" role="menuitem">Fotogalerie</a><a href="../videa/index.html" role="menuitem">Videa</a></div></div><a href="../diskuse/index.html" class="nav-link">Diskuse</a><a href="../strankaffec.html?slug=kontakt" class="nav-link">Kontakt</a><a href="index.html" class="nav-link">Účet rodiče</a><a href="../prihlaska.html" class="cta-btn nav-cta">Přihlásit dítě</a></nav></header>
+
+<main class="section">
+  <div class="section-inner acct-wrap">
+    <h1 class="section-title"><span class="icon">👤</span> Můj účet</h1>
+
+        
+          <div class="acct-login-box">
+        <h2>Přihlášení</h2>
+        <p class="section-lead">
+          Po přihlášení uvidíte podané přihlášky (včetně stavu platby) a fotogalerii / videa z tábora podle roků, které vám přiřadil organizátor.
+        </p>
+        <form method="post" class="admin-form">
+          <input type="hidden" name="action" value="login">
+          <label>Přihlašovací e-mail
+            <input type="email" name="email" required autocomplete="username" value="">
+          </label>
+          <label>Heslo
+            <input type="password" name="password" required autocomplete="current-password">
+          </label>
+          <button type="submit" class="btn btn-primary">Přihlásit se</button>
+        </form>
+        <p style="margin:14px 0 0;text-align:center">
+          <a href="index05bf.html?forgot=1">Zapomenuté heslo?</a>
+        </p>
+      </div>
+      <p class="acct-hint">
+        Nemáte účet? Po podání přihlášky vám ho může založit organizátor tábora
+        (info@taborledec.cz).
+      </p>
+
+      </div>
+</main>
+
+<footer id="kontakt" class="site-footer"><div class="footer-inner"><div class="footer-brand"><strong><img src="../assets/img/logo-footer.png" alt="Tábor Ledeč" class="site-logo site-logo-footer" width="40" height="40"> Tábor Ledeč</strong><p>Letní dětský sportovní tábor u Ledče nad Sázavou<br>Dobrodružství v přírodě nikdy nekončí…</p><div class="socials"><a href="https://www.facebook.com/taborledec/?locale=cs_CZ" target="_blank" aria-label="Facebook">f</a><a href="https://www.instagram.com/tabor.ledec?xtok=MWhwMXVzOHd4d2oycQ==" target="_blank" aria-label="Instagram">ig</a></div></div><div class="footer-col"><h4>Rychlé odkazy</h4><a href="../strankac5d4.html?slug=o-tabore">O táboře</a><a href="../strankadf97.html?slug=program">Program</a><a href="../terminy/index.html">Termín</a><a href="../galerie/index.html">Fotogalerie</a><a href="../videa/index.html">Videa</a><a href="../prihlaska.html">Přihláška</a></div><div class="footer-col"><h4>Kontakt</h4><p><strong>Jana Haltufová</strong> (předseda z.s.)</p><p>✉ infotaborledec@gmail.com</p><p>📞 +420 732 228 657</p><p>📍 Pod Hájem 1309, Ledeč nad Sázavou, 584 01</p><p>IČO: 01440594</p></div><div class="footer-col"><h4>Pro rodiče</h4><a href="../prihlaska.html">Přihlásit dítě</a><a href="../terminy/index.html">Termín a ceny</a></div></div><div class="footer-bottom"><span>© 2026 TachoEdu.eu , TestEdu.eu - Ing. Jan Vaverka</span><a href="../stranka8960.html?slug=gdpr" class="js-gdpr-modal" style="opacity:0.85;color:inherit">Ochrana osobních údajů (GDPR)</a><a href="../stranka5237.html?slug=cookies" style="opacity:0.85;color:inherit">Cookies</a><a href="../admin/index.html">Administrace</a></div></footer><div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title">
+  <div class="cookie-consent-card">
+    <div class="cookie-consent-head">
+      <span class="cookie-consent-icon" aria-hidden="true">🍪</span>
+      <h2 id="cookie-consent-title">Používáme cookies pro váš lepší zážitek</h2>
+    </div>
+    <div class="cookie-consent-body" id="cookie-consent-main">
+      <p>Naše webové stránky používají soubory cookies k zajištění správného fungování webu, analýze návštěvnosti a personalizaci. Nezbytné cookies ukládáme automaticky, ostatní pouze s vaším souhlasem.</p>
+      <p>Více informací naleznete v <a href="#" data-cookie-action="policy">Zásadách používání cookies</a>. Kliknutím na „Přijmout vše“ souhlasíte s používáním všech cookies.</p>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="settings">Nastavení</button>
+        <button type="button" class="cookie-btn cookie-btn-reject" data-cookie-action="reject">Odmítnout vše</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+      </div>
+    </div>
+    <div class="cookie-consent-body cookie-consent-settings" id="cookie-consent-settings" hidden>
+      <p class="cookie-settings-intro">Zvolte, které kategorie cookies povolíte. Nezbytné cookies nelze vypnout.</p>
+      <label class="cookie-opt">
+        <input type="checkbox" checked disabled>
+        <span>
+          <strong>Nezbytné (technické)</strong>
+          <small>Základní funkce webu, přihlášení, zabezpečení. Vždy aktivní.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-analytics" checked>
+        <span>
+          <strong>Analytické</strong>
+          <small>Statistiky návštěvnosti (anonymní). Max. 2 roky. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-preferences" checked>
+        <span>
+          <strong>Preferenční</strong>
+          <small>Zapamatování vašich nastavení. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-marketing">
+        <span>
+          <strong>Marketingové</strong>
+          <small>Personalizovaná reklama. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="back">Zpět</button>
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="policy">Zásady</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="save">Uložit volbu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-policy-title">
+  <div class="cookie-policy-backdrop" data-cookie-action="close-policy"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="cookie-policy-title">Zásady používání cookies</strong>
+      <button type="button" class="cookie-policy-close" data-cookie-action="close-policy" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content">
+      <div class="cookie-policy-header">
+        <h2>Zásady používání cookies</h2>
+        <p>Poslední aktualizace: 18. června 2026</p>
+      </div>
+      <h3>1. Co jsou cookies?</h3>
+      <p>Cookies jsou malé textové soubory, které se ukládají do vašeho zařízení při návštěvě našich webových stránek. Používáme je k zajištění správného fungování webu, analýze návštěvnosti a zlepšení uživatelského zážitku.</p>
+      <h3>2. Typy cookies, které používáme</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Kategorie</th><th>Účel</th><th>Doba uložení</th><th>Právní základ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Nezbytné (technické)</strong></td><td>Základní funkce webu, přihlášení, zabezpečení</td><td>Session / max. 1 rok</td><td>Oprávněný zájem / smlouva</td></tr>
+            <tr><td><strong>Analytické</strong></td><td>Statistiky návštěvnosti (anonymní)</td><td>max. 2 roky</td><td>Souhlas</td></tr>
+            <tr><td><strong>Preferenční</strong></td><td>Zapamatování vašich nastavení</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+            <tr><td><strong>Marketingové</strong></td><td>Personalizovaná reklama</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>3. Konkrétní cookies</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Název cookie</th><th>Kategorie</th><th>Účel</th><th>Doba platnosti</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>cookie_consent</td><td>Nezbytné</td><td>Uložení vašeho souhlasu s cookies</td><td>1 rok</td></tr>
+            <tr><td>analytics</td><td>Analytické</td><td>Sledování anonymní návštěvnosti</td><td>1 rok</td></tr>
+            <tr><td>preferences</td><td>Preferenční</td><td>Uložení uživatelských preferencí</td><td>1 rok</td></tr>
+            <tr><td>marketing</td><td>Marketingové</td><td>Personalizace reklamy</td><td>1 rok</td></tr>
+            <tr><td>PHPSESSID</td><td>Nezbytné</td><td>Technická session</td><td>Session</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>4. Jak spravovat cookies?</h3>
+      <p>Své preference můžete kdykoli změnit kliknutím na „Nastavení cookies“ v cookie liště nebo odkazem v patičce webu. Cookies můžete také blokovat nebo smazat přímo v nastavení vašeho prohlížeče.</p>
+      <h3>5. Kontakt</h3>
+      <p>Pokud máte jakékoli dotazy k používání cookies, kontaktujte nás na:</p>
+      <p><strong>E-mail:</strong> infotaborledec@gmail.com<br>
+      <strong>Telefon:</strong> +420 732 228 657<br></p>
+      <p><em>Tyto zásady jsou v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR) a zákonem č. 480/2004 Sb. o některých službách informační společnosti.</em></p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="close-policy">Zavřít</button>
+      <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+    </div>
+  </div>
+</div>
+<!-- <button type="button" id="cookie-reopen" class="cookie-reopen" title="Nastavení cookies" aria-label="Nastavení cookies" hidden>🍪</button> --><div id="gdpr-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gdpr-policy-title">
+  <div class="cookie-policy-backdrop" data-gdpr-action="close"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="gdpr-policy-title">Ochrana osobních údajů (GDPR)</strong>
+      <button type="button" class="cookie-policy-close" data-gdpr-action="close" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content gdpr-policy-content">
+      <h2>Zásady ochrany osobních údajů</h2>
+<p>Správce osobních údajů: <strong>Nudafuč z.s.</strong> (dále jen „správce“), provozovatel dětského tábora ve Sluneční zátoce u Ledče nad Sázavou. Kontakt: info@taborledec.cz, tel. +420 732 228 657.</p>
+<h3>Jaké údaje zpracováváme</h3>
+<ul>
+<li>Jméno a příjmení dítěte, věk</li>
+<li>Jméno a příjmení zákonného zástupce</li>
+<li>E-mail a telefon zákonného zástupce</li>
+<li>Údaje o zvoleném termínu tábora</li>
+<li>Poznámky uvedené v přihlášce (např. zdravotní omezení, kamarád)</li>
+</ul>
+<h3>Účel a právní základ</h3>
+<p>Údaje zpracováváme za účelem vyřízení přihlášky, organizace tábora, komunikace s rodiči a plnění zákonných povinností (včetně evidence účastníků a zdravotní dokumentace). Právním základem je plnění smlouvy (přihláška) a oprávněný zájem / právní povinnost.</p>
+<h3>Doba uchování</h3>
+<p>Přihlášky a související údaje uchováváme po dobu nezbytně nutnou, zpravidla maximálně <strong>2 roky</strong> od skončení příslušného ročníku tábora, pokud zákon nevyžaduje delší dobu (např. účetní doklady).</p>
+<h3>Příjemci údajů</h3>
+<p>Údaje nepředáváme třetím stranám k marketingu. Mohou být zpřístupněny zpracovatelům (např. poskytovatel hostingu, e-mailové služby) v rozsahu nutném pro provoz webu a komunikaci, a orgánům veřejné moci, pokud to vyžaduje zákon.</p>
+<h3>Vaše práva</h3>
+<p>Máte právo na přístup k údajům, jejich opravu, výmaz (je-li to možné), omezení zpracování, námitku a stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).</p>
+<p>Pro uplatnění práv napište na <a href="mailto:info@taborledec.cz">info@taborledec.cz</a>.</p>
+<p>Tyto zásady jsou účinné od data zveřejnění na webu. Text můžete upravit v administraci (Nastavení / stránka GDPR).</p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-gdpr-action="close">Zavřít</button>
+    </div>
+  </div>
+</div>
+<script src="../assets/js/app.js"></script>
+</body>
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/ucet/ by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:40 GMT -->
+</html>
