@@ -55,10 +55,6 @@
       Prostor pro dotazy rodičů, zkušenosti a tipy.
     </p>
 
-    <div id="disc-notice" hidden style="padding:12px 16px;background:#fff8e6;border-left:4px solid #d9822b;border-radius:6px;margin-bottom:20px;">
-      Na tomto statickém webu zatím není zapojeno ukládání nových příspěvků.
-    </div>
-
     <div class="disc-layout">
       <div class="disc-threads">
         <article class="disc-post" id="p-d2026110920030861">
@@ -93,33 +89,23 @@
           <div class="disc-body">test msg</div>
         </article>
 
-        <!-- Sem můžeš případně vložit vygenerovaný widget (např. Giscus nebo Disqus) -->
-        <div id="external-comments"></div>
+        <div id="external-comments" style="margin-top:24px;">
+          <script src="https://giscus.app/client.js"
+                  data-repo="Jakje67/cerebrio"
+                  data-repo-id="R_kgDOVMEmfw"
+                  data-category="Announcements"
+                  data-category-id="DIC_kwDOVMEmf84DLlTR"
+                  data-mapping="title"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="0"
+                  data-input-position="top"
+                  data-theme="light"
+                  data-lang="cs"
+                  crossorigin="anonymous"
+                  async></script>
+        </div>
       </div>
-
-      <aside class="disc-form-wrap" id="form">
-        <h2>Napsat příspěvek</h2>
-        <form id="disc-static-form" class="disc-form" autocomplete="off">
-          <input type="hidden" name="parent_id" value="">
-          <div class="hp" aria-hidden="true">
-            <label>Fax <input type="text" name="fax_number_hp" value="" tabindex="-1" autocomplete="off"></label>
-          </div>
-          <label>Jméno *
-            <input name="name" required maxlength="80">
-          </label>
-          <label>E-mail * <small>(nezveřejňuje se)</small>
-            <input type="email" name="email" required>
-          </label>
-          <label>Zpráva *
-            <textarea name="message" rows="5" required maxlength="2000" placeholder="Váš dotaz nebo zkušenost…"></textarea>
-          </label>
-          <label class="check">
-            <input type="checkbox" name="gdpr" value="1" required>
-            Souhlasím se zpracováním údajů pro zobrazení příspěvku (viz <a href="../stranka8960.html?slug=gdpr" target="_blank">GDPR</a>).
-          </label>
-          <button type="submit" class="cta-btn" style="width:100%;justify-content:center;margin-top:8px">Odeslat příspěvek</button>
-        </form>
-      </aside>
     </div>
 
     <p style="margin-top:32px"><a href="../index.html">← Zpět na úvod</a></p>
@@ -168,15 +154,5 @@
 </footer>
 
 <script src="../assets/js/app.js"></script>
-<script>
-  document.getElementById('disc-static-form')?.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const notice = document.getElementById('disc-notice');
-    if (notice) {
-      notice.hidden = false;
-      notice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  });
-</script>
 </body>
 </html>
