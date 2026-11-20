@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/prihlaska.php by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Přihláška dítěte | Sluneční zátoka</title>
+  <link rel="icon" href="assets/img/logo-favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style5e8e.css?v=20261019r">
+  <style>
+    .form {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 28px 24px;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      box-sizing: border-box;
+    }
+    .form h1 {
+      font-size: 1.5rem;
+      color: #2d5a27;
+      margin: 0 0 8px;
+      line-height: 1.25;
+    }
+    .form .form-lead {
+      color: #5a6b5a;
+      margin: 0 0 16px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .form-deadline {
+      background: #fff8e6;
+      border: 1px solid #f0d78c;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-weight: 600;
+      color: #5c4a10;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .user-panel {
+      background: #f7f9f4;
+      border: 1px solid #dde5d8;
+      border-radius: 12px;
+      padding: 14px 14px 6px;
+      margin: 0 0 18px;
+    }
+    .user-panel-ok { background: #eef5ea; border-color: #d0e0c8; }
+    .user-panel label { margin-bottom: 12px; }
+    .auth-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.5px solid #c5d0c4;
+      border-radius: 10px;
+      background: #fff;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #2d5a27;
+      cursor: pointer;
+    }
+    .auth-tab.active {
+      background: #2d5a27;
+      border-color: #2d5a27;
+      color: #fff;
+    }
+    .auth-pane { display: none; }
+    .auth-pane.active { display: block; }
+    .user-panel .cta-btn {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin: 4px 0 12px;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #e85d04;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .form-section {
+      margin: 22px 0 10px;
+      padding-top: 14px;
+      border-top: 1px solid #dde5d8;
+      font-size: 1.05rem;
+      color: #2d5a27;
+      line-height: 1.3;
+    }
+    .form-section:first-of-type { border-top: 0; margin-top: 4px; padding-top: 0; }
+    .form-hint { font-size: 0.85rem; color: #666; margin: -4px 0 12px; }
+    .form label {
+      display: block;
+      margin-bottom: 14px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .form label > input,
+    .form label > select,
+    .form label > textarea {
+      display: block;
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border: 1.5px solid #c5d0c4;
+      border-radius: 10px;
+      font: inherit;
+      font-size: 16px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .form .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: 500;
+    }
+    .form .check input {
+      width: auto;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .radio-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin: 6px 0 14px;
+    }
+    .radio-row label {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      margin: 0 !important;
+    }
+    .radio-row input { width: auto !important; margin: 0 !important; }
+    .form .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 14px;
+    }
+    .form .cta-btn {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+      margin-top: 12px;
+      padding: 14px 18px;
+      font-size: 1rem;
+    }
+    .invoice-box {
+      background: #f4f8f1;
+      border: 1.5px solid #c5d0c4;
+      border-radius: 12px;
+      padding: 14px 14px 4px;
+      margin: 4px 0 16px;
+    }
+    .invoice-box-title {
+      font-weight: 700;
+      color: #2d5a27;
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 700px) {
+      .form {
+        max-width: 100%;
+        padding: 22px 16px;
+        border-radius: 16px;
+      }
+      .form h1 { font-size: 1.35rem; }
+      .form .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .form {
+        padding: 16px 12px;
+        border-radius: 12px;
+      }
+      .form h1 { font-size: 1.2rem; }
+      .form .form-lead { font-size: 0.88rem; }
+      .form-deadline { padding: 10px 12px; font-size: 0.88rem; }
+      .form-section { font-size: 0.98rem; margin: 18px 0 8px; }
+      .form label { font-size: 0.88rem; margin-bottom: 12px; }
+      .radio-row { flex-direction: column; gap: 8px; }
+    }
+    @media (min-width: 900px) {
+      .form { padding: 36px 40px; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html"><img src="assets/img/logo-header.png" alt="Tábor Ledeč" class="site-logo site-logo-header" width="44" height="44"><span>Tábor Ledeč<small>Letní dětský sportovní tábor u Ledče nad Sázavou</small></span></a><button class="nav-toggle" aria-label="Menu" type="button">☰</button><nav class="main-nav"><div class="nav-item has-sub"><a href="strankac5d4.html?slug=o-tabore" class="nav-link">O táboře <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="strankadf97.html?slug=program" role="menuitem">Program</a><a href="stranka2d85.html?slug=historie" role="menuitem">Historie</a><a href="stranka85bb.html?slug=ubytovani" role="menuitem">Ubytování a strava</a></div></div><a href="tym/index.html" class="nav-link">Náš tým</a><a href="terminy/index.html" class="nav-link">Termín tábora</a><div class="nav-item has-sub"><a href="strankabd05.html?slug=pro-rodice" class="nav-link">Pro rodiče <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="stranka0b05.html?slug=co-s-sebou" role="menuitem">Co s sebou</a><a href="stranka9214.html?slug=zdravi" role="menuitem">Zdravotní péče</a><a href="strankac5dd.html?slug=doprava" role="menuitem">Doprava</a></div></div><div class="nav-item has-sub"><a href="galerie/index.html" class="nav-link">Galerie <span class="caret" aria-hidden="true"></span></a><div class="submenu" role="menu"><a href="galerie/index.html" role="menuitem">Fotogalerie</a><a href="videa/index.html" role="menuitem">Videa</a></div></div><a href="diskuse/index.html" class="nav-link">Diskuse</a><a href="strankaffec.html?slug=kontakt" class="nav-link">Kontakt</a><a href="ucet/index.html" class="nav-link">Účet rodiče</a><a href="prihlaska.html" class="cta-btn nav-cta">Přihlásit dítě</a></nav></header>
+
+<main class="section">
+  <div class="section-inner">
+  <div class="form">
+    <h1>Přihláška dítěte</h1>
+    <p class="form-lead">Vyplňte formulář. Po odeslání vám přijde potvrzení e-mailem.</p>
+    <div class="form-deadline">Přihlášky prosím odešlete zpět do 30.4..</div>
+
+          
+              <div class="user-panel">
+          <p class="form-hint" style="margin:0 0 12px">
+            <strong>Máte už účet?</strong> Přihlaste se pro předvyplnění údajů z dřívějších přihlášek.
+            Nebo se <strong>zaregistrujte</strong> – po přihlášce uvidíte stav a později fotogalerii.
+          </p>
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab active" data-auth="login">Přihlášení</button>
+            <button type="button" class="auth-tab" data-auth="register">Registrace</button>
+          </div>
+          <form method="post" accept-charset="UTF-8" id="auth-login" class="auth-pane active">
+            <input type="hidden" name="action" value="user_login">
+            <label>E-mail
+              <input type="email" name="login_email" required autocomplete="username">
+            </label>
+            <label>Heslo
+              <input type="password" name="login_password" required autocomplete="current-password">
+            </label>
+            <button type="submit" class="cta-btn">Přihlásit a předvyplnit</button>
+          </form>
+          <form method="post" accept-charset="UTF-8" id="auth-register" class="auth-pane">
+            <input type="hidden" name="action" value="user_register">
+            <label>Jméno
+              <input name="reg_name" autocomplete="name">
+            </label>
+            <label>E-mail (přihlašovací jméno) *
+              <input type="email" name="reg_email" required autocomplete="username">
+            </label>
+            <label>Heslo * <span style="font-weight:400;color:#666">(min. 6 znaků)</span>
+              <input type="password" name="reg_password" required minlength="6" autocomplete="new-password">
+            </label>
+            <label>Heslo znovu *
+              <input type="password" name="reg_password2" required minlength="6" autocomplete="new-password">
+            </label>
+            <button type="submit" class="cta-btn">Zaregistrovat a pokračovat</button>
+          </form>
+        </div>
+      
+      <form method="post" accept-charset="UTF-8" id="app-form">
+      <h2 class="form-section">Termín</h2>
+                    <input type="hidden" name="term_id" id="term_id" value="t2026"
+               data-price="8800" data-price-member="8500">
+        <div class="form-deadline" style="background:#eef5ea;border-color:#c5d9b8;color:#2d5a27">
+          <strong>Termín  2026</strong><br>
+          18. 7. 2026 – 1. 8. 2026           · Pro děti 6–16 let · Nudafuč z.s.          · Volná místa (129)        </div>
+      
+      <h2 class="form-section">Údaje o dítěti</h2>
+      <label>Jméno a příjmení dítěte *
+        <input name="child" required value="">
+      </label>
+      <label>Rodné číslo (bez lomítka) *
+        <input name="birth_number" required pattern="[0-9]{9,10}" inputmode="numeric"
+               placeholder="např. 1501011234" value="">
+      </label>
+      <p class="form-hint">Zadejte pouze číslice, bez lomítka.</p>
+      <label>Věk dítěte
+        <input name="age" type="number" min="6" max="16" value="">
+      </label>
+      <label>Ulice a č.p. *
+        <input name="street" required value="">
+      </label>
+      <div class="grid-2">
+        <label>Město *
+          <input name="city" required value="">
+        </label>
+        <label>PSČ *
+          <input name="zip" required pattern="[0-9 ]{3,6}" value="">
+        </label>
+      </div>
+      <label>Kolikrát se dítě zúčastnilo našeho tábora?
+        <input name="times_attended" type="number" min="0" max="20" value="">
+      </label>
+      <label>Pokud to situace umožní, chtěl(a) bych být v družstvu s
+        <input name="prefer_team" value="" placeholder="jméno kamaráda / kamarádky">
+      </label>
+
+      <h2 class="form-section">Členství a pojištění</h2>
+      <p style="font-weight:700;margin-bottom:4px">Je dítě členem TJ Sokol Královské Vinohrady nebo ŘSD? *</p>
+      <p class="form-hint" style="margin-top:0">Členové TJ Sokol KV a zaměstnanci / děti zaměstnanců ŘSD mají sníženou cenu.</p>
+      <div class="radio-row">
+                  <label>
+            <input type="radio" name="membership" value="rsd" required                    onchange="updateAppPrice()">
+            ŘSD          </label>
+                  <label>
+            <input type="radio" name="membership" value="tj_sokol" required                    onchange="updateAppPrice()">
+            TJ Sokol          </label>
+                  <label>
+            <input type="radio" name="membership" value="ne" required                    onchange="updateAppPrice()">
+            Ne          </label>
+              </div>
+      <div id="price-box" class="price-box" style="margin:12px 0 16px;padding:12px 14px;background:#eef6ea;border:1px solid #c5d9b8;border-radius:10px;font-size:0.95rem">
+        <strong>Cena:</strong> <span id="price-amount">—</span>
+        <span id="price-note" style="color:#555"></span>
+      </div>
+      <label>Úrazové pojištění – pojišťovna + číslo smlouvy
+        <input name="insurance" value="" placeholder="pokud je dítě pojištěno">
+      </label>
+      <label>Jiná upozornění rodičů
+        <textarea name="parent_notes" rows="5" placeholder="Uveďte vše důležité pro vedení tábora"></textarea>
+      </label>
+      <p class="form-hint" style="margin-top:-8px">
+        Např.: strava / alergie / dieta, plavec / neplavec, poruchy příjmu potravy,
+        noční pomočování, změny nálad, stav po úrazu, sebepoškozování, strachy, úzkost,
+        onemocnění, léky, specifické potřeby dítěte.
+      </p>
+      <label>Poznámka
+        <textarea name="note" rows="2"></textarea>
+      </label>
+
+      <h2 class="form-section">Kontakt na rodiče (příbuzné) i během tábora</h2>
+      <label>Jméno a příjmení *
+        <input name="parent" required value="">
+      </label>
+      <label>Příbuzenský vztah *
+        <input name="relation" required value="" placeholder="např. matka, otec, babička">
+      </label>
+      <label>Telefon *
+        <input type="tel" name="phone" required value="">
+      </label>
+      <label>E-mail * <span style="font-weight:400;color:#666">(na něj bude zaslána vyplněná přihláška)</span>
+        <input type="email" name="email" required value="">
+      </label>
+      <label class="check">
+        <input type="checkbox" name="need_invoice" id="need_invoice" value="1"
+                              onchange="toggleInvoiceBox()">
+        Potřebuji fakturu
+      </label>
+
+      <div id="invoice-box" class="invoice-box" style="display:none">
+        <p class="invoice-box-title">Údaje pro fakturu (právnická osoba)</p>
+        <p style="font-weight:700;margin:0 0 6px">Fakturovat na *</p>
+        <div class="radio-row">
+                    <label>
+            <input type="radio" name="invoice_type" value="fksp" >
+            FKSP
+          </label>
+          <label>
+            <input type="radio" name="invoice_type" value="firma" >
+            Firmu
+          </label>
+        </div>
+        <label>Název organizace / firmy *
+          <input name="invoice_name" value="" placeholder="např. XY s.r.o. / FKSP zaměstnavatele">
+        </label>
+        <div class="grid-2">
+          <label>IČO *
+            <input name="invoice_ico" value="" inputmode="numeric" placeholder="8 číslic">
+          </label>
+          <label>DIČ
+            <input name="invoice_dic" value="" placeholder="pokud jste plátci DPH">
+          </label>
+        </div>
+        <label>Ulice a č.p. *
+          <input name="invoice_street" value="">
+        </label>
+        <div class="grid-2">
+          <label>Město *
+            <input name="invoice_city" value="">
+          </label>
+          <label>PSČ *
+            <input name="invoice_zip" value="">
+          </label>
+        </div>
+      </div>
+
+      <h2 class="form-section">Anketa (pro ty, co s námi ještě nebyli)</h2>
+      <label>O táboře jsem se dozvěděl(a)…
+        <select name="heard_about" id="heard_about" onchange="toggleHeardOther()">
+                      <option value="" selected>— vyberte —</option>
+                      <option value="facebook" >Facebook</option>
+                      <option value="instagram" >Instagram</option>
+                      <option value="letak" >z letáku</option>
+                      <option value="doporuceni" >doporučení známých</option>
+                      <option value="jine" >jinak (uveďte jak)</option>
+                  </select>
+      </label>
+            <label id="heard-other-wrap" style="display:none">
+        Uveďte prosím jak *
+        <input name="heard_about_other" id="heard_about_other"
+               value=""
+               placeholder="např. od kamarádů, z práce, z webu…">
+      </label>
+
+      <h2 class="form-section">Souhlas</h2>
+      <label class="check">
+        <input type="checkbox" name="gdpr" value="1" required >
+        Souhlasím se zpracováním osobních údajů pro vyřízení přihlášky. *
+      </label>
+      <p class="gdpr-note">Podrobnosti: <a href="stranka8960.html?slug=gdpr" class="js-gdpr-modal">Zásady ochrany osobních údajů (GDPR)</a>.</p>
+
+      <button type="submit" class="cta-btn" style="width:100%;max-width:100%;justify-content:center;margin-top:12px;box-sizing:border-box">
+        Odeslat přihlášku
+      </button>
+      </form>
+      <p style="margin-top:18px;text-align:center"><a href="index.html">← Zpět na web</a></p>
+      </div>
+  </div>
+</main>
+
+<footer id="kontakt" class="site-footer"><div class="footer-inner"><div class="footer-brand"><strong><img src="assets/img/logo-footer.png" alt="Tábor Ledeč" class="site-logo site-logo-footer" width="40" height="40"> Tábor Ledeč</strong><p>Letní dětský sportovní tábor u Ledče nad Sázavou<br>Dobrodružství v přírodě nikdy nekončí…</p><div class="socials"><a href="https://www.facebook.com/taborledec/?locale=cs_CZ" target="_blank" aria-label="Facebook">f</a><a href="https://www.instagram.com/tabor.ledec?xtok=MWhwMXVzOHd4d2oycQ==" target="_blank" aria-label="Instagram">ig</a></div></div><div class="footer-col"><h4>Rychlé odkazy</h4><a href="strankac5d4.html?slug=o-tabore">O táboře</a><a href="strankadf97.html?slug=program">Program</a><a href="terminy/index.html">Termín</a><a href="galerie/index.html">Fotogalerie</a><a href="videa/index.html">Videa</a><a href="prihlaska.html">Přihláška</a></div><div class="footer-col"><h4>Kontakt</h4><p><strong>Jana Haltufová</strong> (předseda z.s.)</p><p>✉ infotaborledec@gmail.com</p><p>📞 +420 732 228 657</p><p>📍 Pod Hájem 1309, Ledeč nad Sázavou, 584 01</p><p>IČO: 01440594</p></div><div class="footer-col"><h4>Pro rodiče</h4><a href="prihlaska.html">Přihlásit dítě</a><a href="terminy/index.html">Termín a ceny</a></div></div><div class="footer-bottom"><span>© 2026 TachoEdu.eu , TestEdu.eu - Ing. Jan Vaverka</span><a href="stranka8960.html?slug=gdpr" class="js-gdpr-modal" style="opacity:0.85;color:inherit">Ochrana osobních údajů (GDPR)</a><a href="stranka5237.html?slug=cookies" style="opacity:0.85;color:inherit">Cookies</a><a href="admin/index.html">Administrace</a></div></footer><div id="cookie-consent" class="cookie-consent" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title">
+  <div class="cookie-consent-card">
+    <div class="cookie-consent-head">
+      <span class="cookie-consent-icon" aria-hidden="true">🍪</span>
+      <h2 id="cookie-consent-title">Používáme cookies pro váš lepší zážitek</h2>
+    </div>
+    <div class="cookie-consent-body" id="cookie-consent-main">
+      <p>Naše webové stránky používají soubory cookies k zajištění správného fungování webu, analýze návštěvnosti a personalizaci. Nezbytné cookies ukládáme automaticky, ostatní pouze s vaším souhlasem.</p>
+      <p>Více informací naleznete v <a href="#" data-cookie-action="policy">Zásadách používání cookies</a>. Kliknutím na „Přijmout vše“ souhlasíte s používáním všech cookies.</p>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="settings">Nastavení</button>
+        <button type="button" class="cookie-btn cookie-btn-reject" data-cookie-action="reject">Odmítnout vše</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+      </div>
+    </div>
+    <div class="cookie-consent-body cookie-consent-settings" id="cookie-consent-settings" hidden>
+      <p class="cookie-settings-intro">Zvolte, které kategorie cookies povolíte. Nezbytné cookies nelze vypnout.</p>
+      <label class="cookie-opt">
+        <input type="checkbox" checked disabled>
+        <span>
+          <strong>Nezbytné (technické)</strong>
+          <small>Základní funkce webu, přihlášení, zabezpečení. Vždy aktivní.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-analytics" checked>
+        <span>
+          <strong>Analytické</strong>
+          <small>Statistiky návštěvnosti (anonymní). Max. 2 roky. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-preferences" checked>
+        <span>
+          <strong>Preferenční</strong>
+          <small>Zapamatování vašich nastavení. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <label class="cookie-opt">
+        <input type="checkbox" id="cookie-opt-marketing">
+        <span>
+          <strong>Marketingové</strong>
+          <small>Personalizovaná reklama. Max. 1 rok. Právní základ: souhlas.</small>
+        </span>
+      </label>
+      <div class="cookie-consent-actions">
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="back">Zpět</button>
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="policy">Zásady</button>
+        <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="save">Uložit volbu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cookie-policy-title">
+  <div class="cookie-policy-backdrop" data-cookie-action="close-policy"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="cookie-policy-title">Zásady používání cookies</strong>
+      <button type="button" class="cookie-policy-close" data-cookie-action="close-policy" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content">
+      <div class="cookie-policy-header">
+        <h2>Zásady používání cookies</h2>
+        <p>Poslední aktualizace: 18. června 2026</p>
+      </div>
+      <h3>1. Co jsou cookies?</h3>
+      <p>Cookies jsou malé textové soubory, které se ukládají do vašeho zařízení při návštěvě našich webových stránek. Používáme je k zajištění správného fungování webu, analýze návštěvnosti a zlepšení uživatelského zážitku.</p>
+      <h3>2. Typy cookies, které používáme</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Kategorie</th><th>Účel</th><th>Doba uložení</th><th>Právní základ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Nezbytné (technické)</strong></td><td>Základní funkce webu, přihlášení, zabezpečení</td><td>Session / max. 1 rok</td><td>Oprávněný zájem / smlouva</td></tr>
+            <tr><td><strong>Analytické</strong></td><td>Statistiky návštěvnosti (anonymní)</td><td>max. 2 roky</td><td>Souhlas</td></tr>
+            <tr><td><strong>Preferenční</strong></td><td>Zapamatování vašich nastavení</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+            <tr><td><strong>Marketingové</strong></td><td>Personalizovaná reklama</td><td>max. 1 rok</td><td>Souhlas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>3. Konkrétní cookies</h3>
+      <div class="cookie-policy-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Název cookie</th><th>Kategorie</th><th>Účel</th><th>Doba platnosti</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>cookie_consent</td><td>Nezbytné</td><td>Uložení vašeho souhlasu s cookies</td><td>1 rok</td></tr>
+            <tr><td>analytics</td><td>Analytické</td><td>Sledování anonymní návštěvnosti</td><td>1 rok</td></tr>
+            <tr><td>preferences</td><td>Preferenční</td><td>Uložení uživatelských preferencí</td><td>1 rok</td></tr>
+            <tr><td>marketing</td><td>Marketingové</td><td>Personalizace reklamy</td><td>1 rok</td></tr>
+            <tr><td>PHPSESSID</td><td>Nezbytné</td><td>Technická session</td><td>Session</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>4. Jak spravovat cookies?</h3>
+      <p>Své preference můžete kdykoli změnit kliknutím na „Nastavení cookies“ v cookie liště nebo odkazem v patičce webu. Cookies můžete také blokovat nebo smazat přímo v nastavení vašeho prohlížeče.</p>
+      <h3>5. Kontakt</h3>
+      <p>Pokud máte jakékoli dotazy k používání cookies, kontaktujte nás na:</p>
+      <p><strong>E-mail:</strong> infotaborledec@gmail.com<br>
+      <strong>Telefon:</strong> +420 732 228 657<br></p>
+      <p><em>Tyto zásady jsou v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR) a zákonem č. 480/2004 Sb. o některých službách informační společnosti.</em></p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-action="close-policy">Zavřít</button>
+      <button type="button" class="cookie-btn cookie-btn-accept" data-cookie-action="accept">Přijmout vše</button>
+    </div>
+  </div>
+</div>
+<!-- <button type="button" id="cookie-reopen" class="cookie-reopen" title="Nastavení cookies" aria-label="Nastavení cookies" hidden>🍪</button> --><div id="gdpr-policy-modal" class="cookie-policy-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gdpr-policy-title">
+  <div class="cookie-policy-backdrop" data-gdpr-action="close"></div>
+  <div class="cookie-policy-dialog">
+    <div class="cookie-policy-bar">
+      <strong id="gdpr-policy-title">Ochrana osobních údajů (GDPR)</strong>
+      <button type="button" class="cookie-policy-close" data-gdpr-action="close" aria-label="Zavřít">×</button>
+    </div>
+    <div class="cookie-policy-content gdpr-policy-content">
+      <h2>Zásady ochrany osobních údajů</h2>
+<p>Správce osobních údajů: <strong>Nudafuč z.s.</strong> (dále jen „správce“), provozovatel dětského tábora ve Sluneční zátoce u Ledče nad Sázavou. Kontakt: info@taborledec.cz, tel. +420 732 228 657.</p>
+<h3>Jaké údaje zpracováváme</h3>
+<ul>
+<li>Jméno a příjmení dítěte, věk</li>
+<li>Jméno a příjmení zákonného zástupce</li>
+<li>E-mail a telefon zákonného zástupce</li>
+<li>Údaje o zvoleném termínu tábora</li>
+<li>Poznámky uvedené v přihlášce (např. zdravotní omezení, kamarád)</li>
+</ul>
+<h3>Účel a právní základ</h3>
+<p>Údaje zpracováváme za účelem vyřízení přihlášky, organizace tábora, komunikace s rodiči a plnění zákonných povinností (včetně evidence účastníků a zdravotní dokumentace). Právním základem je plnění smlouvy (přihláška) a oprávněný zájem / právní povinnost.</p>
+<h3>Doba uchování</h3>
+<p>Přihlášky a související údaje uchováváme po dobu nezbytně nutnou, zpravidla maximálně <strong>2 roky</strong> od skončení příslušného ročníku tábora, pokud zákon nevyžaduje delší dobu (např. účetní doklady).</p>
+<h3>Příjemci údajů</h3>
+<p>Údaje nepředáváme třetím stranám k marketingu. Mohou být zpřístupněny zpracovatelům (např. poskytovatel hostingu, e-mailové služby) v rozsahu nutném pro provoz webu a komunikaci, a orgánům veřejné moci, pokud to vyžaduje zákon.</p>
+<h3>Vaše práva</h3>
+<p>Máte právo na přístup k údajům, jejich opravu, výmaz (je-li to možné), omezení zpracování, námitku a stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).</p>
+<p>Pro uplatnění práv napište na <a href="mailto:info@taborledec.cz">info@taborledec.cz</a>.</p>
+<p>Tyto zásady jsou účinné od data zveřejnění na webu. Text můžete upravit v administraci (Nastavení / stránka GDPR).</p>
+    </div>
+    <div class="cookie-policy-footer">
+      <button type="button" class="cookie-btn cookie-btn-outline" data-gdpr-action="close">Zavřít</button>
+    </div>
+  </div>
+</div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    var PREV_CHILDREN = [];
+
+    function toggleInvoiceBox() {
+      var cb = document.getElementById('need_invoice');
+      var box = document.getElementById('invoice-box');
+      if (!cb || !box) return;
+      box.style.display = cb.checked ? '' : 'none';
+    }
+
+    function toggleHeardOther() {
+      var sel = document.getElementById('heard_about');
+      var wrap = document.getElementById('heard-other-wrap');
+      var inp = document.getElementById('heard_about_other');
+      if (!sel || !wrap) return;
+      var show = sel.value === 'jine';
+      wrap.style.display = show ? '' : 'none';
+      if (inp) inp.required = show;
+    }
+
+    function updateAppPrice() {
+      var term = document.getElementById('term_id');
+      var amountEl = document.getElementById('price-amount');
+      var noteEl = document.getElementById('price-note');
+      if (!term || !amountEl) return;
+      var full = 0, mem = 0, hasTerm = false;
+      if (term.tagName === 'SELECT') {
+        var opt = term.options[term.selectedIndex];
+        if (!opt || !opt.value) {
+          amountEl.textContent = '—';
+          if (noteEl) noteEl.textContent = ' (vyberte termín a členství)';
+          return;
+        }
+        full = parseInt(opt.getAttribute('data-price') || '0', 10) || 0;
+        mem = parseInt(opt.getAttribute('data-price-member') || '0', 10) || full;
+        hasTerm = true;
+      } else {
+        // skrytý input – jeden pevný termín
+        if (!term.value) {
+          amountEl.textContent = '—';
+          if (noteEl) noteEl.textContent = '';
+          return;
+        }
+        full = parseInt(term.getAttribute('data-price') || '0', 10) || 0;
+        mem = parseInt(term.getAttribute('data-price-member') || '0', 10) || full;
+        hasTerm = true;
+      }
+      var m = document.querySelector('input[name="membership"]:checked');
+      var isMember = m && (m.value === 'rsd' || m.value === 'tj_sokol');
+      var price = isMember ? mem : full;
+      amountEl.textContent = price.toLocaleString('cs-CZ') + ' Kč';
+      if (noteEl) {
+        if (!m) {
+          noteEl.textContent = ' (plná cena – vyberte členství)';
+        } else if (isMember) {
+          noteEl.textContent = ' (zvýhodněná členská cena)';
+        } else {
+          noteEl.textContent = ' (plná cena)';
+        }
+      }
+    }
+
+    function setVal(name, val) {
+      var el = document.querySelector('[name="' + name + '"]');
+      if (!el) return;
+      if (el.type === 'checkbox') {
+        el.checked = !!val;
+        return;
+      }
+      el.value = val == null ? '' : String(val);
+    }
+
+    function applyChild(idx) {
+      if (idx === '' || !PREV_CHILDREN[idx]) return;
+      var d = PREV_CHILDREN[idx];
+      ['child','birth_number','age','street','city','zip','times_attended','prefer_team',
+       'insurance','parent_notes','parent','relation','phone','email',
+       'invoice_type','invoice_name','invoice_ico','invoice_dic','invoice_street','invoice_city','invoice_zip'
+      ].forEach(function (k) { setVal(k, d[k] || ''); });
+      if (d.membership) {
+        var mr = document.querySelector('input[name="membership"][value="' + d.membership + '"]');
+        if (mr) mr.checked = true;
+      }
+      var need = document.getElementById('need_invoice');
+      if (need) {
+        need.checked = !!d.need_invoice;
+        toggleInvoiceBox();
+      }
+      // radio invoice type
+      if (d.invoice_type) {
+        var r = document.querySelector('input[name="invoice_type"][value="' + d.invoice_type + '"]');
+        if (r) r.checked = true;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      toggleInvoiceBox();
+      toggleHeardOther();
+      updateAppPrice();
+      var sel = document.getElementById('prev-child');
+      if (sel) {
+        sel.addEventListener('change', function () {
+          applyChild(sel.value);
+          updateAppPrice();
+        });
+      }
+      document.querySelectorAll('.auth-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var which = btn.getAttribute('data-auth');
+          document.querySelectorAll('.auth-tab').forEach(function (b) { b.classList.toggle('active', b === btn); });
+          var login = document.getElementById('auth-login');
+          var reg = document.getElementById('auth-register');
+          if (login) login.classList.toggle('active', which === 'login');
+          if (reg) reg.classList.toggle('active', which === 'register');
+        });
+      });
+    });
+  </script>
+</body>
+
+<!-- Mirrored from https://tachoedu.eu/www/slunecni-zatoka/prihlaska.php by HTTrack Website Copier/3.x [XR&CO], Thu, 19 Nov 2026 12:47:41 GMT -->
+</html>
